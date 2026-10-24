@@ -2,7 +2,7 @@
 Description=Periodically mirror runtime (GitCode -> GitHub)
 
 [Timer]
-OnCalendar=hourly
+OnCalendar=*-*-* 00,12:07:00
 # 机器关机错过的任务，开机后补跑一次
 Persistent=true
 RandomizedDelaySec=180

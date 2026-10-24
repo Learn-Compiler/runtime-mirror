@@ -1,7 +1,7 @@
 # runtime-mirror
 
 [`https://gitcode.com/cann/runtime.git`](https://gitcode.com/cann/runtime.git) 的自动镜像仓库。
-由 GitHub Actions 每 2 小时同步一次，**不需要任何 PAT 或 secret**。
+由 GitHub Actions 每 12 小时同步一次，**不需要任何 PAT 或 secret**。
 
 ## 仓库结构（单仓库方案）
 
@@ -43,7 +43,7 @@ git fetch upstream && git log --oneline HEAD..upstream/master | head
 
 | 项 | 值 |
 |---|---|
-| 频率 | 每 2 小时（UTC `17 */2 * * *`，北京时间 02:17 / 04:17 / …） |
+| 频率 | 每 12 小时（UTC `17 */12 * * *`，即北京时间 08:17 / 20:17） |
 | 触发 | `schedule` + 推送到 `main` + 手动 `workflow_dispatch` |
 | 凭据 | 仓库自带的 `GITHUB_TOKEN`（`contents: write`），无需配置 |
 | 体积 | 约 55 MB（18 分支 + 18 tag） |
@@ -72,10 +72,10 @@ git fetch upstream && git log --oneline HEAD..upstream/master | head
 `LICENSE` 随镜像保留，满足要求；2.1 条款把使用范围限定在华为 AI 处理器生态内。建议在仓库 About 写清
 「上游镜像，版权归华为，许可见 LICENSE」。
 
-**别手动改镜像分支**：`master`、`9.x` 等分支每 2 小时会被上游内容强制覆盖，你在上面提的 commit 会丢。
+**别手动改镜像分支**：`master`、`9.x` 等分支每 12 小时会被上游内容强制覆盖，你在上面提的 commit 会丢。
 要加说明就改 `main` 上的 README。
 
-**Actions 60 天自动停用**：GitHub 会在仓库连续 60 天无活动后停用定时 workflow。本仓库每 2 小时
+**Actions 60 天自动停用**：GitHub 会在仓库连续 60 天无活动后停用定时 workflow。本仓库每 12 小时
 都在推分支，不会触发；如果哪天停了，去 Actions 页面点一下 Enable 即可。
 
 ## 兜底：改在本机跑
@@ -85,7 +85,7 @@ runner 在美国，拉 GitCode 偶尔会超时（本机实测 runtime 首次抓�
 ```bash
 ./scripts/sync-local.sh
 
-# 装成每小时自动跑的 systemd timer
+# 装成每 12 小时自动跑的 systemd timer
 mkdir -p ~/.local/bin ~/.config/systemd/user
 cp scripts/sync-local.sh ~/.local/bin/runtime-mirror-sync
 chmod +x ~/.local/bin/runtime-mirror-sync

@@ -9,8 +9,8 @@ name: Sync runtime from GitCode
 
 on:
   schedule:
-    # GitHub 用 UTC。每 2 小时的第 17 分钟跑一次。
-    - cron: "17 */2 * * *"
+    # GitHub 用 UTC。每 12 小时跑一次（UTC 00:17 / 12:17，即北京时间 08:17 / 20:17）。
+    - cron: "17 */12 * * *"
   # 改完配置推上来就立刻同步一次（镜像永远不会推 main，所以不会自触发）
   push:
     branches: [main]
