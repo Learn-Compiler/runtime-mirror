@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically mirror runtime (GitCode -> GitHub)
+
+[Timer]
+OnCalendar=hourly
+# 机器关机错过的任务，开机后补跑一次
+Persistent=true
+RandomizedDelaySec=180
+Unit=runtime-mirror.service
+
+[Install]
+WantedBy=timers.target

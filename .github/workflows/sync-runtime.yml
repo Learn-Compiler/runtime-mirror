@@ -1,0 +1,163 @@
+name: Sync runtime from GitCode
+
+# 单仓库镜像：本仓库同时存放
+#   - main 分支：本 workflow + README（受保护，永不被镜像覆盖）
+#   - 其余分支和 tag：gitcode.com/cann/runtime.git 的镜像内容
+#
+# 为什么 main 必须留着：GitHub 的 schedule 只在默认分支的 workflow 上生效，
+# 而镜像会写满 master/9.x/tag。所以 main 固定当「配置分支」，镜像永远不碰它。
+
+on:
+  schedule:
+    # GitHub 用 UTC。每 2 小时的第 17 分钟跑一次。
+    - cron: "17 */2 * * *"
+  # 改完配置推上来就立刻同步一次（镜像永远不会推 main，所以不会自触发）
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "忽略 ref 差异检查，强制重新全量同步"
+        type: boolean
+        default: false
+
+concurrency:
+  group: sync-runtime
+  cancel-in-progress: false
+
+# 用仓库自带的 GITHUB_TOKEN 推自己，不需要任何 PAT
+permissions:
+  contents: write
+
+env:
+  UPSTREAM_URL: https://gitcode.com/cann/runtime.git
+  # 受保护分支：既装 workflow，又绝不被镜像覆盖
+  PROTECTED_BRANCH: main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: 配置 git（大仓库 + 慢链路容错）
+        run: |
+          git config --global http.postBuffer 524288000
+          git config --global http.lowSpeedLimit 100
+          git config --global http.lowSpeedTime 300
+          git config --global http.version HTTP/1.1
+
+      - name: 比对上游与镜像的 ref，判断是否需要同步
+        id: diff
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          base="https://github.com/${{ github.repository }}.git"
+
+          # 上游：只取 heads + tags，天然排除 GitCode 广播的 refs/tmp/* 临时 ref
+          upstream_refs=$(git ls-remote --refs --heads --tags "$UPSTREAM_URL" | sort)
+          # 本地目标：同样只看 heads + tags，并排除受保护的 main
+          mirror_refs=$(git -c "http.extraheader=AUTHORIZATION: basic $auth" \
+              ls-remote --refs --heads --tags "$base" 2>/dev/null \
+            | awk -v b="refs/heads/${PROTECTED_BRANCH}" '$2 != b' | sort || true)
+
+          up_count=$(printf '%s\n' "$upstream_refs" | grep -c . || true)
+          mk_count=$(printf '%s\n' "$mirror_refs"   | grep -c . || true)
+          echo "上游 ref 数: ${up_count}，镜像 ref 数: ${mk_count}（不含 ${PROTECTED_BRANCH}）"
+
+          if [ "${{ inputs.force }}" != "true" ] && [ "$upstream_refs" = "$mirror_refs" ]; then
+            echo "✅ ref 完全一致，跳过 55MB 克隆。"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "⚠️ 检测到差异，开始同步。"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 从 GitCode 抓取（只取分支和 tag）
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          # 不用 clone --mirror：GitCode 会广播大量 refs/tmp/* 临时 ref（pypto 上实测 8168 个 / 多 364MB），
+          # 而且推回 GitHub 时只接受 heads/tags，会整个 push 被拒。
+          git init --bare -q upstream.git
+          cd upstream.git
+          git remote add origin "$UPSTREAM_URL"
+          git config remote.origin.fetch '+refs/heads/*:refs/heads/*'
+          git config --add remote.origin.fetch '+refs/tags/*:refs/tags/*'
+
+          # GitCode 偶发 TLS 断连（curl 56 GnuTLS recv error），重试 3 次
+          fetch_ok=0
+          for attempt in 1 2 3; do
+            if git fetch --prune --no-tags origin; then fetch_ok=1; break; fi
+            echo "::warning::第 $attempt 次抓取失败，15 秒后重试"
+            sleep 15
+          done
+          [ "$fetch_ok" -eq 1 ] || { echo "::error::连续 3 次抓取失败"; exit 1; }
+
+          echo "--- 体积 ---"; du -sh .
+          echo "--- ref 统计 ---"
+          git for-each-ref --format='%(refname)' | sed 's#refs/##' | awk -F/ '{print $1}' | sort | uniq -c
+
+          # 防御 1：不能混入非 heads/tags 的 ref
+          stray=$(git for-each-ref --format='%(refname)' | grep -vc -E '^refs/(heads|tags)/' || true)
+          if [ "$stray" -ne 0 ]; then
+            echo "::error::发现 $stray 个非 heads/tags 的 ref，中止。"
+            git for-each-ref --format='%(refname)' | grep -v -E '^refs/(heads|tags)/' | head
+            exit 1
+          fi
+
+          # 防御 2：上游若哪天也弄出个 main，会覆盖掉本仓库的 workflow，必须人工介入
+          if git show-ref --verify --quiet "refs/heads/${PROTECTED_BRANCH}"; then
+            echo "::error::上游出现了 ${PROTECTED_BRANCH} 分支，会覆盖本仓库的 workflow，请人工处理。"
+            exit 1
+          fi
+
+      - name: 推送镜像 ref（绝不触碰 main）
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          gitc() { git -c "http.extraheader=AUTHORIZATION: basic $auth" "$@"; }
+
+          cd upstream.git
+          # 只推本地存在的 heads/tags。本地裸仓库来自 GitCode，没有 main，
+          # 所以这个 refspec 天然不会碰到受保护的 main。
+          git remote remove mirror 2>/dev/null || true
+          git remote add mirror "https://github.com/${{ github.repository }}.git"
+          gitc push --quiet --force mirror \
+            'refs/heads/*:refs/heads/*' 'refs/tags/*:refs/tags/*'
+          echo "✅ 分支与 tag 已推送"
+
+          # 清理上游已不存在的 ref，但跳过受保护的 main
+          gitc ls-remote --refs --heads --tags mirror | awk '{print $2}' > /tmp/remote_refs.txt
+          git for-each-ref --format='%(refname)' > /tmp/local_refs.txt
+          removed=0
+          while read -r ref; do
+            [ -z "$ref" ] && continue
+            [ "$ref" = "refs/heads/${PROTECTED_BRANCH}" ] && continue
+            if ! grep -qxF "$ref" /tmp/local_refs.txt; then
+              if gitc push --quiet mirror ":${ref}"; then
+                echo "🗑  删除上游已不存在的 ref: ${ref}"
+                removed=$((removed + 1))
+              fi
+            fi
+          done < /tmp/remote_refs.txt
+          echo "共清理 ${removed} 个残留 ref"
+
+      - name: 摘要
+        if: always()
+        run: |
+          {
+            echo "### runtime 同步结果"
+            echo ""
+            echo "| 项 | 值 |"
+            echo "|---|---|"
+            echo "| 上游 | \`https://gitcode.com/cann/runtime.git\` |"
+            echo "| 镜像 | \`https://github.com/${{ github.repository }}\`（代码在 \`master\` 等分支，不在 \`${PROTECTED_BRANCH}\`） |"
+            echo "| 是否触发同步 | \`${{ steps.diff.outputs.changed }}\` |"
+            echo "| 时间 | $(date -u '+%Y-%m-%d %H:%M:%S UTC') |"
+          } >> "$GITHUB_STEP_SUMMARY"
