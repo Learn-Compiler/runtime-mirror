@@ -6,7 +6,7 @@
 ## 仓库结构（单仓库方案）
 
 ```
-main              ← 本 README + .github/workflows/sync-runtime.yml   ← 默认分支，受保护
+main              ← 镜像配置 + docs/analysis 技术调研文档          ← 默认分支，受保护
 master            ┐
 9.1.0             │
 9.2.0             ├─ 上游镜像内容：18 个分支
@@ -17,11 +17,18 @@ v9.1.1            ├─ 上游镜像内容：18 个 tag
 ...               ┘
 ```
 
-**代码在 `master` 等分支，不在 `main`。** 打开仓库看到的 `main` 只是配置分支。
+**代码在 `master` 等分支，不在 `main`。** `main` 用于镜像配置和技术调研文档。
 
 为什么这么拆：GitHub 的 `schedule` 触发器**只在默认分支的 workflow 文件上生效**，
 而镜像会写满 `master`/`9.x`/所有 tag。所以固定用 `main` 当配置分支，镜像永远不碰它 ——
 推送的 refspec 只取上游存在的 ref（上游没有 `main`），清理残留 ref 时也显式跳过 `main`。
+
+## 技术调研报告
+
+- [华为昇腾 Runtime 技术调研报告（在线阅读）](docs/analysis/华为昇腾Runtime技术调研报告.md)
+- [Word 版本（可编辑）](docs/analysis/华为昇腾Runtime技术调研报告.docx)
+
+报告基于 `master` 分支提交 `f1030c42a414fb00e87dd689225997048364e3b7`，覆盖 Runtime 架构、主要功能、编译器与驱动接口、输入输出格式，以及云端与端侧 NPU Runtime 的比较。源码路径和参考资料见报告附录。
 
 ## 用法
 
