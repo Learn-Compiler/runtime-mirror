@@ -206,7 +206,11 @@ int32_t ProfTxPlugin::ProftxRangePop()
         return PROFILING_FAILED;
     }
     if (static_cast<bool>(value.cacheOpInfoSwitch)) {
-        return ReportCacheOpInfo2RT(tensorInfo);
+        ret = ReportCacheOpInfo2RT(tensorInfo);
+        if (ret != PROFILING_SUCCESS) {
+            MSPROF_LOGE("Failed to report tensor info to runtime, ret=%d", ret);
+            return PROFILING_FAILED;
+        }
     }
     ProfCannPlugin::instance()->ProfApiInit();
     if (!ProfAclPlugin::instance()->IsInited()) {
