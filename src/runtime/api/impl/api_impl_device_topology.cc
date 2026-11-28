@@ -35,7 +35,7 @@ ApiDeviceTopology* CreateImplDeviceTopologyAndGet()
         RT_LOG(RT_LOG_ERROR, "create ApiImplDeviceTopology failed.");
         return nullptr;
     }
-    RT_LOG(RT_LOG_INFO, "ApiImplDeviceTopology:Runtime_alloc_size %zu", sizeof(ApiImplDeviceTopology));
+    RT_LOG(RT_LOG_INFO, "ApiImplDeviceTopology:Runtime_alloc_size %zu bytes.", sizeof(ApiImplDeviceTopology));
     return apiImplDeviceTopology;
 }
 
@@ -67,7 +67,9 @@ rtError_t GetAtomicDevProperties(uint32_t* const capabilities, const uint32_t co
     }
     const rtChipType_t chipType = Runtime::Instance()->GetChipType();
     const rtError_t error = GET_DEV_PROPERTIES(chipType, prop);
-    COND_RETURN_ERROR_MSG_INNER(error != RT_ERROR_NONE, RT_ERROR_INVALID_VALUE, "GetDevProperties fail");
+    COND_RETURN_ERROR_MSG_INNER(
+        error != RT_ERROR_NONE, RT_ERROR_INVALID_VALUE, "Failed to get device properties, chipType=%d, retCode=%#x.",
+        static_cast<int32_t>(chipType), static_cast<uint32_t>(error));
     return RT_ERROR_NONE;
 }
 
@@ -217,7 +219,7 @@ rtError_t ApiImplDeviceTopology::DeviceCanAccessPeer(
 
         error = Runtime::Instance()->CheckCurCtxValid(static_cast<int32_t>(realDeviceId));
         if (unlikely(error != RT_ERROR_NONE)) {
-            RT_LOG(RT_LOG_ERROR, "Current Context is null, drv devId[%lu].", realDeviceId);
+            RT_LOG(RT_LOG_ERROR, "Current Context is null, drv devId[%u].", realDeviceId);
             error = RT_ERROR_CONTEXT_NULL;
             break;
         }
@@ -246,7 +248,7 @@ rtError_t ApiImplDeviceTopology::GetP2PStatus(const uint32_t devIdDes, const uin
         RT_LOG(RT_LOG_INFO, "drv devId=%u, phyIdSrc=%u.", realDeviceId, phyIdSrc);
         error = Runtime::Instance()->CheckCurCtxValid(static_cast<int32_t>(realDeviceId));
         if (unlikely(error != RT_ERROR_NONE)) {
-            RT_LOG(RT_LOG_ERROR, "Current Context is null, drv devId[%lu].", realDeviceId);
+            RT_LOG(RT_LOG_ERROR, "Current Context is null, drv devId[%u].", realDeviceId);
             error = RT_ERROR_CONTEXT_NULL;
             break;
         }

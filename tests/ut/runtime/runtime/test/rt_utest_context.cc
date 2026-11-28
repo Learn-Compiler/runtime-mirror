@@ -10,7 +10,9 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <cstdio>
+#include <cinttypes>
 #include <stdlib.h>
+#include <string>
 
 #include "gtest/gtest.h"
 #include "mockcpp/mockcpp.hpp"
@@ -77,6 +79,10 @@
 #include "data/elf.h"
 #include "common/rt_utest_context_reset_helper.hpp"
 #include "common/rt_utest_memory_transfer_driver.hpp"
+#include "label.hpp"
+
+void ClearLastDlogRecordLine();
+bool DlogRecordContains(const std::string& keyword);
 
 using namespace testing;
 using namespace cce::runtime;
@@ -3651,12 +3657,32 @@ TEST_F(ContextTest, memcpy2d_invalid_stream)
     (void)((Runtime*)Runtime::Instance())->PrimaryContextRelease(devId);
 }
 
+TEST_F(ContextTest, CreateContextLogsDefaultStreamAllocationBytes)
+{
+    MOCKER(CheckLogLevel).stubs().will(returnValue(1));
+    rtContext_t context = nullptr;
+    ClearLastDlogRecordLine();
+
+    EXPECT_EQ(rtCtxCreate(&context, 0U, 0), RT_ERROR_NONE);
+    EXPECT_NE(context, nullptr);
+    EXPECT_TRUE(DlogRecordContains(
+        RtFmtMsg("New defaultStream_ ok, Runtime_alloc_size %zu bytes, stream_id=", sizeof(Stream))));
+
+    if (context != nullptr) {
+        EXPECT_EQ(rtCtxDestroy(context), RT_ERROR_NONE);
+    }
+}
+
 TEST_F(ContextTest, TryAllocFastCq)
 {
+    MOCKER(CheckLogLevel).stubs().will(returnValue(1));
     RawDevice* stub = new RawDevice(0);
     stub->Init();
     Context* ctx = new Context(stub, 0);
+    ClearLastDlogRecordLine();
     EXPECT_EQ(ctx->Init(), RT_ERROR_NONE);
+    EXPECT_TRUE(
+        DlogRecordContains(RtFmtMsg("Runtime_alloc_size is %zu bytes.", sizeof(Module*) * DEFAULT_PROGRAM_NUMBER)));
     stub->SetFastCqFlag(false);
     ctx->TryAllocFastCq();
     stub->SetFastCqFlag(true);
@@ -3664,6 +3690,10 @@ TEST_F(ContextTest, TryAllocFastCq)
     MOCKER_CPP_VIRTUAL(stm, &Stream::Setup).stubs().will(returnValue(RT_ERROR_INVALID_VALUE));
     MOCKER_CPP(&StreamSqCqManage::DelStreamIdToStream).stubs().will(returnValue(RT_ERROR_NONE));
     ctx->TryAllocFastCq();
+    EXPECT_TRUE(
+        DlogRecordContains(RtFmtMsg("New onlineStream_ ok, Runtime_alloc_size %zu bytes, stream_id=", sizeof(Stream))));
+    EXPECT_FALSE(stub->GetFastCqFlag());
+    EXPECT_EQ(ctx->OnlineStream_(), nullptr);
     delete ctx;
     delete stub;
 }
@@ -4696,8 +4726,13 @@ TEST_F(ContextTest, ModelTaskUpdate_test)
         .then(returnValue(RT_ERROR_NONE));
     MOCKER_CPP(&Stream::ModelTaskUpdate).stubs().will(returnValue(1));
 
-    error = ctx->ModelTaskUpdate(streamA, 0, streamB, &para);
+    ClearLastDlogRecordLine();
+    constexpr uint32_t desTaskId = 17U;
+    error = ctx->ModelTaskUpdate(streamA, desTaskId, streamB, &para);
     EXPECT_EQ(error, 1);
+    EXPECT_TRUE(DlogRecordContains(RtFmtMsg(
+        "Failed to copy tiling table to device, deviceId=%u, stream_id=%d, desTaskId=%u, retCode=%#x.", device->Id_(),
+        streamB->Id_(), desTaskId, 1U)));
 
     error = ctx->ModelTaskUpdate(streamA, 0, streamB, &para);
     EXPECT_EQ(error, 1);
@@ -4706,6 +4741,40 @@ TEST_F(ContextTest, ModelTaskUpdate_test)
     delete streamA;
     delete streamB;
     delete device;
+    GlobalMockObject::verify();
+}
+
+TEST_F(ContextTest, LabelSwitchListCreateMemSetFailureFreesMemoryAndLogsBytes)
+{
+    Context* const context = Runtime::Instance()->CurrentContext();
+    ASSERT_NE(context, nullptr);
+    Device* const device = context->Device_();
+    Driver* const driver = device->Driver_();
+    Label label(nullptr);
+    Label* labels[] = {&label};
+    rtLabelDevInfo memory = {};
+    void* memoryPtr = &memory;
+    constexpr uint64_t labelSize = sizeof(memory);
+    void* labelList = nullptr;
+    MOCKER_CPP_VIRTUAL(driver, &Driver::DevMemAllocWithBackupFlag)
+        .expects(once())
+        .with(outBoundP(&memoryPtr, sizeof(memoryPtr)), eq(labelSize), mockcpp::any(), eq(device->Id_()))
+        .will(returnValue(RT_ERROR_NONE));
+    MOCKER_CPP_VIRTUAL(driver, &Driver::MemSetSync)
+        .expects(once())
+        .with(eq(static_cast<const void*>(memoryPtr)), eq(labelSize), eq(0xFFU), eq(labelSize))
+        .will(returnValue(RT_ERROR_DRV_ERR));
+    MOCKER_CPP_VIRTUAL(driver, &Driver::DevMemFree)
+        .expects(once())
+        .with(eq(memoryPtr), eq(device->Id_()))
+        .will(returnValue(RT_ERROR_NONE));
+    ClearLastDlogRecordLine();
+
+    EXPECT_EQ(context->LabelSwitchListCreate(labels, 1U, &labelList), RT_ERROR_DRV_ERR);
+    EXPECT_EQ(labelList, nullptr);
+    EXPECT_TRUE(DlogRecordContains(RtFmtMsg(
+        "Failed to set label device address memory, retCode=%#x, labels num=%zu, labelSize=%" PRIu64 " (bytes).",
+        static_cast<uint32_t>(RT_ERROR_DRV_ERR), size_t{1U}, labelSize)));
     GlobalMockObject::verify();
 }
 

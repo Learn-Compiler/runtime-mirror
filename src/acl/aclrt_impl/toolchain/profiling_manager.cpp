@@ -357,7 +357,7 @@ aclError RegisterType(const uint32_t index)
     if (iter != PROF_TYPE_TO_NAMES.cend()) {
         const auto ret = MsprofRegTypeInfo(MSPROF_REPORT_ACL_LEVEL, index, iter->second.c_str());
         if (ret != MSPROF_ERROR_NONE) {
-            ACL_LOG_CALL_ERROR("Registered api type [%u] failed = %d", index, ret);
+            ACL_LOG_CALL_ERROR("Failed to register api type [%u], ret = %d.", index, ret);
             return ACL_ERROR_PROFILING_FAILURE;
         }
     }
