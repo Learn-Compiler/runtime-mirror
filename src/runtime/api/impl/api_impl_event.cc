@@ -80,7 +80,7 @@ rtError_t ApiImplEvent::EventQueryStatus(Event* const evt, rtEventStatus_t* cons
     Context* eventCtx = evt->Context_();
     if (eventCtx != nullptr) {
         const rtError_t error = eventCtx->CheckStatus();
-        ERROR_RETURN(error, "context is abort, status=%#x.", static_cast<uint32_t>(error));
+        ERROR_RETURN(error, "context is aborted, status=%#x.", static_cast<uint32_t>(error));
     }
     *status = RT_EVENT_INIT;
     if (evt->GetEventFlag() == RT_EVENT_IPC) {
@@ -123,7 +123,7 @@ rtError_t ApiImplEvent::EventQueryWaitStatus(Event* const evt, rtEventWaitStatus
         error = device->GetDeviceStatus();
         ERROR_RETURN(error, "device_id=%d status=%d is abnormal.", device->Id_(), error);
         error = curCtx->GetFailureError();
-        ERROR_RETURN(error, "context is abort, status=%#x.", static_cast<uint32_t>(error));
+        ERROR_RETURN(error, "context is aborted, status=%#x.", static_cast<uint32_t>(error));
     }
     *status = EVENT_STATUS_NOT_READY;
     bool waitStatus = false;
