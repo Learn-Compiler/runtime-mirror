@@ -101,7 +101,7 @@ myKernel<<<8, nullptr, s0>>>();    // 在Device 1上通过Stream s0下发算子
 以下是跨Device内存复制的代码示例，不可以直接拷贝编译运行，仅供参考。
 
 <!-- npu="950,A3,910b,910,310p,310b" id1 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/master/example/1_basic_features/device/2_device_P2P)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/9.3.0-beta.2/example/1_basic_features/device/2_device_P2P)。
 <!-- end id1 -->
 
 ```c

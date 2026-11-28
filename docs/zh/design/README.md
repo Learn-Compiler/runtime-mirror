@@ -50,7 +50,7 @@
 
 ## 项目结构
 
-```
+```text
 runtime/
 ├── api/                    # API 接口层
 │   ├── api.hpp             # Runtime API 定义

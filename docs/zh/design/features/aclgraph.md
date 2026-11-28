@@ -20,6 +20,7 @@
 以下为接口调用流程片段。`kernel1`、`kernel2`为已加载的`aclrtFuncHandle`，`numBlocks`为启动核数，`argsData1`/`argsSize1`和`argsData2`/`argsSize2`分别为已准备的Kernel参数数据及其字节数；相关流和参数需由调用方提前初始化。
 
 - **场景一**：单算子流捕获
+
   ```cpp
   // 开始捕获
   aclError ret = aclmdlRICaptureBegin(stream, ACL_MODEL_RI_CAPTURE_MODE_GLOBAL);
@@ -37,6 +38,7 @@
   ```
 
 - **场景二**：多流捕获（级联捕获）
+
   ```cpp
   // 在原始流上开始捕获
   aclmdlRICaptureBegin(stream1, ACL_MODEL_RI_CAPTURE_MODE_GLOBAL);
@@ -50,6 +52,7 @@
   ```
 
 - **场景三**：TaskGroup 任务组
+
   ```cpp
   // 开始任务组
   aclmdlRICaptureTaskGrpBegin(stream);
@@ -68,6 +71,7 @@
   ```
 
 - **场景四**：模型更新
+
   ```cpp
   // 检查模型是否支持更新
   aclError ret = aclmdlRICheckCaptureForUpdate(stream);
@@ -77,6 +81,7 @@
   ```
 
 - **场景五**：条件控制流（Cond 场景）
+
   ```cpp
   // 1. 开始父图捕获
   aclmdlRICaptureBegin(stream1, ACL_MODEL_RI_CAPTURE_MODE_GLOBAL);
@@ -635,7 +640,6 @@ rtError_t Context::StreamBeginCapture(Stream * const stm, const rtStreamCaptureM
 }
 ```
 
-
 #### 流捕获结束流程
 
 ```mermaid
@@ -1160,6 +1164,7 @@ private:
 ```
 
 **CondHandle 生命周期**：
+
 - **创建**：`aclmdlRICondHandleCreate` → `new CondHandle` → `Setup`（分配 device 内存）→ `ModelPushBackCondHandle`（加入父图）
 - **使用**：`aclmdlRIAddCondTask` → 创建条件子图 → 下发条件任务 → `StoreCondHandleTaskInfo`（记录到 `condHandleTaskMap_`）
 - **执行**：`InitAllSubCaptureModelCondTaskByDefValue` 初始化条件值

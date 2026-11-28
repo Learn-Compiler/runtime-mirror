@@ -15,7 +15,9 @@
 ### 2.1 使用场景
 
 - **场景一**：计算（or通信） & 计算 算子融合
+
 1) AI CPU + AI Core 融合
+
   ```cpp
   // 创建融合算子任务信息
   rtFunsionTaskInfo_t fusionInfo;
@@ -36,7 +38,9 @@
   ```
 
 - **场景二**：通信 & 计算 算子融合
+
 1) CCU + AI Core 融合
+
   ```cpp
   // 创建融合算子任务信息
   rtFunsionTaskInfo_t fusionInfo;
@@ -64,6 +68,7 @@
 | `rtFusionLaunch` | `pkg_inc/runtime/rt_external_kernel.h:545` | 提交下发融合算子任务 |
 
 **接口参数说明**：
+
 ```cpp
 rtError_t rtFusionLaunch(
     void * const fusionInfo,       // 融合算子任务信息（rtFunsionTaskInfo_t*）
@@ -180,6 +185,7 @@ flowchart TD
 **位置**：`src/runtime/feature/fusion/fusion_task.cc:279`
 
 **职责**：根据子任务类型构建对应的 SQE
+
 - AI Core：调用 `ConstructAicAivSubSqe`，根据 mixType 判断是 AIC、AIV 还是 Mix
 - AI CPU/HCOM CPU：调用 `ConstructAicpuSubSqe`
 - CCU：调用 `ConstructCcuSubSqe`
@@ -202,7 +208,9 @@ fusion sub tasks 的组合模式如下：
 ### 4.4 核心数据结构
 
 #### rtFunsionTaskInfo_t（融合算子任务的各子任务搭配信息）
+
 ◆ Fusion融合任务中各子任务信息汇总结构体。
+
 ```cpp
 #define FUSION_SUB_TASK_MAX_NUM     (2U)
 typedef struct tagRtFunsionTaskInfo {
@@ -212,13 +220,17 @@ typedef struct tagRtFunsionTaskInfo {
 ```
 
 #### FusionTaskInfo（融合算子任务内部信息）
+
 ◆ 任务初始化和下发时存储融合算子信息相关必要字段信息，例如融合算子的子任务搭配类型、任务数量、是否包含CCU任务等等。
+
 ```cpp
 struct FusionTaskInfo;
 ```
 
 #### FusionTaskInfoAicPart（AI Core 任务部分）
+
 ◆ 用于存储融合算子任务中AI Core子任务的必要字段信息，例如pc地址、args参数地址、分核计算所需维度、SIMT内存大小等等。
+
 ```cpp
 struct FusionTaskInfoAicPart;
 ```

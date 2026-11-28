@@ -15,7 +15,7 @@
 以下是关键步骤的代码示例，不可以直接拷贝编译运行，仅供参考。
 
 <!-- npu="950,A3,910b,910,310p,310b" id1 -->
-完整样例代码，请参见[Link](https://gitcode.com/cann/runtime/tree/master/example/2_advanced_features/kernel/1_launch_kernel_with_reslimit)。
+完整样例代码，请参见[Link](https://gitcode.com/cann/runtime/tree/9.3.0-beta.2/example/2_advanced_features/kernel/1_launch_kernel_with_reslimit)。
 <!-- end id1 -->
 
 ```c

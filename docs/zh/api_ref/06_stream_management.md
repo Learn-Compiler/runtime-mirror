@@ -55,12 +55,6 @@ aclError aclrtCreateStream(aclrtStream *stream)
 <!-- npu="910" id2596 -->
 - Atlas训练系列产品：支持
 <!-- end id2596 -->
-<!-- npu="IPV350" id2597 -->
-- IPV350：不支持
-<!-- end id2597 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id1 -->
 
 ### 功能说明
@@ -101,10 +95,6 @@ aclError aclrtCreateStream(aclrtStream *stream)
 <!-- end id4 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id23 -->
 
-<!-- npu="5162A" id21 -->
-- 对于Hisilicon5162A，Stream最大数为128。
-<!-- end id21 -->
-
 <br>
 <br>
 <br>
@@ -137,12 +127,6 @@ aclError aclrtCreateStreamWithConfig(aclrtStream *stream, uint32_t priority, uin
 <!-- npu="910" id3142 -->
 - Atlas训练系列产品：支持
 <!-- end id3142 -->
-<!-- npu="IPV350" id3143 -->
-- IPV350：不支持
-<!-- end id3143 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id2 -->
 
 ### 功能说明
@@ -219,9 +203,6 @@ aclError aclrtCreateStreamWithConfig(aclrtStream *stream, uint32_t priority, uin
 返回0表示成功，返回其他值表示失败，请参见[aclError](25-01_aclError.md#aclError)。
 
 ### 约束说明
-<!-- npu="5162A" id22 -->
-对于Hisilicon5162A，flag不支持ACL\_STREAM\_FAST\_LAUNCH、ACL\_STREAM\_CPU\_SCHEDULE和ACL\_STREAM\_DEVICE\_USE\_ONLY。
-<!-- end id22 -->
 
 <br>
 <br>
@@ -255,12 +236,6 @@ aclError aclrtDestroyStream(aclrtStream stream)
 <!-- npu="910" id3352 -->
 - Atlas训练系列产品：支持
 <!-- end id3352 -->
-<!-- npu="IPV350" id3353 -->
-- IPV350：支持
-<!-- end id3353 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id3 -->
 
 ### 功能说明
@@ -315,12 +290,6 @@ aclError aclrtDestroyStreamForce(aclrtStream stream)
 <!-- npu="910" id3527 -->
 - Atlas训练系列产品：支持
 <!-- end id3527 -->
-<!-- npu="IPV350" id3528 -->
-- IPV350：不支持
-<!-- end id3528 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id4 -->
 
 ### 功能说明
@@ -373,12 +342,6 @@ aclError aclrtSetStreamOverflowSwitch(aclrtStream stream, uint32_t flag)
 <!-- npu="910" id2232 -->
 - Atlas训练系列产品：不支持
 <!-- end id2232 -->
-<!-- npu="IPV350" id2233 -->
-- IPV350：不支持
-<!-- end id2233 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id5 -->
 
 ### 功能说明
@@ -432,12 +395,6 @@ aclError aclrtGetStreamOverflowSwitch(aclrtStream stream, uint32_t *flag)
 <!-- npu="910" id314 -->
 - Atlas训练系列产品：不支持
 <!-- end id314 -->
-<!-- npu="IPV350" id315 -->
-- IPV350：不支持
-<!-- end id315 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id6 -->
 
 ### 功能说明
@@ -487,12 +444,6 @@ aclError aclrtSetStreamFailureMode(aclrtStream stream, uint64_t mode)
 <!-- npu="910" id1112 -->
 - Atlas训练系列产品：支持
 <!-- end id1112 -->
-<!-- npu="IPV350" id1113 -->
-- IPV350：不支持
-<!-- end id1113 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id7 -->
 
 ### 功能说明
@@ -556,12 +507,6 @@ aclError aclrtStreamQuery(aclrtStream stream, aclrtStreamStatus *status)
 <!-- npu="910" id1315 -->
 - Atlas训练系列产品：支持
 <!-- end id1315 -->
-<!-- npu="IPV350" id1316 -->
-- IPV350：不支持
-<!-- end id1316 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id8 -->
 
 ### 功能说明
@@ -615,12 +560,6 @@ aclError aclrtSynchronizeStream(aclrtStream stream)
 <!-- npu="910" id2617 -->
 - Atlas训练系列产品：支持
 <!-- end id2617 -->
-<!-- npu="IPV350" id2618 -->
-- IPV350：支持
-<!-- end id2618 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id9 -->
 
 ### 功能说明
@@ -673,12 +612,6 @@ aclError aclrtSynchronizeStreamWithTimeout(aclrtStream stream, int32_t timeout)
 <!-- npu="910" id1987 -->
 - Atlas训练系列产品：支持
 <!-- end id1987 -->
-<!-- npu="IPV350" id1988 -->
-- IPV350：不支持
-<!-- end id1988 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：支持
-<!-- end id5010 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id10 -->
 
 ### 功能说明
@@ -732,12 +665,6 @@ aclError aclrtNonBlockingLaunchBegin(aclrtStream stream, uint64_t flag)
 <!-- npu="910" id3605 -->
 - Atlas训练系列产品：不支持
 <!-- end id3605 -->
-<!-- npu="IPV350" id3606 -->
-- IPV350：不支持
-<!-- end id3606 -->
-<!-- npu="5162A" id5011 -->
-- Hisilicon5162A：不支持
-<!-- end id5011 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id29 -->
 
 ### 功能说明
@@ -814,12 +741,6 @@ aclError aclrtNonBlockingLaunchEnd(aclrtStream stream, uint64_t flag)
 <!-- npu="910" id3612 -->
 - Atlas训练系列产品：不支持
 <!-- end id3612 -->
-<!-- npu="IPV350" id3613 -->
-- IPV350：不支持
-<!-- end id3613 -->
-<!-- npu="5162A" id5012 -->
-- Hisilicon5162A：不支持
-<!-- end id5012 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id30 -->
 
 ### 功能说明
@@ -890,12 +811,6 @@ aclError aclrtStreamAbort(aclrtStream stream)
 <!-- npu="910" id951 -->
 - Atlas训练系列产品：不支持
 <!-- end id951 -->
-<!-- npu="IPV350" id952 -->
-- IPV350：不支持
-<!-- end id952 -->
-<!-- npu="5162A" id5013 -->
-- Hisilicon5162A：不支持
-<!-- end id5013 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id11 -->
 
 ### 功能说明
@@ -954,12 +869,6 @@ aclError aclrtStreamGetId(aclrtStream stream, int32_t *streamId)
 <!-- npu="910" id1938 -->
 - Atlas训练系列产品：支持
 <!-- end id1938 -->
-<!-- npu="IPV350" id1939 -->
-- IPV350：不支持
-<!-- end id1939 -->
-<!-- npu="5162A" id5014 -->
-- Hisilicon5162A：支持
-<!-- end id5014 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id12 -->
 
 ### 功能说明
@@ -1009,12 +918,6 @@ aclError aclrtGetStreamAvailableNum(uint32_t *streamCount)
 <!-- npu="910" id965 -->
 - Atlas训练系列产品：支持
 <!-- end id965 -->
-<!-- npu="IPV350" id966 -->
-- IPV350：不支持
-<!-- end id966 -->
-<!-- npu="5162A" id5015 -->
-- Hisilicon5162A：支持
-<!-- end id5015 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id13 -->
 
 ### 功能说明
@@ -1063,12 +966,6 @@ aclError aclrtSetStreamAttribute(aclrtStream stream, aclrtStreamAttr stmAttrType
 <!-- npu="910" id1070 -->
 - Atlas训练系列产品：支持
 <!-- end id1070 -->
-<!-- npu="IPV350" id1071 -->
-- IPV350：不支持
-<!-- end id1071 -->
-<!-- npu="5162A" id5016 -->
-- Hisilicon5162A：不支持
-<!-- end id5016 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id14 -->
 
 ### 功能说明
@@ -1131,12 +1028,6 @@ aclError aclrtGetStreamAttribute(aclrtStream stream, aclrtStreamAttr stmAttrType
 <!-- npu="910" id2981 -->
 - Atlas训练系列产品：支持
 <!-- end id2981 -->
-<!-- npu="IPV350" id2982 -->
-- IPV350：不支持
-<!-- end id2982 -->
-<!-- npu="5162A" id5017 -->
-- Hisilicon5162A：不支持
-<!-- end id5017 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id15 -->
 
 ### 功能说明
@@ -1200,12 +1091,6 @@ aclError aclrtActiveStream(aclrtStream activeStream, aclrtStream stream)
 <!-- npu="910" id342 -->
 - Atlas训练系列产品：支持
 <!-- end id342 -->
-<!-- npu="IPV350" id343 -->
-- IPV350：不支持
-<!-- end id343 -->
-<!-- npu="5162A" id5018 -->
-- Hisilicon5162A：支持
-<!-- end id5018 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id16 -->
 
 ### 功能说明
@@ -1257,12 +1142,6 @@ aclError aclrtSwitchStream(void *leftValue, aclrtCondition cond, void *rightValu
 <!-- npu="910" id2218 -->
 - Atlas训练系列产品：支持
 <!-- end id2218 -->
-<!-- npu="IPV350" id2219 -->
-- IPV350：不支持
-<!-- end id2219 -->
-<!-- npu="5162A" id5019 -->
-- Hisilicon5162A：支持
-<!-- end id5019 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id17 -->
 
 ### 功能说明
@@ -1319,12 +1198,6 @@ aclError aclrtRegStreamStateCallback(const char *regName, aclrtStreamStateCallba
 <!-- npu="910" id1924 -->
 - Atlas训练系列产品：支持
 <!-- end id1924 -->
-<!-- npu="IPV350" id1925 -->
-- IPV350：不支持
-<!-- end id1925 -->
-<!-- npu="5162A" id5020 -->
-- Hisilicon5162A：不支持
-<!-- end id5020 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id18 -->
 
 ### 功能说明
@@ -1387,12 +1260,6 @@ aclError aclrtStreamStop(aclrtStream stream)
 <!-- npu="910" id2505 -->
 - Atlas训练系列产品：不支持
 <!-- end id2505 -->
-<!-- npu="IPV350" id2506 -->
-- IPV350：不支持
-<!-- end id2506 -->
-<!-- npu="5162A" id5021 -->
-- Hisilicon5162A：不支持
-<!-- end id5021 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id19 -->
 
 ### 功能说明
@@ -1447,12 +1314,6 @@ aclError aclrtPersistentTaskClean(aclrtStream stream)
 <!-- npu="910" id433 -->
 - Atlas训练系列产品：不支持
 <!-- end id433 -->
-<!-- npu="IPV350" id434 -->
-- IPV350：不支持
-<!-- end id434 -->
-<!-- npu="5162A" id5022 -->
-- Hisilicon5162A：不支持
-<!-- end id5022 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id20 -->
 
 ### 功能说明
@@ -1505,12 +1366,6 @@ aclError aclrtStreamGetPriority(aclrtStream stream, uint32_t *priority)
 <!-- npu="910" id3093 -->
 - Atlas训练系列产品：支持
 <!-- end id3093 -->
-<!-- npu="IPV350" id3094 -->
-- IPV350：不支持
-<!-- end id3094 -->
-<!-- npu="5162A" id5023 -->
-- Hisilicon5162A：支持
-<!-- end id5023 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id21 -->
 
 ### 功能说明
@@ -1560,12 +1415,6 @@ aclError aclrtStreamGetFlags(aclrtStream stream, uint32_t *flags)
 <!-- npu="910" id1567 -->
 - Atlas训练系列产品：支持
 <!-- end id1567 -->
-<!-- npu="IPV350" id1568 -->
-- IPV350：不支持
-<!-- end id1568 -->
-<!-- npu="5162A" id5024 -->
-- Hisilicon5162A：不支持
-<!-- end id5024 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/06_stream_management_res.md#id22 -->
 
 ### 功能说明

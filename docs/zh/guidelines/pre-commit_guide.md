@@ -45,7 +45,8 @@ pre-commit install
 ```
 
 安装成功后会显示：
-```
+
+```text
 pre-commit installed at .git/hooks/pre-commit
 ```
 
@@ -61,7 +62,8 @@ git commit -m "your commit message"
 ```
 
 输出示例：
-```
+
+```text
 clang-format.............................................................Passed
 OAT Compliance Check (Python Edition).....................................Passed
 ```
@@ -99,7 +101,6 @@ git commit --no-verify -m "emergency fix"
 - **大括号**: 函数定义换行，控制语句同行
 - **指针对齐**: 右对齐 (`int *ptr`)
 
-
 ### 2. OAT Compliance Check
 
 OAT (Open Source Audit Tool) 检查开源合规性：
@@ -109,7 +110,6 @@ OAT (Open Source Audit Tool) 检查开源合规性：
 | 许可证头检查 | 确保源文件包含 CANN License 头 |
 | 二进制文件检查 | 禁止提交二进制文件 |
 | 归档文件检查 | 禁止提交 zip/tar 等归档文件 |
-
 
 OAT 使用 [compliance](https://gitcode.com/HiAgent/compliance) 仓库提供的远程 Python hook，版本由 `.pre-commit-config.yaml` 中的 `rev: v1.0.6` 固定。首次运行时，pre-commit 会自动克隆该仓库，在独立的 Python 虚拟环境中安装 OAT 及其依赖，并通过 `oat-precommit` 检查传入的文件。
 
@@ -122,7 +122,6 @@ OAT 使用 [compliance](https://gitcode.com/HiAgent/compliance) 仓库提供的�
 **原因**: 首次运行需要下载远程 hook 并安装 Python 环境及依赖，需要能够访问 GitCode 和 Python 包源。
 
 **解决**: 等待首次安装完成，后续提交会复用 pre-commit 缓存的环境。
-
 
 ## 相关文档
 

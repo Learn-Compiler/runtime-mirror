@@ -40,12 +40,6 @@ acltdtChannelHandle *acltdtCreateChannel(uint32_t deviceId, const char *name)
 <!-- npu="910" id3289 -->
 - Atlas训练系列产品：支持
 <!-- end id3289 -->
-<!-- npu="IPV350" id3290 -->
-- IPV350：不支持
-<!-- end id3290 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id1 -->
 
 ### 功能说明
@@ -100,12 +94,6 @@ acltdtChannelHandle *acltdtCreateChannelWithCapacity(uint32_t deviceId, const ch
 <!-- npu="910" id2092 -->
 - Atlas训练系列产品：支持
 <!-- end id2092 -->
-<!-- npu="IPV350" id2093 -->
-- IPV350：不支持
-<!-- end id2093 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id2 -->
 
 ### 功能说明
@@ -157,12 +145,6 @@ aclError acltdtSendTensor(const acltdtChannelHandle *handle, const acltdtDataset
 <!-- npu="910" id2701 -->
 - Atlas训练系列产品：支持
 <!-- end id2701 -->
-<!-- npu="IPV350" id2702 -->
-- IPV350：不支持
-<!-- end id2702 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id3 -->
 
 ### 功能说明
@@ -217,12 +199,6 @@ aclError acltdtReceiveTensor(const acltdtChannelHandle *handle, acltdtDataset *d
 <!-- npu="910" id2211 -->
 - Atlas训练系列产品：支持
 <!-- end id2211 -->
-<!-- npu="IPV350" id2212 -->
-- IPV350：不支持
-<!-- end id2212 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：不支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id4 -->
 
 ### 功能说明
@@ -277,12 +253,6 @@ aclError acltdtStopChannel(acltdtChannelHandle *handle)
 <!-- npu="910" id923 -->
 - Atlas训练系列产品：支持
 <!-- end id923 -->
-<!-- npu="IPV350" id924 -->
-- IPV350：不支持
-<!-- end id924 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id5 -->
 
 ### 功能说明
@@ -331,12 +301,6 @@ aclError acltdtDestroyChannel(acltdtChannelHandle *handle)
 <!-- npu="910" id797 -->
 - Atlas训练系列产品：支持
 <!-- end id797 -->
-<!-- npu="IPV350" id798 -->
-- IPV350：不支持
-<!-- end id798 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id6 -->
 
 ### 功能说明
@@ -385,12 +349,6 @@ aclError acltdtQueryChannelSize(const acltdtChannelHandle *handle, size_t *size)
 <!-- npu="910" id2183 -->
 - Atlas训练系列产品：支持
 <!-- end id2183 -->
-<!-- npu="IPV350" id2184 -->
-- IPV350：不支持
-<!-- end id2184 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id7 -->
 
 ### 功能说明
@@ -440,12 +398,6 @@ aclError acltdtGetSliceInfoFromItem(const acltdtDataItem *dataItem, size_t *slic
 <!-- npu="910" id2876 -->
 - Atlas训练系列产品：支持
 <!-- end id2876 -->
-<!-- npu="IPV350" id2877 -->
-- IPV350：不支持
-<!-- end id2877 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id8 -->
 
 ### 功能说明
@@ -498,12 +450,6 @@ aclError acltdtCleanChannel(acltdtChannelHandle *handle)
 <!-- npu="910" id2456 -->
 - Atlas训练系列产品：支持
 <!-- end id2456 -->
-<!-- npu="IPV350" id2457 -->
-- IPV350：不支持
-<!-- end id2457 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：不支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-01_tensor_data_transfer_res.md#id9 -->
 
 ### 功能说明

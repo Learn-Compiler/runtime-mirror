@@ -42,12 +42,6 @@ aclError acltdtAllocBuf(size_t size, uint32_t type, acltdtBuf *buf)
 <!-- npu="910" id2428 -->
 - Atlas训练系列产品：不支持
 <!-- end id2428 -->
-<!-- npu="IPV350" id2429 -->
-- IPV350：不支持
-<!-- end id2429 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id1 -->
 
 ### 功能说明
@@ -108,12 +102,6 @@ aclError acltdtFreeBuf(acltdtBuf buf)
 <!-- npu="910" id3233 -->
 - Atlas训练系列产品：不支持
 <!-- end id3233 -->
-<!-- npu="IPV350" id3234 -->
-- IPV350：不支持
-<!-- end id3234 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id2 -->
 
 ### 功能说明
@@ -162,12 +150,6 @@ aclError acltdtGetBufData(const acltdtBuf buf, void **dataPtr, size_t *size)
 <!-- npu="910" id1294 -->
 - Atlas训练系列产品：不支持
 <!-- end id1294 -->
-<!-- npu="IPV350" id1295 -->
-- IPV350：不支持
-<!-- end id1295 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id3 -->
 
 ### 功能说明
@@ -220,12 +202,6 @@ aclError acltdtSetBufUserData(acltdtBuf buf, const void *dataPtr, size_t size, s
 <!-- npu="910" id643 -->
 - Atlas训练系列产品：不支持
 <!-- end id643 -->
-<!-- npu="IPV350" id644 -->
-- IPV350：不支持
-<!-- end id644 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：不支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id4 -->
 
 ### 功能说明
@@ -277,12 +253,6 @@ aclError acltdtGetBufUserData(const acltdtBuf buf, void *dataPtr, size_t size, s
 <!-- npu="910" id83 -->
 - Atlas训练系列产品：不支持
 <!-- end id83 -->
-<!-- npu="IPV350" id84 -->
-- IPV350：不支持
-<!-- end id84 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id5 -->
 
 ### 功能说明
@@ -334,12 +304,6 @@ aclError acltdtSetBufDataLen(acltdtBuf buf, size_t len)
 <!-- npu="910" id3380 -->
 - Atlas训练系列产品：不支持
 <!-- end id3380 -->
-<!-- npu="IPV350" id3381 -->
-- IPV350：不支持
-<!-- end id3381 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id6 -->
 
 ### 功能说明
@@ -391,12 +355,6 @@ aclError acltdtGetBufDataLen(acltdtBuf buf, size_t *len)
 <!-- npu="910" id3478 -->
 - Atlas训练系列产品：不支持
 <!-- end id3478 -->
-<!-- npu="IPV350" id3479 -->
-- IPV350：不支持
-<!-- end id3479 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id7 -->
 
 ### 功能说明
@@ -448,12 +406,6 @@ aclError acltdtCopyBufRef(const acltdtBuf buf, acltdtBuf *newBuf)
 <!-- npu="910" id181 -->
 - Atlas训练系列产品：不支持
 <!-- end id181 -->
-<!-- npu="IPV350" id182 -->
-- IPV350：不支持
-<!-- end id182 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id8 -->
 
 ### 功能说明
@@ -509,12 +461,6 @@ aclError acltdtAppendBufChain(acltdtBuf headBuf, acltdtBuf buf)
 <!-- npu="910" id972 -->
 - Atlas训练系列产品：不支持
 <!-- end id972 -->
-<!-- npu="IPV350" id973 -->
-- IPV350：不支持
-<!-- end id973 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：不支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id9 -->
 
 ### 功能说明
@@ -564,12 +510,6 @@ aclError acltdtGetBufChainNum(acltdtBuf headBuf, uint32_t *num)
 <!-- npu="910" id496 -->
 - Atlas训练系列产品：不支持
 <!-- end id496 -->
-<!-- npu="IPV350" id497 -->
-- IPV350：不支持
-<!-- end id497 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：不支持
-<!-- end id5010 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id10 -->
 
 ### 功能说明
@@ -619,12 +559,6 @@ aclError acltdtGetBufFromChain(acltdtBuf headBuf, uint32_t index, acltdtBuf *buf
 <!-- npu="910" id2295 -->
 - Atlas训练系列产品：不支持
 <!-- end id2295 -->
-<!-- npu="IPV350" id2296 -->
-- IPV350：不支持
-<!-- end id2296 -->
-<!-- npu="5162A" id5011 -->
-- Hisilicon5162A：不支持
-<!-- end id5011 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/17-03_shared_buffer_management_res.md#id11 -->
 
 ### 功能说明

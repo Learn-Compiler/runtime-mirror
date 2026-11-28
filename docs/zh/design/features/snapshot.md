@@ -17,6 +17,7 @@
 ### 2.1 使用场景
 
 - **场景一**：进程快照备份
+
   ```cpp
   // 1. 锁定进程
   aclError ret = aclrtSnapShotProcessLock(pid, nullptr);
@@ -33,6 +34,7 @@
   ```
 
 - **场景二**：注册回调快照阶段
+
   ```cpp
   // 注册备份前回调
   aclrtSnapShotCallBack callback = MyBackupPreCallback;
@@ -88,6 +90,7 @@ ACL 层在 `args` 非 `NULL` 时会校验参数：`backupFlags` / `restoreFlags`
 原有 `ApiImplSnapshot` 实现整体位于 feature/snapshot，直接持有服务线程与回调表，本地调用和跨进程分发共用其业务流程。Runtime 通过已有 Snapshot API 对象，在初始化末尾启动服务，退出时停止并 join 服务线程。
 
 Snapshot 特性采用分层架构设计：
+
 - **ACL 接口层**：提供 C 语言接口（aclrtSnapShot* 系列）
 - **Runtime API 层**：ACL 参数为空时调用旧无参 `rtSnapShotProcessBackup` / `rtSnapShotProcessRestore` 保持旧流程兼容语义；ACL 参数非空时通过 `rtSnapShotProcessBackupWithArgs` / `rtSnapShotProcessRestoreWithArgs` 承接并贯通 `backupFlags` / `restoreFlags`
 - **核心协调层**：GlobalStateManager 管理进程状态和版本信息，SnapshotCallbackManager 管理回调
@@ -259,6 +262,7 @@ flowchart TD
 ```
 
 **功能说明**：
+
 - **回调触发**：触发 LOCK_PRE 阶段回调，允许上层执行准备工作
 - **状态切换**：GlobalStateManager 将进程状态从 RUNNING 切换为 LOCKED
 - **线程同步**：等待所有注册的后台线程进入阻塞状态，确保状态一致性
@@ -286,12 +290,14 @@ flowchart TD
 ```
 
 **功能说明**：
+
 - **预处理阶段**：触发 BACKUP_PRE 回调；`args` 非 `NULL` 时先检查驱动能力，检查通过后再同步所有 Context，确保没有任务在执行
 - **非NULL参数流程**：检查驱动是否支持 `FEATURE_SVM_PROCESS_DEVICE_MEM_SNAPSHOT`，不支持则直接返回不支持；支持后同步 Context 并记录版本信息，跳过旧 Runtime 内存备份，由 `NpuDriver::ProcessResBackup(backupFlags)` 交给驱动处理
 - **NULL参数流程**：兼容旧接口语义，不执行驱动能力判断和版本记录，执行 `OpMemoryBackup`、`Runtime::SaveModule` 等旧 Runtime 备份逻辑，并向驱动传入 `0U`
 - **后处理阶段**：触发 BACKUP_POST 回调，将进程状态切换为 BACKED_UP
 
 关键文件位置：
+
 - `src/runtime/api/impl/api_impl_snapshot.cc`
 - `src/runtime/feature/snapshot/snapshot_process_helper.cc`
 
@@ -318,6 +324,7 @@ flowchart TD
 ```
 
 **功能说明**：
+
 - **预处理阶段**：触发 RESTORE_PRE 回调，准备恢复环境
 - **非NULL参数流程**：先检查驱动是否支持 `FEATURE_SVM_PROCESS_DEVICE_MEM_SNAPSHOT`，不支持则直接返回不支持；支持后校验备份时记录的 Runtime/Driver API 版本，版本不一致时恢复失败
 - **NULL参数流程**：兼容旧接口语义，不执行驱动能力判断和版本一致性校验，执行旧 Runtime 恢复流程
@@ -329,6 +336,7 @@ flowchart TD
 - **后处理阶段**：触发 RESTORE_POST 回调，将进程状态切换为 LOCKED
 
 关键文件位置：
+
 - `src/runtime/api/impl/api_impl_snapshot.cc`
 - `src/runtime/feature/snapshot/snapshot_process_helper.cc`
 
@@ -386,6 +394,7 @@ class GlobalStateManager {
 ```
 
 关键文件位置：
+
 - 头文件：`src/runtime/core/inc/common/global_state_manager.hpp`
 - 实现文件：`src/runtime/core/src/common/global_state_manager.cc`
 
@@ -412,6 +421,7 @@ SnapshotCallbackManager --> SnapShotCallBackInfo
 ```
 
 关键文件位置：
+
 - 头文件：`src/runtime/feature/snapshot/snapshot_callback_manager.hpp`
 - 实现文件：`src/runtime/feature/snapshot/snapshot_callback_manager.cc`
 
@@ -462,6 +472,7 @@ DeviceSnapshot --> TaskHandlers
 ```
 
 关键文件位置：
+
 - 接口定义：`src/runtime/core/inc/common/idevice_snapshot_ops.hpp`
 - 实现类头文件：`src/runtime/feature/snapshot/device_snapshot.hpp`
 - 实现文件：`src/runtime/feature/snapshot/device_snapshot.cc`
@@ -471,6 +482,7 @@ DeviceSnapshot --> TaskHandlers
 **设计思想**：提供备份前处理、版本记录/校验、设备恢复、资源恢复、模型备份恢复、ACL Graph恢复等辅助函数。该模块负责根据 `args` 是否为空选择新旧 Snapshot 流程；`args` 非空时检查驱动 feature 并将 `backupFlags` / `restoreFlags` 传递给驱动。
 
 关键文件位置：
+
 - 头文件：`src/runtime/feature/snapshot/snapshot_process_helper.hpp`
 - 实现文件：`src/runtime/feature/snapshot/snapshot_process_helper.cc`
 
@@ -479,11 +491,13 @@ DeviceSnapshot --> TaskHandlers
 **设计思想**：封装驱动侧进程级资源备份/恢复能力，并统一处理设备内存快照标签。
 
 核心职责：
+
 - `ProcessResBackup`：调用 `halProcessResBackup`，当 `backupFlags == 1U` 时携带 optional 备份标记。
 - `ProcessResRestore`：调用 `halProcessResRestore`，当 `restoreFlags == 1U` 时携带 optional 恢复标记。
 - `DevMemAllocWithBackupFlag` / `DevMemAllocWithFlag`：在设备内存申请时写入 `DevMemBackupType` 标签（前者经 `type` 入参传入；后者由调用方设置 `config.type`，再通过 `NpuDriver::BuildDevMemAllocFlag(deviceId, &config)` 将备份类型与其他申请属性统一编入 flag）。
 
 关键文件位置：
+
 - 头文件：`src/runtime/driver/npu_driver.hpp`
 - 实现文件：`src/runtime/driver/npu_driver.cc`、`src/runtime/driver/npu_driver_mem.cc`
 - 驱动抽象接口：`src/runtime/core/inc/drv/driver.hpp`
@@ -621,12 +635,14 @@ flowchart TD
 #### 状态转换约束
 
 **正常转换路径**：
+
 - RUNNING → LOCKED：仅当当前状态为 RUNNING 时，Lock() 才能成功
 - LOCKED → BACKED_UP：仅当当前状态为 LOCKED 时，Backup() 才能成功
 - BACKED_UP → LOCKED：仅当当前状态为 BACKED_UP 时，Restore() 才能成功
 - LOCKED/BACKED_UP → RUNNING：仅当状态为 LOCKED 或 BACKED_UP 时，Unlock() 才能成功
 
 **状态转换失败处理**：
+
 - **Lock 失败**：若当前状态非 RUNNING 或后台线程同步超时，状态回退到 RUNNING，并通知所有阻塞线程
 - **Unlock 失败**：若当前状态非 LOCKED 或 BACKED_UP，返回错误码 RT_ERROR_SNAPSHOT_UNLOCK_FAILED
 - **Backup/Restore 失败**：不影响状态转换，由具体流程内部处理
@@ -638,12 +654,15 @@ flowchart TD
 **触发时机**：进程退出（main 函数返回、调用 exit()、进程终止）
 
 通过 `atexit()` 注册为进程退出清理函数：
+
 ```cpp
 (void)atexit(&ThreadGuard::ThreadExit);
 ```
+
 文件位置：`src/runtime/core/src/utils/osal.cc:218`
 
 **必要性**：
+
 - 若进程在退出时仍处于 `LOCKED` 或 `BACKED_UP` 状态，其他线程可能阻塞在条件变量上等待解锁
 - 如果不强制解锁，这些线程将永远无法退出，导致进程无法正常结束
 - 强制解锁可以通知所有阻塞线程解除阻塞，允许进程正常退出
@@ -651,6 +670,7 @@ flowchart TD
 **设计目的**：进程异常退出时的清理，避免资源死锁和线程僵死
 
 关键文件位置：
+
 - `src/runtime/core/src/common/global_state_manager.cc`
 - `src/runtime/core/src/utils/osal.cc`
 
@@ -670,6 +690,7 @@ API 层通过 `GLOBAL_STATE_WAIT_IF_LOCKED()` 宏实现阻塞：
 ```
 
 阻塞逻辑：
+
 - **阻塞条件**：进程状态为 `RT_PROCESS_STATE_LOCKED` 或 `RT_PROCESS_STATE_BACKED_UP`
 - **阻塞行为**：Host 端调用线程阻塞在条件变量 `globalLockCv_` 上，等待状态变为 `RT_PROCESS_STATE_RUNNING`
 - **非阻塞场景**：若进程状态为 `RUNNING`，则直接返回继续执行
@@ -693,15 +714,18 @@ API 层通过 `GLOBAL_STATE_WAIT_IF_LOCKED()` 宏实现阻塞：
 #### 非阻塞 API 示例（不涉及资源修改）
 
 **查询类 API**：
+
 - rtGetDeviceCount、rtGetDevice、rtGetDeviceIDs
 - rtStreamQuery、rtStreamGetPriority、rtStreamGetFlags
 - rtSnapShotProcessGetState
 
 **同步类 API**：
+
 - rtStreamSynchronize、rtStreamSynchronizeWithTimeout
 - rtEventSynchronize
 
 **Snapshot 管理类 API**：
+
 - rtSnapShotProcessLock、rtSnapShotProcessUnlock
 - rtSnapShotProcessBackup、rtSnapShotProcessRestore、rtSnapShotProcessBackupWithArgs、rtSnapShotProcessRestoreWithArgs
 - rtSnapShotCallbackRegister、rtSnapShotCallbackUnregister
@@ -724,6 +748,7 @@ API 层通过 `GLOBAL_STATE_WAIT_IF_LOCKED()` 宏实现阻塞：
 ### 5.4 后台线程管理
 
 锁定时需要等待所有后台线程进入阻塞状态：
+
 - `IncBackgroundThreadCount(name)`：后台线程注册需要阻塞
 - `BackgroundThreadWaitIfLocked(name)`：后台线程检查并阻塞
 - `DecBackgroundThreadCount(name)`：后台线程退出时取消注册

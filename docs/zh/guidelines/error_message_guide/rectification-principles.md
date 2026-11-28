@@ -235,6 +235,7 @@ Error Message 打印格式应遵循以下规范，确保信息清晰、规范、
 **规则1：用户传入枚举值的打印**
 
 用户传入的枚举参数，使用枚举转字符串函数打印，格式为 `枚举名(数值)`：
+
 - 合法值示例：`GLOBAL(0)`、`THREAD_LOCAL(1)`、`RELAXED(2)`
 - 非法值（不在枚举定义中）示例：`UNKNOWN(100)`，必须同时打印数值
 
@@ -268,6 +269,7 @@ COND_RETURN_EXT_ERRCODE_AND_MSG_OUTER((priority != RT_STREAM_GREATEST_PRIORITY) 
 专有名词需使用正确的大小写和格式，保持原文不拆分、统一格式。
 
 常见专有名词：
+
 - AI CPU
 - ACL Graph
 - SQ/CQ
@@ -276,6 +278,7 @@ COND_RETURN_EXT_ERRCODE_AND_MSG_OUTER((priority != RT_STREAM_GREATEST_PRIORITY) 
 ### ID 类参数打印规范
 
 `stream id`、`model id` 等标识符打印格式：
+
 - `stream (stream_id=%d)`
 - `model (model_id=%d)`
 - `event (event_id=%d)`
@@ -286,6 +289,7 @@ COND_RETURN_EXT_ERRCODE_AND_MSG_OUTER((priority != RT_STREAM_GREATEST_PRIORITY) 
 内部函数名按照功能描述打印，避免直接打印函数名，以便用户理解。
 
 示例：
+
 - 推荐：`Failed to allocate memory for internal buffer.`
 - 不推荐：`Malloc failed.`
 
@@ -298,6 +302,7 @@ COND_RETURN_EXT_ERRCODE_AND_MSG_OUTER((priority != RT_STREAM_GREATEST_PRIORITY) 
 ### 句式完整性规范
 
 使用一句完整的句式表达报错信息：
+
 - 首字母大写
 - 根据错误码类型决定句式末尾是否加句号
 

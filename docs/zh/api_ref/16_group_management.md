@@ -37,12 +37,6 @@ aclError aclrtSetGroup(int32_t groupId)
 <!-- npu="910" id195 -->
 - Atlas训练系列产品：不支持
 <!-- end id195 -->
-<!-- npu="IPV350" id196 -->
-- IPV350：不支持
-<!-- end id196 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id1 -->
 
 ### 功能说明
@@ -102,12 +96,6 @@ aclError  aclrtGetGroupCount(uint32_t *count)
 <!-- npu="910" id699 -->
 - Atlas训练系列产品：不支持
 <!-- end id699 -->
-<!-- npu="IPV350" id700 -->
-- IPV350：不支持
-<!-- end id700 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id2 -->
 
 ### 功能说明
@@ -167,12 +155,6 @@ aclError  aclrtGetAllGroupInfo(aclrtGroupInfo *groupInfo)
 <!-- npu="910" id1266 -->
 - Atlas训练系列产品：不支持
 <!-- end id1266 -->
-<!-- npu="IPV350" id1267 -->
-- IPV350：不支持
-<!-- end id1267 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id3 -->
 
 ### 功能说明
@@ -232,12 +214,6 @@ aclError  aclrtGetGroupInfoDetail(const aclrtGroupInfo *groupInfo, int32_t group
 <!-- npu="910" id895 -->
 - Atlas训练系列产品：不支持
 <!-- end id895 -->
-<!-- npu="IPV350" id896 -->
-- IPV350：不支持
-<!-- end id896 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：不支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id4 -->
 
 ### 功能说明
@@ -302,12 +278,6 @@ aclrtGroupInfo *aclrtCreateGroupInfo()
 <!-- npu="910" id2351 -->
 - Atlas训练系列产品：不支持
 <!-- end id2351 -->
-<!-- npu="IPV350" id2352 -->
-- IPV350：不支持
-<!-- end id2352 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id5 -->
 
 ### 功能说明
@@ -362,12 +332,6 @@ aclError aclrtDestroyGroupInfo(aclrtGroupInfo *groupInfo)
 <!-- npu="910" id1770 -->
 - Atlas训练系列产品：不支持
 <!-- end id1770 -->
-<!-- npu="IPV350" id1771 -->
-- IPV350：不支持
-<!-- end id1771 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/16_group_management_res.md#id6 -->
 
 ### 功能说明

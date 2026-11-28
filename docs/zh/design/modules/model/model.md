@@ -15,6 +15,7 @@
 ### 2.1 使用场景
 
 - **场景一**：创建并执行计算模型（使用 ACL 接口）
+
   ```cpp
   aclmdlRI modelRI;
   aclmdlRIBuildBegin(&modelRI, 0);  // 开始构建模型
@@ -27,6 +28,7 @@
   ```
 
 - **场景二**：异步模型执行（使用 ACL 接口）
+
   ```cpp
   aclmdlRIExecuteAsync(modelRI, execStream);
   // 通过 Stream 同步等待执行完成
@@ -230,6 +232,7 @@ sequenceDiagram
 ```
 
 **差异说明**：
+
 | 对比项 | AutoSplit 模式 | 非 AutoSplit 模式 |
 |--------|----------------|-------------------|
 | 绑定时机 | 仅 Runtime 侧软件绑定 | 立即提交硬件绑定任务 |
@@ -297,6 +300,7 @@ sequenceDiagram
 ```
 
 **差异说明**：
+
 | 对比项 | AutoSplit 模式 | 非 AutoSplit 模式 |
 |--------|----------------|-------------------|
 | SQE存储位置 | Host sqeBuffer_ | 设备 SQ |
@@ -444,6 +448,7 @@ sequenceDiagram
 ```
 
 **差异说明**：
+
 | 对比项 | AutoSplit 模式 | 非 AutoSplit 模式 |
 |--------|----------------|-------------------|
 | SQ/CQ 分配 | LoadComplete 时动态分配 | Stream 创建时已分配 |
@@ -497,6 +502,7 @@ sequenceDiagram
 ```
 
 **说明**：模型执行阶段，AutoSplit 与非 AutoSplit 流程统一。差异在于 SQE 来源：
+
 - AutoSplit：SQE 已在 LoadComplete 时从 Host Buffer 批量下发到设备 SQ
 - 非 AutoSplit：SQE 在任务提交时已直接写入设备 SQ
 
@@ -577,6 +583,7 @@ flowchart TD
 ```
 
 **流程说明**：
+
 1. 用户通过 ACL 接口发起模型创建请求
 2. Runtime 创建 Model 对象，分配唯一的 modelId
 3. 初始化 Label 分配器，支持后续的分支跳转控制
@@ -684,6 +691,7 @@ flowchart TD
 | 提交时机 | LoadComplete 时批量下发 | 实时提交 |
 
 **关键机制**：
+
 - `HOST_SQ_MAX_COUNT = 32K`：Host SQE buffer 最大容量
 - `AutoSplitSqContext`：维护 curStreamSqeCount 和 slaveStreams 列表
 - `Slave Stream`：当任务数量接近32K时自动创建，实现无限队列深度
@@ -770,6 +778,7 @@ flowchart TD
 | 9 | isModelComplete_=true | isModelComplete_=true |
 
 **关键差异**：AutoSplit 模式在 LoadComplete 时需要：
+
 1. 动态分配 SQ/CQ 资源
 2. 批量切换 Stream 到 SQ
 3. 建立硬件绑定关系（EnterBindStream）
@@ -835,6 +844,7 @@ flowchart TD
 | 12 | 确认所有任务完成，返回成功 | 无差异 |
 
 **SQE来源差异说明**：
+
 - **AutoSplit 模式**：SQE 已在 LoadComplete 阶段从 Host sqeBuffer_ 批量下发到设备 SQ
   - 任务提交时写入 Host Buffer（延迟提交）
   - LoadComplete 时一次性批量下发所有 SQE
@@ -870,6 +880,7 @@ flowchart TD
 ```
 
 **流程说明**：
+
 1. 用户创建 Label，向 Model 申请唯一的 LabelId
 2. Model 通过 LabelAllocator 分配 ID，记录映射关系
 3. Label 绑定到 Model 和 Stream
@@ -897,6 +908,7 @@ flowchart TD
 ```
 
 **流程说明**：
+
 1. 用户调用 LabelSwitch接口，发起跳转指令
 2. 获取目标 Label 的设备侧地址（devDstAddr_）
 3. 生成 LabelSwitch SQE，包含目标跳转地址
@@ -933,6 +945,7 @@ flowchart TD
 ```
 
 **流程说明**：
+
 1. 用户调用 Destroy，触发模型销毁
 2. 释放 Notify 资源，删除 endGraphNotify_
 3. 释放设备内存，清理参数句柄记录
@@ -977,6 +990,7 @@ graph TB
 ```
 
 **机制说明**：
+
 - **Stream 绑定管理**：维护所有 Stream 列表，headStreams_ 作为执行起点
 - **Label 控制流管理**：分配 Label ID，管理跳转关系
 - **参数内存管理**：记录任务参数句柄，避免重复分配
@@ -1011,6 +1025,7 @@ graph TB
 ```
 
 **机制说明**：
+
 - **任务缓存**：delayRecycleTaskid_ 记录任务 ID，等待批量下发
 - **SQE 缓冲**：sqeBuffer_ 存储任务描述符，准备写入硬件 SQ
 - **位置映射**：posToTaskIdMap_ 记录 SQE 位置与任务的对应关系
@@ -1053,6 +1068,7 @@ graph TB
 ```
 
 **机制说明**：
+
 - **Label 分配**：Model 通过 LabelAllocator 分配唯一 ID
 - **Label 设置**：在目标 Stream 上记录跳转位置，设置设备侧地址
 - **Label 跳转**：读取设备地址，生成跳转 SQE，硬件执行跳转
@@ -1098,6 +1114,7 @@ sequenceDiagram
 ```
 
 **机制说明**：
+
 - **Notify 创建**：EndGraph 任务申请 NotifyId，绑定到 Model
 - **Notify 等待**：Host 通过 NtyWait 轮询 Notify Value
 - **Notify 触发**：硬件执行到 EndGraph，Signal Notify，更新 Value
@@ -1135,7 +1152,6 @@ Model 模块按照功能划分为核心容器、任务管理、接口层、辅�
 |----------|----------|----------|----------|
 | **ACL 接口封装** | ACL → RT 接口映射 | `src/acl/aclrt_impl/model_ri.cpp` | 用户调用 aclmdlRI 接口 |
 | **API 装饰器** | API 错误处理装饰 | `src/runtime/api/impl/api_decorator.cc`| ApiImpl 调用链 |
-
 
 ### 5 关键文件路径索引
 

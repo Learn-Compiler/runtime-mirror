@@ -74,7 +74,7 @@ CANN Runtime 有两层错误码：**EE 系列**（Runtime 核心层，`src/runti
 
 ### EE 层选择决策树
 
-```
+```text
 输入参数非法？
   ├─ 多个参数同时非法（≥2个参数同时为NULL或同时非法）？
   │     ├─ 是 → EE1022（多参数同时非法专用）
@@ -104,7 +104,7 @@ CANN Runtime 有两层错误码：**EE 系列**（Runtime 核心层，`src/runti
 
 ### EH 层选择决策树
 
-```
+```text
 输入参数非法？
   ├─ 多个指针同时为NULL？
   │     ├─ 是 → EH0014（多指针同时NULL专用）
@@ -147,7 +147,7 @@ CANN Runtime 有两层错误码：**EE 系列**（Runtime 核心层，`src/runti
 
 ### EE 层选择决策树
 
-```
+```text
 驱动版本不正确，对应的驱动接口找不到，通过升级驱动包可解决？
   ├─ 是 → EE1015
   ├─ 否 → 完整功能，当前芯片不支持？
@@ -165,7 +165,6 @@ CANN Runtime 有两层错误码：**EE 系列**（Runtime 核心层，`src/runti
 | **4** | **EE1016‑固有不支持** | `%s failed. Reason: %s.` | func, reason | 某种状态或场景下不支持做某类操作 | 遇错即停模式从 stop 修改为 continue 不支持 |
 | **4** | **EE1016‑完整功能不支持** | `%s failed. Reason: %s.` | func, reason | 完整功能不支持，和芯片无关 | MemCopy操作已被转换为同步操作。当流正在捕获且指定的捕获模式非宽松模式时，不允许执行该操作。 |
 
-
 #### EE1005 vs EE1006 vs EE1016 选择规则
 
 | 对比 | 关键区别 | 选择方法 |
@@ -175,7 +174,7 @@ CANN Runtime 有两层错误码：**EE 系列**（Runtime 核心层，`src/runti
 
 ### EH 层选择决策树
 
-```
+```text
 完整功能，当前芯片不支持？
   ├─ 是 → EH0011
   └─ 否 → EH0006

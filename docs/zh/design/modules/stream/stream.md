@@ -13,6 +13,7 @@
 ### 2.1 使用场景
 
 - **场景一**：创建流并提交任务
+
   ```cpp
   aclrtStream stream;
   aclrtCreateStream(&stream);  // 创建流
@@ -21,6 +22,7 @@
   ```
 
 - **场景二**：多流并行执行
+
   ```cpp
   aclrtStream stream1, stream2;
   aclrtCreateStream(&stream1);
@@ -31,6 +33,7 @@
   ```
 
 - **场景三**：带配置创建流
+
   ```cpp
   aclrtStream stream;
   aclrtCreateStreamWithConfig(&stream, 0, ACL_STREAM_FAST_SYNC);  // 创建快速同步流

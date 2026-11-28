@@ -34,12 +34,6 @@ aclError aclrtValueWrite(void* devAddr, uint64_t value, uint32_t flag, aclrtStre
 <!-- npu="910" id2239 -->
 - Atlas训练系列产品：不支持
 <!-- end id2239 -->
-<!-- npu="IPV350" id2240 -->
-- IPV350：不支持
-<!-- end id2240 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/11-09_stream_memory_operation_res.md#id1 -->
 
 ### 功能说明
@@ -91,12 +85,6 @@ aclError aclrtValueWait(void* devAddr, uint64_t value, uint32_t flag, aclrtStrea
 <!-- npu="910" id888 -->
 - Atlas训练系列产品：不支持
 <!-- end id888 -->
-<!-- npu="IPV350" id889 -->
-- IPV350：不支持
-<!-- end id889 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/11-09_stream_memory_operation_res.md#id2 -->
 
 ### 功能说明
@@ -148,12 +136,6 @@ aclError aclrtStreamBatchMemOp(aclrtStreamBatchMemOpParams* paramArray, size_t c
 <!-- npu="910" id5008 -->
 - Atlas训练系列产品：不支持
 <!-- end id5008 -->
-<!-- npu="IPV350" id5009 -->
-- IPV350：不支持
-<!-- end id5009 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：不支持
-<!-- end id5010 -->
 
 ### 功能说明
 

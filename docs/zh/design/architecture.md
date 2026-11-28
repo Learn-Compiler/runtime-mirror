@@ -13,7 +13,6 @@
 * Runtime核心层：提供设备管理（Device）、上下文管理（Context/主上下文）、流管理（Stream/SQ-CQ异步机制）、任务调度（Engine/TaskFactory）、内存管理（MemoryPool）、内核执行（Kernel/Program）、事件同步（Event）、通知机制（Notify）等核心功能，是 Runtime 的核心实现主体。
 * 驱动适配层：适配层为 Runtime **核心层** 和**特性层**提供不同代际芯片的抽象和适配，屏蔽硬件和驱动接口差异。通过driver/v100、v200 等版本目录支持多代际芯片；通过 config/ 目录（如 910、310P、BS9SX1A 等）管理芯片特性配置；通过HAL 驱动接口（ascend_hal.h）统一驱动调用入口。
 
-
 ### 1.2 Runtime部署视图
 
 Runtime 以动态库形式部署在用户态进程空间，作为上层应用与底层驱动之间的桥梁。下图展示了 Runtime 在系统中的部署位置和层级关系：
@@ -78,7 +77,6 @@ graph TB
     Dev3 -.->|共享| NPU0
 ```
 
-
 ### 1.3 核心模块介绍
 
 #### 1.3.1 Runtime 全局管理
@@ -102,7 +100,6 @@ graph TB
 - 设备初始化：驱动初始化 → 获取设备属性 → 创建资源池 → 启动调度引擎
 - 任务提交：检查设备状态 → Engine.SubmitTask → Stream 分配 → 发送到 SQ
 - 错误处理：检测错误 → 设置设备状态 → 停止设备 → 触发回调
-
 
 #### 1.3.3 Context 上下文管理
 
@@ -134,7 +131,6 @@ graph TB
 - 任务提交：AllocTask → 填充参数 → 发送到 SQ → 等待 CQ 完成
 - 流同步：Synchronize → 等待所有任务完成 → 返回结果
 
-
 #### 1.3.6 Kernel 核函数管理
 
 **组件职责**：管理 AI Core（AI Cube、AI Vector）、AICPU 等算子二进制的注册、查找和执行。支持按核函数名称/核函数标识两种查找方式。
@@ -155,7 +151,6 @@ graph TB
 - 任务分配：TaskFactory.AllocTask → 填充 TaskInfo
 - 任务提交：填充 SQE → 发送到 SQ → 等待 CQ
 - 任务回收：从 CQ 获取完成状态 → RecycleTask → 更新资源池
-
 
 #### 1.3.8 Event 事件同步
 
@@ -297,13 +292,12 @@ classDiagram
 
 **核心模块关系**
 
-
 | 关系                     | 说明                                                             |
 | ------------------------ | ---------------------------------------------------------------- |
 | Runtime → Device        | Runtime 管理所有设备实例，通过 DeviceRetain/Release 管理引用计数 |
 | Runtime → Context       | Runtime 管理主上下文，每个设备对应一个主上下文                   |
 | Runtime → Program       | Runtime 维护 Program，支持内核二进制管理                         |
-| Program → Kernel        | Program 包含多个 Kernel，通过 kernelNameMap_ 和 KernelTable_ 支持按名称和 tilingKey 注册查找 |
+| Program → Kernel        | Program 包含多个 Kernel，通过 kernelNameMap_和 KernelTable_ 支持按名称和 tilingKey 注册查找 |
 | PlainProgram → Program  | PlainProgram 继承 Program，管理 CPU 算子简单二进制               |
 | ElfProgram → Program    | ElfProgram 继承 Program，管理 ELF 内核解析与注册                 |
 | BinaryLoader → Program  | BinaryLoader 加载二进制创建 Program                              |
@@ -371,7 +365,6 @@ classDiagram
 
 ### 3.1 架构设计原则
 
-
 | 原则         | 说明                                                                  | 实现方式                                                              |
 | ------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | 分层设计     | 采用 API/Feature/Core/Driver 四层架构分离，确保各层职责清晰、边界明确 | 目录结构按层级划分：api/、feature/、core/src/、driver/                |
@@ -384,7 +377,6 @@ classDiagram
 ### 3.2 高性能设计原则
 
 Runtime 提供极致性能运行时功能，代码遵循高性能设计原则。
-
 
 | 原则           | 说明                                         |
 | -------------- | -------------------------------------------- |

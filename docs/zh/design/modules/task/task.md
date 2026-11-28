@@ -14,6 +14,7 @@
 ### 2.1 使用场景示意
 
 - **场景一**：内核执行任务
+
   ```cpp
     // 下发单算子任务
     aclrtLaunchKernel(funcHandle, numBlocks, argsData, argsSize, stream);
@@ -21,6 +22,7 @@
   ```
 
 - **场景二**：事件同步任务
+
   ```cpp
   // 下发event 同步任务，并流同步结果
   aclrtRecordEvent(event, stream1);  // 在 stream1 记录事件
@@ -30,6 +32,7 @@
   ```
 
 ### 2.2 任务类型
+
 | 任务分类 | 任务类型 | 头文件 | 说明 |
 |---------|---------|--------|------|
 | 计算类任务 | `TS_TASK_TYPE_KERNEL_AICORE` <br> `TS_TASK_TYPE_KERNEL_AICPU` <br> `TS_TASK_TYPE_KERNEL_AIVEC` | `davinci_kernel_task.h` | 算子核执行 |
@@ -42,10 +45,10 @@
 
 **整体设计思路**
 **Task 管理整理分为三部分：**
+
 - **Task 资源管理：** Task 资源分为两部分，Device 粒度的Task资源和Stream粒度的资源。
 - **Task 处理函数：** Task 处理函数主要是针对不同类型的Task进行任务初始化、SQE封装、Task回收后处理、Task 异常后处理等流程进行统一注册管理。
 - **Task 下发流程：** 配合API接口通过task资源申请、任务组装、任务下发等接口组合完成运行时调度。
-
 
 ### 3.1 Task 资源管理架构
 
@@ -356,8 +359,10 @@ struct TaskFuncArrays {
     PfnTaskSqeHeaderPostProc sqeHeaderPostProcFunc;
 };
 ```
+
 **3. Task处理时使用的全局变量**  <br/>
 业务代码中通过 g_XXX 对 taskType 进行回调处理。
+
 ```cpp
 static PfnTaskToCmd *g_toCommandFunc = g_taskFuncArrays[CHIP_BEGIN].toCommandFunc;
 static PfnTaskToSqe *g_toSqeFunc = g_taskFuncArrays[CHIP_BEGIN].toSqeFunc;
@@ -373,6 +378,7 @@ PfnTaskSqeHeaderPostProc g_taskSqeHeaderPostProcRunningFunc =
 ```
 
 ### 4.2.4 任务回收流程
+
 #### 4.2.4.1 David 任务回收触发时机
 
 | 触发条件 | 调用方式 | 说明 |
@@ -408,6 +414,7 @@ void RecycleThreadDoForStarsV2(Device *deviceInfo) {
 ```
 
 ### 4.3 模块职责划分
+
  | 模块 | 职责 | 位置 | 
  |------|------|------| 
  | TaskInfo | 任务信息结构体 | `core/inc/task/task_info.hpp` |
@@ -498,6 +505,7 @@ classDiagram
 ```
 
 #### 4.4.2 Stream TaskRes 类图
+
 ```mermaid
 classDiagram
     classDef baseStyle fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
@@ -561,7 +569,6 @@ classDiagram
 
 ```
 
-
 ## 5. 关键文件索引
 
 | 功能模块 | 文件路径 | 核心内容 |
@@ -576,6 +583,7 @@ classDiagram
 | David 任务下发 | `core/src/task/task_submit/v200/task_david.cc` | AllocTask（统一入口）<br>AllocTaskInfo <br> SaveTaskCommonInfo <br> DavidSendTask |
 | David 任务回收 | `core/src/task/task_recycle/v200/task_recycle.cc` | TryRecycleTask <br> 回收线程 |
 | 回收公共逻辑 | `core/src/task/task_recycle/v200/task_recycle_common_base.cc` | TaskReclaimForSeparatedStm <br> 回收CQE、回收Task |
+
 ---
 
 _本模块文档基于源码 `src/runtime/core/src/task/` 分析。_

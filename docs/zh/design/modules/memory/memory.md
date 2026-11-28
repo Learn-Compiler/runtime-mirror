@@ -14,23 +14,27 @@
 ### 2.1 基本使用场景
 
 - **场景一**：分配Device内存
+
   ```cpp
   void *devPtr;
   aclrtMalloc(&devPtr, size, ACL_MEM_MALLOC_HUGE_FIRST);
   ```
 
 - **场景二**：分配Host内存
+
   ```cpp
   void *hostPtr;
   aclrtMallocHost(&hostPtr, size);
   ```
 
 - **场景三**：同步内存拷贝
+
   ```cpp
   aclrtMemcpy(dstPtr, dstSize, srcPtr, srcSize, ACL_MEMCPY_HOST_TO_DEVICE);
   ```
 
 - **场景四**：异步内存拷贝
+
   ```cpp
   aclrtStream stream;
   aclrtCreateStream(&stream);
@@ -39,6 +43,7 @@
   ```
 
 - **场景五**：IPC 内存共享
+
   ```cpp
   // 进程 A：导出共享句柄
   void *ptr;
@@ -56,6 +61,7 @@
   ```
 
 - **场景六**：物理内存管理
+
   ```cpp
   aclrtDrvMemHandle handle;
   aclrtPhysicalMemProp prop = {...};
@@ -114,7 +120,6 @@
 
 ### 架构分层图
 
-
 ```mermaid
 graph TB
     subgraph API["接口层"]
@@ -155,11 +160,13 @@ graph TB
 ### 4.1 核心流程
 
 #### 内存申请流程
+
 Device申请内存的接口如下：
 
 ```cpp
 aclError aclrtMalloc(void **devPtr, size_t size, aclrtMemMallocPolicy policy);
 ```
+
 - `devPtr`：指向分配内存地址的二级指针，函数成功后 `*devPtr` 为分配的设备内存地址；
 - `size`：申请内存大小，单位为字节；
 - `policy`：内存分配策略，根据应用实际场景与诉求，开发者可以指定申请策略，选择普通的小页(4KB)更加节省资源，在处理海量数据时使用大页(2MB)性能更好。支持的策略说明如下：
@@ -179,6 +186,7 @@ aclError aclrtMalloc(void **devPtr, size_t size, aclrtMemMallocPolicy policy);
 | `ACL_MEM_ACCESS_USER_SPACE_READONLY` | 用户空间只读访问权限 |
 
 详细申请流程如下所示：
+
 ```mermaid
 sequenceDiagram
     participant App as 应用程序
@@ -225,21 +233,25 @@ rtError_t ret = driver->DevMemAllocWithFlag(devPtr, tmpSize, type, devId, &alloc
 两个入口最终收敛到同一条分发链：`DevMemAllocWithBackupFlag` 内部基于 config 经 `BuildDevMemAllocFlag` 构建 flag 后委托 `DevMemAllocWithFlag`，由其按 run mode 分发至 Online/Offline 叶子分配器（offline 路径掩掉访问位、保持历史行为），最终经 `DevMemAllocByFlag` 统一收口调用 `halMemAlloc`。
 
 #### 内存拷贝流程
+
 常用的内存拷贝分为同步拷贝和异步拷贝：
 
 **同步拷贝（aclrtMemcpy）：**
+
 - 调用后阻塞主机线程，直到拷贝完成才返回
 - 适用场景：需要立即使用拷贝结果、数据量较小、简单的数据传输场景
 - 优点：使用简单，不需要考虑流同步问题
 - 缺点：阻塞主机，影响并发性能
 
 **异步拷贝（aclrtMemcpyAsync）：**
+
 - 调用后立即返回，不阻塞主机线程，拷贝任务在指定Stream上异步执行
 - 适用场景：数据量大、需要与其他计算任务并行、多流并发场景
 - 优点：提高主机与设备并行度，充分利用硬件性能
 - 缺点：需要通过Event或Stream同步确保拷贝完成后再使用数据
 
 以下是异步拷贝的主要流程：
+
 ```mermaid
 sequenceDiagram
     participant App as 应用程序
@@ -262,6 +274,7 @@ sequenceDiagram
 批量内存拷贝允许一次性提交多个内存拷贝任务，减少任务提交开销，提高整体拷贝效率。支持同步批量拷贝（`aclrtMemcpyBatch`）和异步批量拷贝（`aclrtMemcpyBatchAsync`），适用于需要同时传输多个数据块的场景。
 
 **接口参数：**
+
 ```cpp
 aclError aclrtMemcpyBatch(void **dsts, size_t *destMaxs, void **srcs, 
                           size_t *sizes, size_t numBatches,
@@ -276,6 +289,7 @@ aclError aclrtMemcpyBatchAsync(void **dsts, size_t *destMaxs, void **srcs,
 ```
 
 **参数说明：**
+
 | 参数 | 类型 | 说明 |
 |------|------|------|
 | `dsts` | IN `void**` | 目标地址数组 |
@@ -289,10 +303,10 @@ aclError aclrtMemcpyBatchAsync(void **dsts, size_t *destMaxs, void **srcs,
 | `failIdx` | OUT `size_t*` | 失败任务索引；全部成功或错误与单项拷贝无关时为SIZE_MAX |
 | `stream` | IN `aclrtStream` | 异步拷贝使用的流 |
 
-
 #### 物理内存管理流程
 
 物理内存管理允许用户直接控制物理内存的分配和映射，提供更精细的内存管理能力。主要用于需要跨进程共享内存、大内存池管理或需要特定内存属性的进阶场景。通过物理内存管理接口，用户可以：
+
 - 独立分配物理内存并获取 handle（`aclrtMallocPhysical`）
 - 预留虚拟地址空间（`aclrtReserveMemAddress`）
 - 将物理内存映射到虚拟地址空间（`aclrtMapMem`）
@@ -321,7 +335,6 @@ flowchart TD
 #### IPC 内存共享
 
 IPC（Inter-Process Communication）内存共享允许不同进程之间共享同一块设备内存，实现高效的跨进程数据传递。通过 IPC 机制，进程 A 可以将已分配的设备内存导出为共享 key，进程 B 通过该 key 导入并访问同一块物理内存，避免了数据拷贝开销。
-
 
 | 核心接口 | 说明 |
 |------|------|

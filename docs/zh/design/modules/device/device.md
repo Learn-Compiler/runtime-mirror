@@ -15,15 +15,18 @@
 ### 2.1 使用场景
 
 - **场景一**：设置当前计算设备
+
   ```cpp
   rtError_t err = rtSetDevice(0);
   // Runtime::DeviceRetain(0) → Device::Init() → Device::Start()
   ```
+
   `rtSetDevice()` 用于设置当前线程的设备 ID。由于大多数 `rt`/`aclrt` 接口不携带设备 ID 参数，设置后当前线程将默认在该设备上执行后续操作，实现线程级设备上下文的绑定。
 
 - **场景二**：获取设备能力信息
   
   **获取设备能力特性**：
+
   ```cpp
   int32_t val;
   rtError_t ret = rtGetDeviceCapability(0, RT_MODULE_TYPE_AICORE, FEATURE_TYPE_SCHE, &val);
@@ -32,6 +35,7 @@
   }
   // val 包含 AI Core 的调度能力信息
   ```
+
   | 参数 | 说明 |
   |------|------|
   | `moduleType` | 模块类型，如 `RT_MODULE_TYPE_AICORE`、`RT_MODULE_TYPE_AICPU`、`RT_MODULE_TYPE_TSCPU` 等 |
@@ -40,6 +44,7 @@
 - **场景三**：设备状态监控与异常处理
   
   **设备状态查询**：
+
   ```cpp
   rtDeviceStatus deviceStatus;
   rtError_t ret = rtDeviceStatusQuery(0, &deviceStatus);
@@ -49,12 +54,14 @@
   ```
   
   `rtDeviceStatus` 状态值：
+
   | 状态值 | 含义 |
   |--------|------|
   | `RT_DEVICE_STATUS_NORMAL` | 设备正常运行 |
   | `RT_DEVICE_STATUS_ABNORMAL` | 设备异常，需排查故障 |
   
   **设备同步与错误捕获**：
+
   ```cpp
   rtError_t ret = rtDeviceSynchronize();
   if (ret != RT_ERROR_NONE) {
@@ -228,6 +235,7 @@ private:
 ```
 
 **多线程并发安全**：
+
 - 每个线程有独立的设备上下文，互不干扰
 - 引用计数使用原子操作，保证多线程安全
 
@@ -609,6 +617,7 @@ sequenceDiagram
 ```
 
 **快照信息内容**：
+
 - **基础信息**：`stream_id`、`task_id`、`taskType`（任务类型）
 - **任务特定信息**：
   - EVENT_RECORD 任务：`EventId`

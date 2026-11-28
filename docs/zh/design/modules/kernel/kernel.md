@@ -15,6 +15,7 @@
 ### 2.1 使用场景
 
 - **场景一**：二进制注册（从文件）
+
   ```cpp
   aclrtBinHandle binHandle = nullptr;
   aclrtBinaryLoadFromFile(binPath, nullptr, &binHandle);
@@ -22,6 +23,7 @@
   ```
 
 - **场景二**：二进制注册（从内存）
+
   ```cpp
   aclrtBinHandle binHandle = nullptr;
   aclrtBinaryLoadFromData(data, length, nullptr, &binHandle);
@@ -29,6 +31,7 @@
   ```
 
 - **场景三**：内核查找与执行
+
   ```cpp
   aclrtFuncHandle funcHandle = nullptr;
   aclrtBinaryGetFunction(binHandle, kernelName, &funcHandle);
@@ -36,6 +39,7 @@
   ```
 
 - **场景四**：内核查找（按核函数标识）
+
   ```cpp
   aclrtFuncHandle funcHandle = nullptr;
   aclrtBinaryGetFunctionByEntry(binHandle, funcEntry, &funcHandle);

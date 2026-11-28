@@ -16,7 +16,7 @@ Runtime 代码中存在两种错误记录方式：
 
 ### ErrMsg 的完整流程
 
-```
+```text
 错误发生 → 调用上报宏 → ErrorManager 存储错误 → 调用方获取错误信息
 ```
 
@@ -111,6 +111,7 @@ Runtime 代码中存在两种错误记录方式：
 | 特定场景 | 有明确适用场景，但不如推荐宏通用 |
 | 谨慎使用 | 有约束或与推荐宏重叠，需确认后再用 |
 | 禁止使用 | 存在设计缺陷，禁止在新代码中使用 |
+
 ---
 
 ## 2. 字符串格式说明
@@ -127,6 +128,7 @@ COND_RETURN_AND_MSG_INNER(ptr == nullptr, RT_ERROR_INVALID_VALUE,
 ```
 
 **禁止**先用 `std::string` 拼接再传入：
+
 ```cpp
 // 错误用法：会导致 .so 文件膨胀
 std::string msg = "Init failed, devId=" + std::to_string(devId);
@@ -134,6 +136,7 @@ COND_RETURN_AND_MSG_INNER(ptr == nullptr, RT_ERROR_INVALID_VALUE, "%s", msg.c_st
 ```
 
 如需预格式化字符串（如消息内容需要动态拼接），必须使用 `RtFmtMsg` 函数：
+
 ```cpp
 // 正确用法
 COND_RETURN_AND_MSG_INNER(ptr == nullptr, RT_ERROR_INVALID_VALUE,
@@ -150,6 +153,7 @@ COND_RETURN_AND_MSG_OUTER(ret != RT_ERROR_NONE, RT_ERROR_FEATURE_NOT_SUPPORT,
 ```
 
 对于需要动态拼接的 reason 参数，同样**禁止**直接用 `std::string` 相加，应使用 `RtFmtMsg`：
+
 ```cpp
 // 错误用法：会导致 .so 文件膨胀
 COND_RETURN_AND_MSG_OUTER(..., ErrorCode::EE1016, __func__,
@@ -254,7 +258,6 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 
 **禁止使用。** EE1001 错误码及其专用宏（`COND_RETURN_OUT_ERROR_MSG_CALL`、`COND_PROC_RETURN_OUT_ERROR_MSG_CALL`），禁止在新代码中使用，仅用于兜底逻辑。
 
-
 ### 通用外部错误码主力封装宏
 
 适用于 EE1005~EE1021（EE1016 capture mode 场景除外）、EE2002、WE0000、WE0001 等没有专用宏的外部错误码。调用者传入 `ErrorCode` 枚举值和对应参数。
@@ -268,6 +271,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | COND_GOTO_MSG_OUTER | 无 | 自定义条件 | 否 | 是 | 否 | 推荐 | — |
 | COND_RETURN_EXT_ERRCODE_AND_MSG_OUTER | ACL错误码(rt转换) | 自定义条件 | 否 | 否 | 是 | 推荐 | — |
 | COND_RETURN_EXT_WARNCODE_AND_MSG_OUTER | ACL错误码(rt转换) | 自定义条件 | 否 | 否 | 是 | 推荐 | — |
+
 ---
 
 ### 通用外部错误码底层上报宏
@@ -282,6 +286,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | RT_LOG_OUTER_MSG_WITH_FUNC_DESC | 显式输入 | ErrorCode 枚举 | 外部 | 特定场景 | — |
 | REPORT_INPUT_ERROR | 显式输入 | 字符串错误码 | 外部 | **不能直接使用** | — |
 | REPORT_ENV_ERROR | 显式输入 | 字符串错误码 | 外部 | **不能直接使用** | — |
+
 ---
 
 ### API层兜底宏
@@ -303,8 +308,8 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 |------|---------|---------|------|------|--------------|---------|--------|
 | ERROR_RETURN_WITH_EXT_ERRCODE | ACL错误码(rt转换) | 错误码!=NONE | 否 | 否 | 是 | 推荐 | — |
 | REPORT_FUNC_ERROR_REASON | 无 | 无 | 否 | 否 | 否 | 不能直接使用 | ERROR_RETURN_WITH_EXT_ERRCODE |
----
 
+---
 
 ## 4. 内部错误码宏
 
@@ -335,6 +340,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ERROR_GOTO_MSG_INNER | 无 | 错误码!=NONE | 否 | 是 | 否 | 推荐 | — |
 | ERROR_PROC_GOTO_MSG_INNER | 无 | 错误码!=NONE | 是 | 是 | 否 | 推荐 | — |
 | COND_RETURN_EXT_ERRCODE_AND_MSG_INNER | ACL错误码(rt转换) | 自定义条件 | 否 | 否 | 是 | 推荐 | — |
+
 ### _CALL 系列（MODULE_TYPE 映射）
 
 通过 MODULE_TYPE 映射到对应模块的内部错误码，适用于跨模块错误上报，标记错误来源。
@@ -386,7 +392,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 
 建议按照下面的方式选择符合自己要求的宏：
 
-```
+```text
 我要上报的错误码是否有专用的宏？
 ├─ 是（EE1003/EE1004/EE1010/EE1013/EE1016/EE1017，见第3节）
 │   └─ 专用宏是否能满足我的场景？（根据 PROC/GOTO/返回类型/设置全局错误码 判断）
@@ -404,7 +410,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 
 对于内部错误码（EE9999 / MODULE_TYPE 映射），选择方式类似：
 
-```
+```text
 我要上报内部错误码
 ├─ 当前代码属于 Runtime 自身模块 → 使用 _INNER 系列（见第4节）
 │   └─ _INNER 主力宏是否能满足我的场景？
@@ -417,7 +423,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 
 对于 API 层兜底场景（仅用于 rt 接口层）：
 
-```
+```text
 我要在 rt API 入口函数中做兜底返回
 └─ 使用 ERROR_RETURN_WITH_EXT_ERRCODE（见第3节「API层兜底宏」）
 ```
@@ -497,6 +503,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_REQUIRES_NOT_NULL_WITH_INPUT_REPORT_WITH_PRAM_NAME | ACL_ERROR_INVALID_PARAM | 空指针 | EH0008 | 特定场景 | — |
 
 **说明**：
+
 - `ACL_REQUIRES_NOT_NULL_WITH_INPUT_REPORT` 是首选宏，返回 `ACL_ERROR_INVALID_PARAM` 并上报 EH0008
 - `_WITH_FUNC_DESC` / `_AND_FUNC_DESC` 变体额外接收 `funcDesc` 参数，用于非接口层代码传入语义化函数描述
 - `_WITH_PRAM_NAME` 变体用于参数名与变量名不同的场景
@@ -520,6 +527,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_REQUIRES_POSITIVE_REPORT_WITH_FUNC_DESC | ACL_ERROR_INVALID_PARAM | 参数值（<=0） | EH0007 | 推荐 | — |
 
 **说明**：
+
 - `ACL_CHECK_INVALID_VALUE_WITH_EXPECT` 系列的条件是**取反**的：`if (!(condition))` 表示条件不满足时报错
 - `ACL_REQUIRES_PARAM_EQUAL_REPORT` 用于参数必须等于某个特定值的场景
 - `ACL_REQUIRES_POSITIVE_REPORT` 用于参数必须为正数的场景
@@ -539,6 +547,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_CHECK_RESERVED_PARAM_REPORT_RET | 调用者指定 | 参数值（不等） | EH0009 | 推荐 | — |
 
 **说明**：
+
 - `ACL_CHECK_RESERVED_PARAM_REPORT_RET` 专用于预留参数校验（参数必须等于某个值，如 `flags == 0`）
 - `ACL_CHECK_INVALID_PARAM_WITH_REASON_DESC_RET` 用于参数名和参数值需要手动传入（非 `#param` 字符串化）的场景
 - `_AND_FUNC_DESC` 变体额外接收 `funcDesc` 参数，用于非接口层代码传入语义化函数描述
@@ -563,6 +572,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_CHECK_FILE_OPEN_FAILED | 调用者指定 | 自定义条件（取反） | EH0004 | 推荐 | — |
 
 **说明**：
+
 - `ACL_CHECK_FILE_OPEN_FAILED` 自动获取 `strerror(errno)` 作为失败原因
 - `ACL_CHECK_INVALID_FILE_MSG_RET` 需要手动传入 reason
 
@@ -577,6 +587,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_CHECK_MALLOC_RESULT_REPORT_RET | 调用者指定 | 空指针 | EH0010 | 推荐 | — |
 
 **说明**：
+
 - 上报 EH0010（带 buf_size），返回类型由调用者指定（可以是 nullptr 或错误码）
 
 ---
@@ -592,6 +603,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_LOG_INNER_ERROR / ACL_LOG_CALL_ERROR | 无 | 无条件 | 推荐 |
 
 **说明**：
+
 - 两个宏实现完全相同（均调用 `AclErrorLogManager::ReportInnerError()` → `REPORT_INNER_ERR_MSG("EH9999", ...)`）
 
 ### 条件检查 + 上报 + 返回
@@ -605,6 +617,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_REQUIRES_LE | ACL_ERROR_INVALID_PARAM | 参数值（大于） | 特定场景 |
 
 **说明**：
+
 - `ACL_CHECK_WITH_INNER_MESSAGE_AND_RETURN`：条件取反（`if (!(exp))`），通用性最强
 - `ACL_REQUIRES_NOT_NULL_WITH_INNER_REPORT`：空指针检查 + EH9999，如需上报 EH0008 请用第 3 节宏
 - `ACL_CHECK_MALLOC_RESULT`：内存分配失败，固定返回 `ACL_ERROR_BAD_ALLOC`，如需上报 EH0010 请用 `ACL_CHECK_MALLOC_RESULT_REPORT_RET`
@@ -621,6 +634,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 | ACL_REQUIRES_EOK | ACL_ERROR_FAILURE | 返回值!=EOK | 推荐 |
 
 **说明**：
+
 - `ACL_REQUIRES_CALL_RTS_OK` 对 `ACL_ERROR_RT_FEATURE_NOT_SUPPORT` 特殊处理：仅打 WARN 日志，不上报 ErrMsg；其他失败情况上报 EH9999
 - `ACL_REQUIRES_RTS_OK_WARN_NOT_SUPPORT` 对 `ACL_ERROR_RT_FEATURE_NOT_SUPPORT` 特殊处理：仅打 WARN 日志；其他失败情况不上报 ErrMsg（rt 已兜底打屏，acl 不重复上报）
 - `ACL_REQUIRES_RTS_OK` 用于 rt 接口已通过 `ERROR_RETURN_WITH_EXT_ERRCODE` 兜底打屏的场景，acl 侧不重复上报，仅返回 `ACL_GET_ERRCODE_RTS(__ret)`，不上报 ErrMsg
@@ -628,7 +642,7 @@ Stream capture 模式检查专用。检查当前上下文是否支持 capture �
 
 ---
 
-## 8. 语义化函数描述（_WITH_FUNC_DESC / _AND_FUNC_DESC 变体）
+## 8. 语义化函数描述（_WITH_FUNC_DESC /_AND_FUNC_DESC 变体）
 
 ACL 层部分宏提供 `_WITH_FUNC_DESC` 或 `_AND_FUNC_DESC` 后缀变体，区别在于函数描述的传入方式：
 
@@ -664,7 +678,7 @@ acl::AclErrorLogManager::ReportInputError(
 
 ## 9. 快速选择指南
 
-```
+```text
 我要上报的错误码是否有专用的宏？
 ├─ 是（空指针→EH0008，参数值→EH0007/EH0009/EH0012，文件→EH0004，内存→EH0010，见第3~6节）
 │   └─ 专用宏是否能满足我的场景？（根据返回类型/条件类型判断）
@@ -676,10 +690,9 @@ acl::AclErrorLogManager::ReportInputError(
 ```
 
 **用法示例**：
+
 ```cpp
 acl::AclErrorLogManager::ReportInputError(acl::INVALID_PATH_MSG,
     std::vector<const char *>({"path", "reason"}),
     std::vector<const char *>({path, "file not found"}));
 ```
-
-

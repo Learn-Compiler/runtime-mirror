@@ -34,12 +34,6 @@ aclError aclrtAllocatorRegister(aclrtStream stream, aclrtAllocatorDesc allocator
 <!-- npu="910" id2302 -->
 - Atlas训练系列产品：支持
 <!-- end id2302 -->
-<!-- npu="IPV350" id2303 -->
-- IPV350：不支持
-<!-- end id2303 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/11-08_custom_memory_allocator_res.md#id1 -->
 
 ### 功能说明
@@ -102,12 +96,6 @@ aclError aclrtAllocatorGetByStream(aclrtStream stream, aclrtAllocatorDesc *alloc
 <!-- npu="910" id377 -->
 - Atlas训练系列产品：支持
 <!-- end id377 -->
-<!-- npu="IPV350" id378 -->
-- IPV350：不支持
-<!-- end id378 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/11-08_custom_memory_allocator_res.md#id2 -->
 
 ### 功能说明
@@ -162,12 +150,6 @@ aclError aclrtAllocatorUnregister(aclrtStream stream)
 <!-- npu="910" id3191 -->
 - Atlas训练系列产品：支持
 <!-- end id3191 -->
-<!-- npu="IPV350" id3192 -->
-- IPV350：不支持
-<!-- end id3192 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/11-08_custom_memory_allocator_res.md#id3 -->
 
 ### 功能说明

@@ -53,12 +53,6 @@ aclError aclrtCreateEvent(aclrtEvent *event)
 <!-- npu="910" id692 -->
 - Atlas训练系列产品：支持
 <!-- end id692 -->
-<!-- npu="IPV350" id693 -->
-- IPV350：不支持
-<!-- end id693 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id1 -->
 
 ### 功能说明
@@ -108,9 +102,6 @@ aclError aclrtCreateEvent(aclrtEvent *event)
   <!-- npu="910" id17 -->
   - 对于Atlas训练系列产品，单个Device支持的Event最大数为65535。
   <!-- end id17 -->
-  <!-- npu="5162A" id40 -->
-  - 对于Hisilicon5162A，单个Device支持的Event最大数为768。
-  <!-- end id40 -->
   <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id23 -->
 
 <br>
@@ -145,12 +136,6 @@ aclError aclrtCreateEventWithFlag(aclrtEvent *event, uint32_t flag)
 <!-- npu="910" id2813 -->
 - Atlas训练系列产品：支持
 <!-- end id2813 -->
-<!-- npu="IPV350" id2814 -->
-- IPV350：不支持
-<!-- end id2814 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id2 -->
 
 ### 功能说明
@@ -187,9 +172,6 @@ aclError aclrtCreateEventWithFlag(aclrtEvent *event, uint32_t flag)
 
 <!-- end id22 -->
 
-<!-- npu="5162A" id44 -->
-- 对于Hisilicon5162A，flag不支持ACL\_EVENT\_EXTERNAL与ACL\_EVENT\_DEVICE\_USE\_ONLY。
-<!-- end id44 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id26 -->
 
 - 若flag参数值**不包含**ACL\_EVENT\_SYNC宏，则不支持在以下API中使用本接口创建的Event：[aclrtResetEvent](#aclrtResetEvent)、[aclrtStreamWaitEvent](#aclrtStreamWaitEvent)。若flag参数值**包含**ACL\_EVENT\_SYNC宏或者flag设置为ACL\_EVENT\_EXTERNAL时，则创建出来的Event数量受限。
@@ -220,9 +202,6 @@ aclError aclrtCreateEventWithFlag(aclrtEvent *event, uint32_t flag)
   <!-- npu="910" id32 -->
   - 对于Atlas训练系列产品，单个Device支持的Event最大数为65535。
   <!-- end id32 -->
-  <!-- npu="5162A" id41 -->
-  - 对于Hisilicon5162A，单个Device支持的Event最大数为768。
-  <!-- end id41 -->
 
 <br>
 <br>
@@ -256,12 +235,6 @@ aclError aclrtCreateEventExWithFlag(aclrtEvent *event, uint32_t flag)
 <!-- npu="910" id2785 -->
 - Atlas训练系列产品：支持
 <!-- end id2785 -->
-<!-- npu="IPV350" id2786 -->
-- IPV350：不支持
-<!-- end id2786 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id3 -->
 
 ### 功能说明
@@ -282,10 +255,6 @@ aclError aclrtCreateEventExWithFlag(aclrtEvent *event, uint32_t flag)
 ### 约束说明
 
 - 采用本API创建的Event，不支持在以下接口中使用：[aclrtResetEvent](#aclrtResetEvent)、[aclrtQueryEvent](#aclrtQueryEvent)、[aclrtQueryEventWaitStatus](#aclrtQueryEventWaitStatus)，否则返回报错。
-
-<!-- npu="5162A" id46 -->
-- 对于Hisilicon5162A，flag不支持ACL\_EVENT\_IPC。
-<!-- end id46 -->
 
 - 若flag参数值**不包含**ACL\_EVENT\_SYNC宏，则不支持在[aclrtStreamWaitEvent](#aclrtStreamWaitEvent)接口中使用本接口创建的Event。若flag参数值**包含**ACL\_EVENT\_SYNC宏，并不会实际申请Event资源，只有在调用[aclrtRecordEvent](#aclrtRecordEvent)接口时，才会进行资源申请，因此在调用[aclrtRecordEvent](#aclrtRecordEvent)时，可能会出现线程阻塞，等待Event资源的释放。
 
@@ -316,9 +285,6 @@ aclError aclrtCreateEventExWithFlag(aclrtEvent *event, uint32_t flag)
   <!-- npu="910" id39 -->
   - 对于Atlas训练系列产品，单个Device支持的Event最大数为65535。
   <!-- end id39 -->
-  <!-- npu="5162A" id42 -->
-  - 对于Hisilicon5162A，单个Device支持的Event最大数为768。
-  <!-- end id42 -->
   <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id25 -->
 
 <br>
@@ -353,12 +319,6 @@ aclError aclrtDestroyEvent(aclrtEvent event)
 <!-- npu="910" id1343 -->
 - Atlas训练系列产品：支持
 <!-- end id1343 -->
-<!-- npu="IPV350" id1344 -->
-- IPV350：不支持
-<!-- end id1344 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id4 -->
 
 ### 功能说明
@@ -411,12 +371,6 @@ aclError aclrtRecordEvent(aclrtEvent event, aclrtStream stream)
 <!-- npu="910" id986 -->
 - Atlas训练系列产品：支持
 <!-- end id986 -->
-<!-- npu="IPV350" id987 -->
-- IPV350：不支持
-<!-- end id987 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id5 -->
 
 ### 功能说明
@@ -475,12 +429,6 @@ aclError aclrtRecordEventWithFlag(aclrtEvent event, aclrtStream stream, uint32_t
 <!-- npu="910" id6 -->
 - Atlas训练系列产品：不支持
 <!-- end id6 -->
-<!-- npu="IPV350" id7 -->
-- IPV350：不支持
-<!-- end id7 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id6 -->
 
 ### 功能说明
@@ -540,12 +488,6 @@ aclError aclrtResetEvent(aclrtEvent event, aclrtStream stream)
 <!-- npu="910" id251 -->
 - Atlas训练系列产品：支持
 <!-- end id251 -->
-<!-- npu="IPV350" id252 -->
-- IPV350：不支持
-<!-- end id252 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id7 -->
 
 ### 功能说明
@@ -607,12 +549,6 @@ aclError aclrtQueryEvent(aclrtEvent event, aclrtEventStatus *status)
 <!-- npu="910" id825 -->
 - Atlas训练系列产品：支持
 <!-- end id825 -->
-<!-- npu="IPV350" id826 -->
-- IPV350：不支持
-<!-- end id826 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id8 -->
 
 ### 功能说明
@@ -662,12 +598,6 @@ aclError aclrtQueryEventStatus(aclrtEvent event, aclrtEventRecordedStatus *statu
 <!-- npu="910" id3100 -->
 - Atlas训练系列产品：支持
 <!-- end id3100 -->
-<!-- npu="IPV350" id3101 -->
-- IPV350：不支持
-<!-- end id3101 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：不支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id9 -->
 
 ### 功能说明
@@ -721,12 +651,6 @@ aclError aclrtQueryEventWaitStatus(aclrtEvent event, aclrtEventWaitStatus *statu
 <!-- npu="910" id230 -->
 - Atlas训练系列产品：支持
 <!-- end id230 -->
-<!-- npu="IPV350" id231 -->
-- IPV350：不支持
-<!-- end id231 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：不支持
-<!-- end id5010 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id10 -->
 
 ### 功能说明
@@ -780,12 +704,6 @@ aclError aclrtSynchronizeEvent(aclrtEvent event)
 <!-- npu="910" id916 -->
 - Atlas训练系列产品：支持
 <!-- end id916 -->
-<!-- npu="IPV350" id917 -->
-- IPV350：不支持
-<!-- end id917 -->
-<!-- npu="5162A" id5011 -->
-- Hisilicon5162A：支持
-<!-- end id5011 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id11 -->
 
 ### 功能说明
@@ -834,12 +752,6 @@ aclError aclrtSynchronizeEventWithTimeout(aclrtEvent event, int32_t timeout)
 <!-- npu="910" id1798 -->
 - Atlas训练系列产品：支持
 <!-- end id1798 -->
-<!-- npu="IPV350" id1799 -->
-- IPV350：不支持
-<!-- end id1799 -->
-<!-- npu="5162A" id5012 -->
-- Hisilicon5162A：支持
-<!-- end id5012 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id12 -->
 
 ### 功能说明
@@ -891,12 +803,6 @@ aclError aclrtEventElapsedTime(float *ms, aclrtEvent startEvent, aclrtEvent endE
 <!-- npu="910" id1672 -->
 - Atlas训练系列产品：支持
 <!-- end id1672 -->
-<!-- npu="IPV350" id1673 -->
-- IPV350：不支持
-<!-- end id1673 -->
-<!-- npu="5162A" id5013 -->
-- Hisilicon5162A：支持
-<!-- end id5013 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id13 -->
 
 ### 功能说明
@@ -949,12 +855,6 @@ aclError aclrtStreamWaitEvent(aclrtStream stream, aclrtEvent event)
 <!-- npu="910" id69 -->
 - Atlas训练系列产品：支持
 <!-- end id69 -->
-<!-- npu="IPV350" id70 -->
-- IPV350：不支持
-<!-- end id70 -->
-<!-- npu="5162A" id5014 -->
-- Hisilicon5162A：支持
-<!-- end id5014 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id14 -->
 
 ### 功能说明
@@ -1010,12 +910,6 @@ aclError aclrtStreamWaitEventWithFlag(aclrtStream stream, aclrtEvent event, uint
 <!-- npu="910" id13 -->
 - Atlas训练系列产品：不支持
 <!-- end id13 -->
-<!-- npu="IPV350" id14 -->
-- IPV350：不支持
-<!-- end id14 -->
-<!-- npu="5162A" id5015 -->
-- Hisilicon5162A：不支持
-<!-- end id5015 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id15 -->
 
 ### 功能说明
@@ -1076,12 +970,6 @@ aclError aclrtStreamWaitEventWithTimeout(aclrtStream stream, aclrtEvent event, i
 <!-- npu="910" id2134 -->
 - Atlas训练系列产品：支持
 <!-- end id2134 -->
-<!-- npu="IPV350" id2135 -->
-- IPV350：不支持
-<!-- end id2135 -->
-<!-- npu="5162A" id5016 -->
-- Hisilicon5162A：支持
-<!-- end id5016 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id16 -->
 
 ### 功能说明
@@ -1099,12 +987,6 @@ aclError aclrtStreamWaitEventWithTimeout(aclrtStream stream, aclrtEvent event, i
 ### 返回值说明
 
 返回0表示成功，返回其他值表示失败，请参见[aclError](25-01_aclError.md#aclError)。
-
-<!-- npu="5162A" id43 -->
-### 约束说明
-
-对于Hisilicon5162A，当timeout为0时表示永不超时；当timeout大于0时，超时时间固定为2.15s，不随timeout参数值变化。
-<!-- end id43 -->
 
 <br>
 <br>
@@ -1138,12 +1020,6 @@ aclError aclrtSetOpWaitTimeout(uint32_t timeout)
 <!-- npu="910" id419 -->
 - Atlas训练系列产品：支持
 <!-- end id419 -->
-<!-- npu="IPV350" id420 -->
-- IPV350：不支持
-<!-- end id420 -->
-<!-- npu="5162A" id5017 -->
-- Hisilicon5162A：不支持
-<!-- end id5017 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id17 -->
 
 ### 功能说明
@@ -1198,12 +1074,6 @@ aclError aclrtEventGetTimestamp(aclrtEvent event, uint64_t *timestamp)
 <!-- npu="910" id2414 -->
 - Atlas训练系列产品：支持
 <!-- end id2414 -->
-<!-- npu="IPV350" id2415 -->
-- IPV350：不支持
-<!-- end id2415 -->
-<!-- npu="5162A" id5018 -->
-- Hisilicon5162A：支持
-<!-- end id5018 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id18 -->
 
 ### 功能说明
@@ -1255,12 +1125,6 @@ aclError aclrtGetEventId(aclrtEvent event, uint32_t *eventId)
 <!-- npu="910" id132 -->
 - Atlas训练系列产品：支持
 <!-- end id132 -->
-<!-- npu="IPV350" id133 -->
-- IPV350：不支持
-<!-- end id133 -->
-<!-- npu="5162A" id5019 -->
-- Hisilicon5162A：支持
-<!-- end id5019 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id19 -->
 
 ### 功能说明
@@ -1310,12 +1174,6 @@ aclError aclrtGetEventAvailNum(uint32_t *eventCount)
 <!-- npu="910" id622 -->
 - Atlas训练系列产品：支持
 <!-- end id622 -->
-<!-- npu="IPV350" id623 -->
-- IPV350：不支持
-<!-- end id623 -->
-<!-- npu="5162A" id5020 -->
-- Hisilicon5162A：支持
-<!-- end id5020 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id20 -->
 
 ### 功能说明
@@ -1365,12 +1223,6 @@ aclError aclrtIpcGetEventHandle(aclrtEvent event, aclrtIpcEventHandle *handle)
 <!-- npu="910" id1896 -->
 - Atlas训练系列产品：不支持
 <!-- end id1896 -->
-<!-- npu="IPV350" id1897 -->
-- IPV350：不支持
-<!-- end id1897 -->
-<!-- npu="5162A" id5021 -->
-- Hisilicon5162A：不支持
-<!-- end id5021 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id21 -->
 
 ### 功能说明
@@ -1433,12 +1285,6 @@ aclError aclrtIpcOpenEventHandle(aclrtIpcEventHandle handle, aclrtEvent *event)
 <!-- npu="910" id2169 -->
 - Atlas训练系列产品：不支持
 <!-- end id2169 -->
-<!-- npu="IPV350" id2170 -->
-- IPV350：不支持
-<!-- end id2170 -->
-<!-- npu="5162A" id5022 -->
-- Hisilicon5162A：不支持
-<!-- end id5022 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/07_event_management_res.md#id22 -->
 
 ### 功能说明

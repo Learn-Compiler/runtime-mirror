@@ -7,6 +7,7 @@
 ## 1. error_code.json 校验
 
 ### 校验项 — error_code.json 与 error_code_meta.h 双源同步校验
+
 （1）新增或修改错误码时，**必须同时更新两处**并保持一致：
 
 | 文件 | 用途 | 消费方 |
@@ -44,7 +45,7 @@
 
 参数数量计算规则：
 
-```
+```text
 有效参数数量 == GetParamNames(ErrorCode) 的大小
 ```
 
@@ -58,7 +59,7 @@
 
 （3）专用宏为简化使用，通常自动处理通用参数，有效参数要根据实际情况计算。如 `RT_LOG_OUTER_MSG_INVALID_PARAM` 宏为 EE1003 专用，展开链为：
 
-```
+```text
 RT_LOG_OUTER_MSG_INVALID_PARAM(parm, expect)
   → RT_LOG_OUTER_MSG_WITH_FUNC(EE1003, (parm), #parm, expect)
     → RT_LOG_OUTER_MSG_IMPL(EE1003, __func__, (parm), #parm, expect)
@@ -71,6 +72,7 @@ RT_LOG_OUTER_MSG_INVALID_PARAM(parm, expect)
 EH 系列错误码（ACL 层）使用 `acl::AclErrorLogManager::ReportInputError` 上报，通过 key-value 字符串向量传参，不走 `RT_LOG_OUTER_MSG_*` 宏链。参数数量校验规则相同：传入的 value 数量必须等于 Arglist 参数数量。
 
 ACL 层宏的 `func` 参数来源：
+
 - 无后缀宏（如 `ACL_REQUIRES_NOT_NULL_WITH_INPUT_REPORT`）：自动通过 `GetFuncNameWithoutImplSuffix(__func__)` 获取函数名（去除 `Impl` 后缀）
 - `_WITH_FUNC_DESC` / `_AND_FUNC_DESC` 变体（如 `ACL_REQUIRES_NOT_NULL_WITH_INPUT_REPORT_AND_FUNC_DESC`、`ACL_REQUIRES_POSITIVE_REPORT_WITH_FUNC_DESC`）：使用调用者传入的 `funcDesc` 字符串
 - 手动调用 `ReportInputError` 时，`func` 值由调用者自行传入，非接口层代码应传入语义化描述而非 `__func__`
@@ -88,7 +90,7 @@ ACL 层宏的 `func` 参数来源：
 
 ### 3.1 WITH_FUNC 和手动 __func__ 重复
 
-```
+```text
 // ✗ WITH_FUNC 自动加 __func__，手动再传导致重复 → 参数=5，EE1011期望4
 RT_LOG_OUTER_MSG_WITH_FUNC(ErrorCode::EE1011, __func__, ver, "ver", "msg");
 // ✓ 只传可变参数 → 参数=1+3=4
@@ -97,14 +99,14 @@ RT_LOG_OUTER_MSG_WITH_FUNC(ErrorCode::EE1011, ver, "ver", "msg");
 
 ### 3.2 NA vs N/A
 
-```
+```text
 "suggestion": { "Solution": "NA" }    // ✗ 应使用 "N/A"
 "suggestion": { "Solution": "N/A" }   // ✓
 ```
 
 ### 3.3 句号重复
 
-```
+```text
 // ✗ EE1011 的 ErrMessage 模板最后一个 %s 后有句号，reason 参数再加句号导致重复
 COND_RETURN_AND_MSG_OUTER(!trueStream->IsModelStream(), RT_ERROR_STREAM_MODEL,
     ErrorCode::EE1011, __func__, 0, "trueStream->modelNum",

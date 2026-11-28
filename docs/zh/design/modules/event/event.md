@@ -8,7 +8,6 @@
   - IPC 场景通过共享内存实现进程间事件同步
   - 支持事件状态查询和超时等待
   
-
 ## 2. 使用场景与对外接口
 
 ### 2.1 使用场景
@@ -117,6 +116,7 @@ Event Flag 通过 `aclrtCreateEventWithFlag` 或 `aclrtCreateEventExWithFlag` �
 
 **整体设计思路**
 **Event 管理整体分为两部分：**
+
 - **Record/Wait 处理路径**：DavidEvent 的 Record/Wait 入口由 `event_c.cc` 中 `EvtRecord`/`EvtWait` 函数承接，IpcEvent 的 Record/Wait 由 `IpcEventRecordStarsV2`/`IpcEventWaitStarsV2` 承接。不同 Event 类型和 Flag 组合走不同处理分支。
 - **任务下发流程**：配合 API 接口通过 Stream 任务申请、SQE 组装、任务下发等流程完成运行时调度。
 
@@ -325,6 +325,7 @@ stateDiagram-v2
 ```
 
 CntNotifyId 由 DavidStream 管理：
+
 - `cntNotifyId_` 成员维护当前 Stream 的 NotifyId
 - 首次通过 `ApplyCntNotifyId` 从驱动申请
 - `IsCntNotifyReachThreshold` 达到阈值时需等待之前 Wait 任务完成
