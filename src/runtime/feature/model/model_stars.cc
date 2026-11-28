@@ -38,7 +38,7 @@ rtError_t ModelDebugRegister(
     *streamId = static_cast<uint32_t>(dftStm->Id_());
     TaskInfo* rtDbgRegTask = nullptr;
 
-    COND_RETURN_WARN(mdl->IsDebugRegister(), RT_ERROR_DEBUG_REGISTER_FAILED, "model already debug registered!");
+    COND_RETURN_WARN(mdl->IsDebugRegister(), RT_ERROR_DEBUG_REGISTER_FAILED, "model is already debug registered!");
     Device* const device = dftStm->Device_();
     if (device->IsSupportFeature(RtOptionalFeatureType::RT_FEATURE_DEVICE_CTRL_SQ)) {
         RtDebugRegisterParam param = {addr, mdl->Id_(), flag};
@@ -125,7 +125,7 @@ rtError_t ModelAddEndGraph(Model* const mdl, Stream* const stm, const uint32_t f
         useAicpuExcutor = mdl->IsModelHeadStream(stm) && ((stm->Flags() & RT_STREAM_AICPU) != 0U);
 #endif
         if (((flags & RT_KERNEL_DUMPFLAG) == 0U) && (modelExecuteType != EXECUTOR_AICPU) && !useAicpuExcutor) {
-            RT_LOG(RT_LOG_INFO, "not submit endGraph.");
+            RT_LOG(RT_LOG_INFO, "EndGraph is not submitted.");
             return RT_ERROR_NONE;
         }
     }

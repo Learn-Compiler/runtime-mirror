@@ -12,6 +12,7 @@
 #include "binary_loader.hpp"
 #include "stream_xpu.hpp"
 #include "stream.hpp"
+#include "stream_enum_desc.hpp"
 #include "xpu_aicpu_c.hpp"
 #include "inner_thread_local.hpp"
 
@@ -70,13 +71,19 @@ rtError_t XpuContext::StreamCreate(
     rtError_t error = RT_ERROR_NONE;
     if (prio != RT_STREAM_PRIORITY_DEFAULT) {
         error = RT_ERROR_INVALID_VALUE;
-        RT_LOG(RT_LOG_ERROR, "Stream create failed, priority is not supported, priority=%u.", prio);
+        RT_LOG(
+            RT_LOG_ERROR, "Stream create failed, priority=%u is not supported, valid priority is %s.", prio,
+            StreamPriorityToString(static_cast<uint32_t>(RT_STREAM_PRIORITY_DEFAULT)).c_str());
         return error;
     }
 
     if (!(flag == RT_STREAM_DEFAULT) && !((flag & RT_STREAM_FAST_LAUNCH) != 0U)) {
         error = RT_ERROR_INVALID_VALUE;
-        RT_LOG(RT_LOG_ERROR, "Stream create failed, stream flag is not supported, flag=%u.", flag);
+        RT_LOG(
+            RT_LOG_ERROR,
+            "Stream create failed, stream flag=0x%x is not supported, "
+            "flag must be RT_STREAM_DEFAULT(0x%x) or include the RT_STREAM_FAST_LAUNCH(0x%x) bit.",
+            flag, static_cast<uint32_t>(RT_STREAM_DEFAULT), static_cast<uint32_t>(RT_STREAM_FAST_LAUNCH));
         return error;
     }
 

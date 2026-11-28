@@ -1967,7 +1967,7 @@ rtError_t Model::PacketAicpuModelInfo()
         ERROR_GOTO_MSG_INNER(
             error, PACKAGE_AICPU_FAIL,
             "Packet aicpu task information failed, modelId=%d, deviceId=%u, "
-            " retCode=%#x!",
+            "retCode=%#x!",
             id_, dev->Id_(), static_cast<uint32_t>(error));
     }
 
@@ -1975,7 +1975,7 @@ rtError_t Model::PacketAicpuModelInfo()
         error = PacketQueueInfo(&infoAicpuModel);
         ERROR_GOTO_MSG_INNER(
             error, PACKAGE_QUEUE_FAIL,
-            "Packet queue information failed, modelId=%d, deviceId=%u,"
+            "Packet queue information failed, modelId=%d, deviceId=%u, "
             "retCode=%#x!",
             id_, dev->Id_(), static_cast<uint32_t>(error));
     }
@@ -2544,7 +2544,7 @@ rtError_t Model::ModelGetStreams(Stream** streams, uint32_t* numStreams) const
         RT_LOG_INFO, "start to get all streams in the model, modelId=%u, deviceId=%u, input numStreams=%u.", id_,
         context_->Device_()->Id_(), *numStreams);
     if (!isModelComplete_) {
-        RT_LOG(RT_LOG_WARNING, "model is not load complete, modelId=%u.", id_);
+        RT_LOG(RT_LOG_WARNING, "The model is not completely loaded, modelId=%u.", id_);
     }
     const uint32_t mdlStreamNum = static_cast<uint32_t>(streams_.size());
     if (streams == nullptr) {
@@ -2583,7 +2583,7 @@ rtError_t Model::ModelGetTasks(void** tasks, uint32_t* numTasks) const
 {
     RT_LOG(RT_LOG_INFO, "start to get model tasks, modelId=%u, input numTasks=%u.", id_, *numTasks);
     if (!isModelComplete_) {
-        RT_LOG(RT_LOG_WARNING, "model is not load complete, modelId=%u.", id_);
+        RT_LOG(RT_LOG_WARNING, "The model is not completely loaded, modelId=%u.", id_);
     }
 
     const uint32_t capacity = *numTasks;

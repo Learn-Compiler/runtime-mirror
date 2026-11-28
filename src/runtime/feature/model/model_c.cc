@@ -353,8 +353,9 @@ rtError_t ModelSubmitExecuteTask(Model* const mdl, Notify* const notify, Stream*
         RT_LOG_DEBUG, "execute stream, model execute type=%u, model_id=%u, stream_id=%d.", executeType, mdl->Id_(),
         streamIn->Id_());
     COND_RETURN_ERROR_MSG_INNER(
-        (executeType > EXECUTOR_AICPU), RT_ERROR_MODEL_EXECUTOR, "Unsupported executor type=%s, modelId=%u.",
-        ModelExecutorToString(executeType).c_str(), mdl->Id_());
+        (executeType > EXECUTOR_AICPU), RT_ERROR_MODEL_EXECUTOR,
+        "Unsupported executor type=%s, valid range is [0, %u], modelId=%u.", ModelExecutorToString(executeType).c_str(),
+        EXECUTOR_AICPU, mdl->Id_());
 
     if (executeType != EXECUTOR_AICPU) {
         error = ModelSerialSchedPreProc(streamIn, notify, mdl);

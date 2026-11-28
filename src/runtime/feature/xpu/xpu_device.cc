@@ -124,7 +124,7 @@ rtError_t XpuDevice::InitStreamIdBitmap()
         RT_LOG(RT_LOG_ERROR, "Init streamid bitmap failed, maxStreamNum=%u", configInfo_.maxStreamNum);
         return RT_ERROR_MEMORY_ALLOCATION;
     }
-    RT_LOG(RT_LOG_INFO, "Bitmap(%u):Runtime_alloc_size %zu.", configInfo_.maxStreamNum, sizeof(Bitmap));
+    RT_LOG(RT_LOG_INFO, "Bitmap(%u):Runtime_alloc_size %zu bytes.", configInfo_.maxStreamNum, sizeof(Bitmap));
     return RT_ERROR_NONE;
 }
 
@@ -208,7 +208,8 @@ void XpuDevice::FreeStreamIdBitmap(const int32_t id)
     if (static_cast<uint32_t>(id) < configInfo_.maxStreamNum) {
         streamIdBitmap_->FreeId(id);
     } else {
-        RT_LOG_INNER_MSG(RT_LOG_ERROR, "Free xpu stream id=%d, id is invalid.", id);
+        RT_LOG_INNER_MSG(
+            RT_LOG_ERROR, "Free xpu stream id=%d is invalid, valid range is [0, %u).", id, configInfo_.maxStreamNum);
     }
 }
 

@@ -117,7 +117,7 @@ void DeInitCtrlMdl(void)
         if (g_rtCtrlMdlInfo[i].phyMdlId != UINT32_MAX) {
             rtError_t rtRet = rtNanoModelDestroy(g_rtCtrlMdlInfo[i].phyMdlId);
             if (rtRet != ACL_RT_SUCCESS) {
-                RT_LOG_ERROR("destroy modelID[%d] failed, ret=%d.", g_rtCtrlMdlInfo[i].phyMdlId, rtRet);
+                RT_LOG_ERROR("destroy modelID[%u] failed, ret=%d.", g_rtCtrlMdlInfo[i].phyMdlId, rtRet);
             }
             g_rtCtrlMdlInfo[i].phyMdlId = UINT32_MAX;
         }
