@@ -1685,7 +1685,7 @@ aclError aclrtGetDeviceCapability(int32_t deviceId, aclrtDevFeatureType devFeatu
 - Atlas training products: Supported
 <!-- end id1084 -->
 <!-- npu="IPV350" id1085 -->
-- IPV350: Not supported
+- IPV350: Supported
 <!-- end id1085 -->
 <!-- npu="5162A" id5027 -->
 - Hisilicon5162A: Not supported

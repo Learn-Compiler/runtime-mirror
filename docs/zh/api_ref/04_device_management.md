@@ -1746,7 +1746,7 @@ aclError aclrtGetDeviceCapability(int32_t deviceId, aclrtDevFeatureType devFeatu
 - Atlas训练系列产品：支持
 <!-- end id1084 -->
 <!-- npu="IPV350" id1085 -->
-- IPV350：不支持
+- IPV350：支持
 <!-- end id1085 -->
 <!-- npu="5162A" id5027 -->
 - Hisilicon5162A：不支持
