@@ -328,8 +328,9 @@ rtError_t StreamSqCqManage::ReAllocDavidSqCqId(const Stream* const stream)
     COND_RETURN_ERROR((error != RT_ERROR_NONE), error, "NormalSqCqAllocate fail, ret=%#x.", error);
     COND_RETURN_ERROR(
         ((stream->GetSqId() != sqId) || (stream->GetCqId() != cqId)), RT_ERROR_DRV_ERR,
-        "stream_id=%u, sq_id=%u, cq_id=%u, tmp_sq_id=%u, tmp_cq_id=%u.", streamId, stream->GetSqId(), stream->GetCqId(),
-        sqId, cqId);
+        "Reallocated SQ/CQ IDs do not match the original IDs, stream_id=%u, "
+        "original_sq_id=%u, original_cq_id=%u, allocated_sq_id=%u, allocated_cq_id=%u.",
+        streamId, stream->GetSqId(), stream->GetCqId(), sqId, cqId);
 
     drvFlag = (static_cast<uint32_t>(TSDRV_FLAG_SPECIFIED_CQ_ID) | remoteFlag);
     error = device_->Driver_()->LogicCqAllocateV2(
@@ -822,7 +823,7 @@ rtError_t StreamSqCqManage::BindSqToStream(const uint32_t streamId, const uint32
     if (unlikely(iter1 != streamIdToSqIdMap_.end())) {
         RT_LOG_INNER_MSG(
             RT_LOG_ERROR,
-            "The SQ have been applied for the current stream and cannot be applied for again, "
+            "The SQ has been applied for the current stream and cannot be applied for again, "
             "stream_id=%u, current sq_id=%u, applied sq_id=%u.",
             streamId, iter1->second, sqId);
         return RT_ERROR_STREAM_DUPLICATE;
@@ -832,7 +833,7 @@ rtError_t StreamSqCqManage::BindSqToStream(const uint32_t streamId, const uint32
     if (unlikely(iter2 != sqIdToStreamIdMap_.end())) {
         RT_LOG_INNER_MSG(
             RT_LOG_ERROR,
-            "The stream have been applied for the current SQ and cannot be applied for again, "
+            "The stream has been applied for the current SQ and cannot be applied for again, "
             "sq_id=%u, current stream_id=%u, applied stream_id=%u.",
             sqId, iter2->second, streamId);
         return RT_ERROR_STREAM_DUPLICATE;

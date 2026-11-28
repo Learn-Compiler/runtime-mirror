@@ -62,7 +62,9 @@ rtError_t InitFuncCallParaForStreamSwitchTaskV1(
             const uint64_t baseAddr = stm->Device_()->GetStarsRegBaseAddr();
             if (baseAddr == 0ULL) {
                 RT_LOG(
-                    RT_LOG_ERROR, "invalid device_id=%u, physic chip_id=%" PRId64 ", die_id=%" PRId64 ", stream_id=%d.",
+                    RT_LOG_ERROR,
+                    "Invalid STARS base address: 0, device_id=%u, physical_chip_id=%" PRId64 ", die_id=%" PRId64
+                    ", stream_id=%d.",
                     stm->Device_()->Id_(), stm->Device_()->GetPhyChipId(), stm->Device_()->GetPhyDieId(), stm->Id_());
                 return RT_ERROR_DEVICE_INVALID;
             }
@@ -123,7 +125,9 @@ rtError_t InitFuncCallParaForStreamSwitchTaskV2(
             const uint64_t baseAddr = stm->Device_()->GetStarsRegBaseAddr();
             if (baseAddr == 0ULL) {
                 RT_LOG(
-                    RT_LOG_ERROR, "invalid device_id=%u, physic chip_id=%" PRId64 ", die_id=%" PRId64 ", stream_id=%d.",
+                    RT_LOG_ERROR,
+                    "Invalid STARS base address: 0, device_id=%u, physical_chip_id=%" PRId64 ", die_id=%" PRId64
+                    ", stream_id=%d.",
                     stm->Device_()->Id_(), stm->Device_()->GetPhyChipId(), stm->Device_()->GetPhyDieId(), stm->Id_());
                 return RT_ERROR_DEVICE_INVALID;
             }
@@ -440,7 +444,7 @@ rtError_t InitFuncCallParaForStmLblSwiByIdxTask(TaskInfo* taskInfo, rtStarsLabel
     StmLabelSwitchByIdxTaskInfo* stmLblSwiByIdx = &taskInfo->u.stmLabelSwitchIdxTask;
     Stream* stm = taskInfo->stream;
     if (stm->Model_() == nullptr) {
-        RT_LOG(RT_LOG_ERROR, "model is null");
+        RT_LOG(RT_LOG_ERROR, "model is null, stream_id=%d", taskInfo->stream->Id_());
         return RT_ERROR_MODEL_NULL;
     }
 

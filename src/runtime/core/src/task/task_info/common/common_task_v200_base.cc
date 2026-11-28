@@ -78,7 +78,7 @@ void InitWriteValueSqe(RtDavidStarsWriteValueSqe* const writeValueSqe, const rtW
     uint32_t* temp = RtPtrToPtr<uint32_t*>(value);
     for (uint32_t idx = 0U; idx < (WRITE_VALUE_SIZE_MAX_LEN / 4U); idx++) { // 4U: sizeof(uint32_t)
         writeValueSqe->writeValuePart[idx] = temp[idx];
-        RT_LOG(RT_LOG_INFO, "writeValuePart[%u]: %u", idx, writeValueSqe->writeValuePart[idx]);
+        RT_LOG(RT_LOG_DEBUG, "writeValuePart[%u]: %u", idx, writeValueSqe->writeValuePart[idx]);
     }
 
     PrintDavidSqe(RtPtrToPtr<rtDavidSqe_t*>(writeValueSqe), "WriteValueTask");

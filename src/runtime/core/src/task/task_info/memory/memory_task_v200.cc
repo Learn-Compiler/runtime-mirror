@@ -231,7 +231,7 @@ static void ConstructDavidMemcpySqeForOpCode(
     RT_LOG(
         RT_LOG_INFO,
         "ConstructMemcpySqe, size=%u, qos=%u, partid=%u, copyType=" RT_ENUM_LOG_FORMAT(
-            "%u") ", deviceId=%u, streamId=%d,taskId=%hu",
+            "%u") ", deviceId=%u, streamId=%d, taskId=%hu",
         static_cast<uint32_t>(memcpyAsyncTaskInfo->size), sqe->qos, sqe->mapamPartId,
         RT_ENUM_LOG_VALUE(
             static_cast<uint32_t>(memcpyAsyncTaskInfo->copyType),

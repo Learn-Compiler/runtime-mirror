@@ -126,7 +126,7 @@ void ToCmdBodyForStreamLabelGotoTask(TaskInfo* taskInfo, rtCommand_t* const comm
 {
     const Model* const modelPtr = taskInfo->stream->Model_();
     if (modelPtr == nullptr) {
-        RT_LOG(RT_LOG_ERROR, "model is null");
+        RT_LOG(RT_LOG_ERROR, "model is null, stream_id=%d", taskInfo->stream->Id_());
         return;
     }
     const uint32_t modelId = modelPtr->Id_();

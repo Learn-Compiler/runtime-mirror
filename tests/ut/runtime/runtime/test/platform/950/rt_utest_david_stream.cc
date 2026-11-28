@@ -71,6 +71,37 @@
 
 using namespace testing;
 using namespace cce::runtime;
+
+TEST(StreamSqCqManageTest, BindSqToStream_RejectsDuplicateStreamAndPreservesMappings)
+{
+    StreamSqCqManage manager(nullptr);
+    ASSERT_EQ(manager.BindSqToStream(1U, 10U), RT_ERROR_NONE);
+
+    EXPECT_EQ(manager.BindSqToStream(1U, 11U), RT_ERROR_STREAM_DUPLICATE);
+    uint32_t sqId = UINT32_MAX;
+    uint32_t streamId = UINT32_MAX;
+    EXPECT_EQ(manager.GetSqId(1U, sqId), RT_ERROR_NONE);
+    EXPECT_EQ(sqId, 10U);
+    EXPECT_EQ(manager.GetStreamIdBySqId(10U, streamId), RT_ERROR_NONE);
+    EXPECT_EQ(streamId, 1U);
+    EXPECT_EQ(manager.BindSqToStream(2U, 11U), RT_ERROR_NONE);
+}
+
+TEST(StreamSqCqManageTest, BindSqToStream_RejectsDuplicateSqAndPreservesMappings)
+{
+    StreamSqCqManage manager(nullptr);
+    ASSERT_EQ(manager.BindSqToStream(1U, 10U), RT_ERROR_NONE);
+
+    EXPECT_EQ(manager.BindSqToStream(2U, 10U), RT_ERROR_STREAM_DUPLICATE);
+    uint32_t sqId = UINT32_MAX;
+    uint32_t streamId = UINT32_MAX;
+    EXPECT_EQ(manager.GetSqId(1U, sqId), RT_ERROR_NONE);
+    EXPECT_EQ(sqId, 10U);
+    EXPECT_EQ(manager.GetStreamIdBySqId(10U, streamId), RT_ERROR_NONE);
+    EXPECT_EQ(streamId, 1U);
+    EXPECT_EQ(manager.BindSqToStream(2U, 11U), RT_ERROR_NONE);
+}
+
 extern int64_t g_device_driver_version_stub;
 static rtChipType_t g_chipType;
 timespec g_abort_clock_time = {0, 0};

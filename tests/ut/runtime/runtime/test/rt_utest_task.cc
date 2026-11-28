@@ -4126,6 +4126,27 @@ TEST_F(TaskTest, TestLabelGotoTaskInit)
     TaskUnInitProc(&gotoTask);
 }
 
+TEST_F(TaskTest, TestStreamLabelGotoWithoutModelPreservesCommand)
+{
+    rtStream_t streamHandle = nullptr;
+    ASSERT_EQ(rtStreamCreate(&streamHandle, 0), RT_ERROR_NONE);
+    const ScopeGuard destroyStream([&]() { EXPECT_EQ(rtStreamDestroy(streamHandle), RT_ERROR_NONE); });
+    Stream* const stream = rt_ut::UnwrapOrNull<Stream>(streamHandle);
+    ASSERT_NE(stream, nullptr);
+    ASSERT_EQ(stream->Model_(), nullptr);
+    TaskInfo gotoTask = {};
+    gotoTask.stream = stream;
+    gotoTask.u.streamLabelGotoTask.labelId = 1U;
+    rtCommand_t command = {};
+    command.u.streamLabelGotoTask.labelId = 7U;
+    command.u.streamLabelGotoTask.modelId = 9U;
+
+    ToCmdBodyForStreamLabelGotoTask(&gotoTask, &command);
+
+    EXPECT_EQ(command.u.streamLabelGotoTask.labelId, 7U);
+    EXPECT_EQ(command.u.streamLabelGotoTask.modelId, 9U);
+}
+
 TEST_F(TaskTest, ConstructSqeForMemcpyAsyncTask)
 {
     TaskInfo memcpyAsyncTask = {};

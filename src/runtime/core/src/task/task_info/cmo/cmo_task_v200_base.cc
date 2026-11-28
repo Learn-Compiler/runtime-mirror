@@ -117,7 +117,7 @@ void PrintErrorInfoForDavidCmoTask(TaskInfo* taskInfo, const uint32_t devId)
 
     RT_LOG(
         RT_LOG_ERROR,
-        "Sdma for CmoAddrTask in model stream execute failed, device_id=%u, stream_id=%d, task_id=%u,"
+        "Sdma for CmoAddrTask in model stream execute failed, device_id=%u, stream_id=%d, task_id=%u, "
         "cmoAddrInfo=0x%llx.",
         devId, streamId, taskId, RtPtrToValue(cmoAddrTaskInfo->cmoAddrInfo));
     for (size_t i = 0UL; i < cmoInfoSize; i += 8U) {

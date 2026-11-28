@@ -914,6 +914,40 @@ TEST_F(DavidSnapshotTest, ReAllocDavidSqCqId_NormalSqCqAllocateFailed)
     delete stream;
 }
 
+class DavidSnapshotSqCqMismatchTest : public DavidSnapshotTest, public testing::WithParamInterface<bool> {};
+
+TEST_P(DavidSnapshotSqCqMismatchTest, ReAllocDavidSqCqId_RejectsMismatchedIds)
+{
+    rtStream_t streamHandle = nullptr;
+    ASSERT_EQ(rtStreamCreate(&streamHandle, 0), RT_ERROR_NONE);
+    const ScopeGuard destroyStream([&]() { EXPECT_EQ(rtStreamDestroy(streamHandle), RT_ERROR_NONE); });
+    Stream* const stream = rt_ut::UnwrapOrNull<Stream>(streamHandle);
+    ASSERT_NE(stream, nullptr);
+    const uint32_t originalSqId = stream->GetSqId();
+    const uint32_t originalCqId = stream->GetCqId();
+    const uint32_t originalLogicCqId = stream->GetLogicalCqId();
+    uint32_t allocatedSqId = GetParam() ? (originalSqId ^ 1U) : originalSqId;
+    uint32_t allocatedCqId = GetParam() ? originalCqId : (originalCqId ^ 1U);
+    StreamSqCqManage* const manager = dev_->GetStreamSqCqManage();
+    ASSERT_NE(manager, nullptr);
+
+    MOCKER_CPP_VIRTUAL(dev_->Driver_(), &Driver::NormalSqCqAllocate)
+        .expects(once())
+        .with(
+            mockcpp::any(), mockcpp::any(), mockcpp::any(), outBoundP(&allocatedSqId, sizeof(allocatedSqId)),
+            outBoundP(&allocatedCqId, sizeof(allocatedCqId)))
+        .will(returnValue(RT_ERROR_NONE));
+    MOCKER_CPP_VIRTUAL(dev_->Driver_(), &Driver::LogicCqAllocateV2).expects(never());
+    MOCKER_CPP_VIRTUAL(dev_->Driver_(), &Driver::StreamBindLogicCq).expects(never());
+
+    EXPECT_EQ(manager->ReAllocDavidSqCqId(stream), RT_ERROR_DRV_ERR);
+    EXPECT_EQ(stream->GetSqId(), originalSqId);
+    EXPECT_EQ(stream->GetCqId(), originalCqId);
+    EXPECT_EQ(stream->GetLogicalCqId(), originalLogicCqId);
+}
+
+INSTANTIATE_TEST_SUITE_P(SqOrCqMismatch, DavidSnapshotSqCqMismatchTest, testing::Values(true, false));
+
 TEST_F(DavidSnapshotTest, RecordArgsAddrAndSize_Aicore)
 {
     deviceSnapshot_->OpMemoryInfoInit();
