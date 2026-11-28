@@ -22,7 +22,7 @@ Event也支持**多个任务等待同一个事件（多等一）**，例如strea
 以下是创建两个Event并销毁的代码示例，该示例仅用于说明Event使用方法，不可以直接拷贝编译运行。
 
 <!-- npu="950,A3,910b,910,310p,310b" id1 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/master/example/1_basic_features/event/1_event_timestamp)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/9.3.0/example/1_basic_features/event/1_event_timestamp)。
 <!-- end id1 -->
 
 ```c
@@ -95,7 +95,7 @@ aclrtDestroyEvent(event);
 在[Event的创建与销毁](#event的创建与销毁)章节中创建的Event可用于统计Stream上计算任务的耗时，代码示例如下。该示例仅用于说明Event使用方法，不可以直接拷贝编译运行。
 
 <!-- npu="950,A3,910b,910,310p,310b" id2 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/master/example/1_basic_features/event/1_event_timestamp)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/9.3.0/example/1_basic_features/event/1_event_timestamp)。
 <!-- end id2 -->
 
 ```c

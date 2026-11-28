@@ -50,12 +50,6 @@ void aclAppLog(aclLogLevel logLevel, const char *func, const char *file, uint32_
 <!-- npu="910" id1735 -->
 - Atlas训练系列产品：支持
 <!-- end id1735 -->
-<!-- npu="IPV350" id1736 -->
-- IPV350：不支持
-<!-- end id1736 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id1 -->
 
 ### 功能说明
@@ -124,12 +118,6 @@ size_t aclDataTypeSize(aclDataType dataType)
 <!-- npu="910" id244 -->
 - Atlas训练系列产品：支持
 <!-- end id244 -->
-<!-- npu="IPV350" id245 -->
-- IPV350：不支持
-<!-- end id245 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id2 -->
 
 ### 功能说明
@@ -178,12 +166,6 @@ float aclFloat16ToFloat(aclFloat16 value)
 <!-- npu="910" id2512 -->
 - Atlas训练系列产品：支持
 <!-- end id2512 -->
-<!-- npu="IPV350" id2513 -->
-- IPV350：不支持
-<!-- end id2513 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id3 -->
 
 ### 功能说明
@@ -234,12 +216,6 @@ aclFloat16 aclFloatToFloat16(float value)
 <!-- npu="910" id3107 -->
 - Atlas训练系列产品：支持
 <!-- end id3107 -->
-<!-- npu="IPV350" id3108 -->
-- IPV350：不支持
-<!-- end id3108 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：不支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id4 -->
 
 ### 功能说明
@@ -294,12 +270,6 @@ aclError aclrtGetVersion(int32_t *majorVersion, int32_t *minorVersion, int32_t *
 <!-- npu="910" id482 -->
 - Atlas训练系列产品：支持
 <!-- end id482 -->
-<!-- npu="IPV350" id483 -->
-- IPV350：支持
-<!-- end id483 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id5 -->
 
 ### 功能说明
@@ -352,12 +322,6 @@ aclError aclsysGetCANNVersion(aclCANNPackageName name, aclCANNPackageVersion *ve
 <!-- npu="910" id3184 -->
 - Atlas训练系列产品：支持
 <!-- end id3184 -->
-<!-- npu="IPV350" id3185 -->
-- IPV350：支持
-<!-- end id3185 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id6 -->
 
 ### 功能说明
@@ -407,12 +371,6 @@ aclError aclGetCannAttributeList(const aclCannAttr **cannAttrList, size_t *num)
 <!-- npu="910" id146 -->
 - Atlas训练系列产品：支持
 <!-- end id146 -->
-<!-- npu="IPV350" id147 -->
-- IPV350：支持
-<!-- end id147 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id7 -->
 
 ### 功能说明
@@ -462,12 +420,6 @@ aclError aclGetCannAttribute(aclCannAttr cannAttr, int32_t *value)
 <!-- npu="910" id1154 -->
 - Atlas训练系列产品：支持
 <!-- end id1154 -->
-<!-- npu="IPV350" id1155 -->
-- IPV350：支持
-<!-- end id1155 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id8 -->
 
 ### 功能说明
@@ -517,12 +469,6 @@ aclError aclGetDeviceCapability(uint32_t deviceId, aclDeviceInfo deviceInfo, int
 <!-- npu="910" id1378 -->
 - Atlas训练系列产品：支持
 <!-- end id1378 -->
-<!-- npu="IPV350" id1379 -->
-- IPV350：支持
-<!-- end id1379 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：不支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id9 -->
 
 ### 功能说明
@@ -573,12 +519,6 @@ aclError aclrtCacheLastTaskOpInfo(const void * const infoPtr, const size_t infoS
 <!-- npu="910" id1126 -->
 - Atlas训练系列产品：不支持
 <!-- end id1126 -->
-<!-- npu="IPV350" id1127 -->
-- IPV350：不支持
-<!-- end id1127 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：不支持
-<!-- end id5010 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id10 -->
 
 ### 功能说明
@@ -648,12 +588,6 @@ aclError aclrtCacheLastTaskExtendInfo(const char* const extendInfoPtr, const siz
 <!-- npu="910" id1217 -->
 - Atlas训练系列产品：不支持
 <!-- end id1217 -->
-<!-- npu="IPV350" id1218 -->
-- IPV350：不支持
-<!-- end id1218 -->
-<!-- npu="5162A" id5011 -->
-- Hisilicon5162A：不支持
-<!-- end id5011 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id11 -->
 
 ### 功能说明
@@ -704,12 +638,6 @@ aclError aclrtProfTrace(void *userdata, int32_t length, aclrtStream stream)
 <!-- npu="910" id111 -->
 - Atlas训练系列产品：支持
 <!-- end id111 -->
-<!-- npu="IPV350" id112 -->
-- IPV350：不支持
-<!-- end id112 -->
-<!-- npu="5162A" id5012 -->
-- Hisilicon5162A：不支持
-<!-- end id5012 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id12 -->
 
 ### 功能说明
@@ -760,12 +688,6 @@ aclError aclsysGetVersionNum(char *pkgName, int32_t *versionNum)
 <!-- npu="910" id769 -->
 - Atlas训练系列产品：支持
 <!-- end id769 -->
-<!-- npu="IPV350" id770 -->
-- IPV350：不支持
-<!-- end id770 -->
-<!-- npu="5162A" id5013 -->
-- Hisilicon5162A：支持
-<!-- end id5013 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id13 -->
 
 ### 功能说明
@@ -821,12 +743,6 @@ aclError aclsysGetVersionStr(char *pkgName, char *versionStr)
 <!-- npu="910" id1182 -->
 - Atlas训练系列产品：支持
 <!-- end id1182 -->
-<!-- npu="IPV350" id1183 -->
-- IPV350：不支持
-<!-- end id1183 -->
-<!-- npu="5162A" id5014 -->
-- Hisilicon5162A：支持
-<!-- end id5014 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id14 -->
 
 ### 功能说明
@@ -876,12 +792,6 @@ aclError aclplatformGetDeviceInfo(aclplatformDevInfo infoType, char *value, uint
 <!-- npu="910" id1931 -->
 - Atlas训练系列产品：支持
 <!-- end id1931 -->
-<!-- npu="IPV350" id1932 -->
-- IPV350：不支持
-<!-- end id1932 -->
-<!-- npu="5162A" id5015 -->
-- Hisilicon5162A：不支持
-<!-- end id5015 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id15 -->
 
 ### 功能说明
@@ -935,12 +845,6 @@ aclError aclplatformGetInstructionInfo(aclplatformCoreType type,
 <!-- npu="910" id3513 -->
 - Atlas训练系列产品：支持
 <!-- end id3513 -->
-<!-- npu="IPV350" id3514 -->
-- IPV350：不支持
-<!-- end id3514 -->
-<!-- npu="5162A" id5016 -->
-- Hisilicon5162A：不支持
-<!-- end id5016 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id16 -->
 
 ### 功能说明
@@ -994,12 +898,6 @@ aclError aclrtCreateStreamV2(aclrtStream *stream, const aclrtStreamConfigHandle 
 <!-- npu="910" id2309 -->
 - Atlas训练系列产品：不支持
 <!-- end id2309 -->
-<!-- npu="IPV350" id2310 -->
-- IPV350：支持
-<!-- end id2310 -->
-<!-- npu="5162A" id5017 -->
-- Hisilicon5162A：不支持
-<!-- end id5017 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id17 -->
 
 ### 功能说明
@@ -1056,12 +954,6 @@ aclError aclrtSetStreamConfigOpt(aclrtStreamConfigHandle *handle, aclrtStreamCon
 <!-- npu="910" id125 -->
 - Atlas训练系列产品：不支持
 <!-- end id125 -->
-<!-- npu="IPV350" id126 -->
-- IPV350：支持
-<!-- end id126 -->
-<!-- npu="5162A" id5018 -->
-- Hisilicon5162A：不支持
-<!-- end id5018 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id18 -->
 
 ### 功能说明
@@ -1129,21 +1021,11 @@ aclError aclrtSubscribeHostFunc(uint64_t hostFuncThreadId, aclrtStream exeStream
 <!-- npu="910" id2316 -->
 - Atlas训练系列产品：不支持
 <!-- end id2316 -->
-<!-- npu="IPV350" id2317 -->
-- IPV350：支持
-<!-- end id2317 -->
-<!-- npu="5162A" id5019 -->
-- Hisilicon5162A：不支持
-<!-- end id5019 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id19 -->
 
 ### 功能说明
 
 调用本接口注册处理Stream上回调函数的线程（线程需由用户自行创建）。
-
-<!-- npu="IPV350" id2 -->
-**使用场景：**模型中有CPU算子、且调用aclmdlExecuteV2或aclmdlExecuteAsyncV2接口执行模型推理时，由于IPV350上的内存限制，无法支撑CPU算子的调度框架，因此需配合aclrtSubscribeHostFunc、[aclrtProcessHostFunc](#aclrtProcessHostFunc)、[aclrtUnSubscribeHostFunc](#aclrtUnSubscribeHostFunc)接口完成CPU算子调度，完成模型推理。
-<!-- end id2 -->
 
 ### 参数说明
 
@@ -1193,12 +1075,6 @@ aclError aclrtProcessHostFunc(int32_t timeout)
 <!-- npu="910" id2470 -->
 - Atlas训练系列产品：不支持
 <!-- end id2470 -->
-<!-- npu="IPV350" id2471 -->
-- IPV350：支持
-<!-- end id2471 -->
-<!-- npu="5162A" id5020 -->
-- Hisilicon5162A：不支持
-<!-- end id5020 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id20 -->
 
 ### 功能说明
@@ -1249,12 +1125,6 @@ aclError aclrtUnSubscribeHostFunc(uint64_t hostFuncThreadId, aclrtStream exeStre
 <!-- npu="910" id2288 -->
 - Atlas训练系列产品：不支持
 <!-- end id2288 -->
-<!-- npu="IPV350" id2289 -->
-- IPV350：支持
-<!-- end id2289 -->
-<!-- npu="5162A" id5021 -->
-- Hisilicon5162A：不支持
-<!-- end id5021 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/24_other_APIs_res.md#id21 -->
 
 ### 功能说明

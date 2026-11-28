@@ -16,4 +16,4 @@ Value 1,2,2 for environment variable ASCEND_RT_VISIBLE_DEVICES is invalid. Expec
 
 ## 解决方法
 
-参考《[环境变量参考](https://gitcode.com/cann/docs/blob/master/docs/zh/env-vars/README.md)》重新设置环境变量。
+参考《[环境变量参考](https://gitcode.com/cann/docs/blob/9.3.0/docs/zh/env-vars/README.md)》重新设置环境变量。

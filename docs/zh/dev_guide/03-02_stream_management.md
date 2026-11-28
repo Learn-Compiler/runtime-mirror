@@ -22,7 +22,7 @@ Runtime中的Stream均为非阻塞式Stream，默认Stream不会跟显式创建�
 以下是创建Stream并在Stream上下发计算任务的代码示例，不可以直接拷贝编译运行，仅供参考。
 
 <!-- npu="950,A3,910b,910,310p,310b" id2 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/master/example/1_basic_features/stream/0_simple_stream)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/blob/9.3.0/example/1_basic_features/stream/0_simple_stream)。
 <!-- end id2 -->
 
 ```c
@@ -135,7 +135,7 @@ CANN为CPU和NPU之间的异步协作提供了灵活的方式。用户可以使�
 以下是在Stream上插入一个Host回调任务的代码示例，不可以直接拷贝编译运行，仅供参考。
 
 <!-- npu="950,A3,910b,910,310p,310b" id1 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/master/example/2_advanced_features/callback/1_callback_hostfunc)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/9.3.0/example/2_advanced_features/callback/1_callback_hostfunc)。
 <!-- end id1 -->
 
 ```c

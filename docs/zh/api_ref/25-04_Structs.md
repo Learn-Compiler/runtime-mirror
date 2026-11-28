@@ -180,6 +180,7 @@ typedef struct aclmdlRIEventRecordTaskParams {
     uint32_t recordFlag;
 } aclmdlRIEventRecordTaskParams;
 ```
+
 当aclmdlRIEventRecordTaskParams作为查询接口的输出时，若recordFlag为ACL_EVENT_RECORD_DEFAULT，则此时event不支持进行同步或查询操作。
 
 | 成员名称 | 描述 |
@@ -201,6 +202,7 @@ typedef struct aclmdlRIEventResetTaskParams {
     uint32_t resetFlag;
 } aclmdlRIEventResetTaskParams;
 ```
+
 当aclmdlRIEventResetTaskParams作为查询接口的输出时，event不支持进行同步或查询操作。
 
 | 成员名称 | 描述 |
@@ -222,6 +224,7 @@ typedef struct aclmdlRIEventWaitTaskParams {
     uint32_t waitFlag;
 } aclmdlRIEventWaitTaskParams;
 ```
+
 当aclmdlRIEventWaitTaskParams作为查询接口的输出时，若waitFlag为ACL_EVENT_WAIT_DEFAULT，则此时event不支持进行同步或查询操作。
 
 | 成员名称 | 描述 |
@@ -795,9 +798,6 @@ typedef union aclrtLaunchKernelAttrValue {
     仅Ascend 950PR&950DT系列产品支持该参数。
     <!-- end id1 -->
 
-    <!-- npu="IPV350" id2 -->
-    对于IPV350，当前不支持该参数，配置该参数不生效。
-    <!-- end id2 -->
     <!-- @ref: runtime/res/docs/zh/api_ref/25-05_Typedefs_res.md#id1 -->
 
 - engineType
@@ -808,9 +808,6 @@ typedef union aclrtLaunchKernelAttrValue {
     仅Atlas推理系列产品支持该参数。
     <!-- end id3 -->
 
-    <!-- npu="IPV350" id4 -->
-    对于IPV350，当前不支持该参数，配置该参数不生效。
-    <!-- end id4 -->
     <!-- @ref: runtime/res/docs/zh/api_ref/25-05_Typedefs_res.md#id2 -->
 
 - blockDimOffset
@@ -828,9 +825,6 @@ typedef union aclrtLaunchKernelAttrValue {
             - numBlocks ≤ AI Core核数+Vector Core核数时，aicorenumBlocks = AI Core核数
             - 否则，aicorenumBlocks = 向上取整 \( numBlocks \* \( AI Core核数 \) / \( AI Core核数 + Vector Core核数 \)\)
 
-    <!-- npu="IPV350" id6 -->
-    对于IPV350，当前不支持该参数，配置该参数不生效。
-    <!-- end id6 -->
     <!-- @ref: runtime/res/docs/zh/api_ref/25-05_Typedefs_res.md#id3 -->
 
 - isBlockTaskPrefetch

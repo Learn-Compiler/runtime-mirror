@@ -73,12 +73,6 @@ aclError aclmdlRICaptureBegin(aclrtStream stream, aclmdlRICaptureMode mode)
 <!-- npu="910" id1014 -->
 - Atlas训练系列产品：不支持
 <!-- end id1014 -->
-<!-- npu="IPV350" id1015 -->
-- IPV350：不支持
-<!-- end id1015 -->
-<!-- npu="5162A" id84261 -->
-- Hisilicon5162A：不支持
-<!-- end id84261 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id1 -->
 
 ### 功能说明
@@ -136,12 +130,6 @@ aclError aclmdlRICaptureGetInfo(aclrtStream stream, aclmdlRICaptureStatus *statu
 <!-- npu="910" id755 -->
 - Atlas训练系列产品：不支持
 <!-- end id755 -->
-<!-- npu="IPV350" id756 -->
-- IPV350：不支持
-<!-- end id756 -->
-<!-- npu="5162A" id84262 -->
-- Hisilicon5162A：不支持
-<!-- end id84262 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id2 -->
 
 ### 功能说明
@@ -192,12 +180,6 @@ aclError aclmdlRICaptureThreadExchangeMode(aclmdlRICaptureMode *mode)
 <!-- npu="910" id2393 -->
 - Atlas训练系列产品：不支持
 <!-- end id2393 -->
-<!-- npu="IPV350" id2394 -->
-- IPV350：不支持
-<!-- end id2394 -->
-<!-- npu="5162A" id84263 -->
-- Hisilicon5162A：不支持
-<!-- end id84263 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id3 -->
 
 ### 功能说明
@@ -254,12 +236,6 @@ aclError aclmdlRICaptureEnd(aclrtStream stream, aclmdlRI *modelRI)
 <!-- npu="910" id3072 -->
 - Atlas训练系列产品：不支持
 <!-- end id3072 -->
-<!-- npu="IPV350" id3073 -->
-- IPV350：不支持
-<!-- end id3073 -->
-<!-- npu="5162A" id84264 -->
-- Hisilicon5162A：不支持
-<!-- end id84264 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id4 -->
 
 ### 功能说明
@@ -313,12 +289,6 @@ aclError aclmdlRICaptureTaskGrpBegin(aclrtStream stream)
 <!-- npu="910" id349 -->
 - Atlas训练系列产品：不支持
 <!-- end id349 -->
-<!-- npu="IPV350" id350 -->
-- IPV350：不支持
-<!-- end id350 -->
-<!-- npu="5162A" id84265 -->
-- Hisilicon5162A：不支持
-<!-- end id84265 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id5 -->
 
 ### 功能说明
@@ -371,12 +341,6 @@ aclError aclmdlRICaptureTaskGrpEnd(aclrtStream stream, aclrtTaskGrp *handle)
 <!-- npu="910" id1042 -->
 - Atlas训练系列产品：不支持
 <!-- end id1042 -->
-<!-- npu="IPV350" id1043 -->
-- IPV350：不支持
-<!-- end id1043 -->
-<!-- npu="5162A" id84266 -->
-- Hisilicon5162A：不支持
-<!-- end id84266 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id6 -->
 
 ### 功能说明
@@ -428,12 +392,6 @@ aclError aclmdlRICaptureTaskUpdateBegin(aclrtStream stream, aclrtTaskGrp handle)
 <!-- npu="910" id1434 -->
 - Atlas训练系列产品：不支持
 <!-- end id1434 -->
-<!-- npu="IPV350" id1435 -->
-- IPV350：不支持
-<!-- end id1435 -->
-<!-- npu="5162A" id84267 -->
-- Hisilicon5162A：不支持
-<!-- end id84267 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id7 -->
 
 ### 功能说明
@@ -502,12 +460,6 @@ aclError aclmdlRICaptureTaskUpdateEnd(aclrtStream stream)
 <!-- npu="910" id20 -->
 - Atlas训练系列产品：不支持
 <!-- end id20 -->
-<!-- npu="IPV350" id21 -->
-- IPV350：不支持
-<!-- end id21 -->
-<!-- npu="5162A" id84268 -->
-- Hisilicon5162A：不支持
-<!-- end id84268 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id8 -->
 
 ### 功能说明
@@ -564,12 +516,6 @@ aclError aclmdlRIDebugJsonPrint(aclmdlRI modelRI, const char *path, uint32_t fla
 <!-- npu="910" id307 -->
 - Atlas训练系列产品：不支持
 <!-- end id307 -->
-<!-- npu="IPV350" id308 -->
-- IPV350：不支持
-<!-- end id308 -->
-<!-- npu="5162A" id84269 -->
-- Hisilicon5162A：不支持
-<!-- end id84269 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id9 -->
 
 ### 功能说明
@@ -622,12 +568,6 @@ aclError aclmdlRIDebugPrint(aclmdlRI modelRI)
 <!-- npu="910" id3520 -->
 - Atlas训练系列产品：不支持
 <!-- end id3520 -->
-<!-- npu="IPV350" id3521 -->
-- IPV350：不支持
-<!-- end id3521 -->
-<!-- npu="5162A" id84270 -->
-- Hisilicon5162A：不支持
-<!-- end id84270 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id10 -->
 
 ### 功能说明
@@ -676,12 +616,6 @@ aclError aclmdlRIBuildBegin(aclmdlRI *modelRI, uint32_t flag)
 <!-- npu="910" id2407 -->
 - Atlas训练系列产品：支持
 <!-- end id2407 -->
-<!-- npu="IPV350" id2408 -->
-- IPV350：不支持
-<!-- end id2408 -->
-<!-- npu="5162A" id84271 -->
-- Hisilicon5162A：支持
-<!-- end id84271 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id11 -->
 
 ### 功能说明
@@ -735,12 +669,6 @@ aclError aclmdlRIBindStream(aclmdlRI modelRI, aclrtStream stream, uint32_t flag)
 <!-- npu="910" id1630 -->
 - Atlas训练系列产品：支持
 <!-- end id1630 -->
-<!-- npu="IPV350" id1631 -->
-- IPV350：不支持
-<!-- end id1631 -->
-<!-- npu="5162A" id84272 -->
-- Hisilicon5162A：支持
-<!-- end id84272 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id12 -->
 
 ### 功能说明
@@ -791,12 +719,6 @@ aclError aclmdlRIEndTask(aclmdlRI modelRI, aclrtStream stream)
 <!-- npu="910" id2904 -->
 - Atlas训练系列产品：支持
 <!-- end id2904 -->
-<!-- npu="IPV350" id2905 -->
-- IPV350：不支持
-<!-- end id2905 -->
-<!-- npu="5162A" id84273 -->
-- Hisilicon5162A：支持
-<!-- end id84273 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id13 -->
 
 ### 功能说明
@@ -846,12 +768,6 @@ aclError aclmdlRIBuildEnd(aclmdlRI modelRI, void *reserve)
 <!-- npu="910" id34 -->
 - Atlas训练系列产品：支持
 <!-- end id34 -->
-<!-- npu="IPV350" id35 -->
-- IPV350：不支持
-<!-- end id35 -->
-<!-- npu="5162A" id84274 -->
-- Hisilicon5162A：支持
-<!-- end id84274 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id14 -->
 
 ### 功能说明
@@ -905,12 +821,6 @@ aclError aclmdlRIUnbindStream(aclmdlRI modelRI, aclrtStream stream)
 <!-- npu="910" id727 -->
 - Atlas训练系列产品：支持
 <!-- end id727 -->
-<!-- npu="IPV350" id728 -->
-- IPV350：不支持
-<!-- end id728 -->
-<!-- npu="5162A" id84275 -->
-- Hisilicon5162A：支持
-<!-- end id84275 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id15 -->
 
 ### 功能说明
@@ -960,12 +870,6 @@ aclError aclmdlRIExecute(aclmdlRI modelRI, int32_t timeout)
 <!-- npu="910" id587 -->
 - Atlas训练系列产品：支持
 <!-- end id587 -->
-<!-- npu="IPV350" id588 -->
-- IPV350：不支持
-<!-- end id588 -->
-<!-- npu="5162A" id84276 -->
-- Hisilicon5162A：支持
-<!-- end id84276 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id16 -->
 
 ### 功能说明
@@ -1019,12 +923,6 @@ aclError aclmdlRIExecuteAsync(aclmdlRI modelRI, aclrtStream stream)
 <!-- npu="910" id2911 -->
 - Atlas训练系列产品：不支持
 <!-- end id2911 -->
-<!-- npu="IPV350" id2912 -->
-- IPV350：不支持
-<!-- end id2912 -->
-<!-- npu="5162A" id84277 -->
-- Hisilicon5162A：支持
-<!-- end id84277 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id17 -->
 
 ### 功能说明
@@ -1079,12 +977,6 @@ aclError aclmdlRIDestroy(aclmdlRI modelRI)
 <!-- npu="910" id104 -->
 - Atlas训练系列产品：支持
 <!-- end id104 -->
-<!-- npu="IPV350" id105 -->
-- IPV350：不支持
-<!-- end id105 -->
-<!-- npu="5162A" id84278 -->
-- Hisilicon5162A：支持
-<!-- end id84278 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id18 -->
 
 ### 功能说明
@@ -1133,12 +1025,6 @@ aclError aclmdlRISetName(aclmdlRI modelRI, const char *name)
 <!-- npu="910" id2176 -->
 - Atlas训练系列产品：支持
 <!-- end id2176 -->
-<!-- npu="IPV350" id2177 -->
-- IPV350：不支持
-<!-- end id2177 -->
-<!-- npu="5162A" id84279 -->
-- Hisilicon5162A：支持
-<!-- end id84279 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id19 -->
 
 ### 功能说明
@@ -1188,12 +1074,6 @@ aclError aclmdlRIGetName(aclmdlRI modelRI, uint32_t maxLen, char *name)
 <!-- npu="910" id2764 -->
 - Atlas训练系列产品：支持
 <!-- end id2764 -->
-<!-- npu="IPV350" id2765 -->
-- IPV350：不支持
-<!-- end id2765 -->
-<!-- npu="5162A" id84280 -->
-- Hisilicon5162A：支持
-<!-- end id84280 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id20 -->
 
 ### 功能说明
@@ -1246,12 +1126,6 @@ aclError aclmdlRIGetId(aclmdlRI modelRI, uint32_t *modelRIId)
 <!-- npu="910" id874 -->
 - Atlas训练系列产品：不支持
 <!-- end id874 -->
-<!-- npu="IPV350" id875 -->
-- IPV350：不支持
-<!-- end id875 -->
-<!-- npu="5162A" id84281 -->
-- Hisilicon5162A：不支持
-<!-- end id84281 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id21 -->
 
 ### 功能说明
@@ -1301,12 +1175,6 @@ aclError aclmdlRISetAttribute(aclmdlRI modelRI, aclrtModelAttr mdlAttrType, void
 <!-- npu="910" id8506 -->
 - Atlas训练系列产品：不支持
 <!-- end id8506 -->
-<!-- npu="IPV350" id8507 -->
-- IPV350：不支持
-<!-- end id8507 -->
-<!-- npu="5162A" id84282 -->
-- Hisilicon5162A：不支持
-<!-- end id84282 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id40 -->
 
 ### 功能说明
@@ -1362,12 +1230,6 @@ aclError aclrtCheckArchCompatibility(const char *socVersion, int32_t *canCompati
 <!-- npu="910" id2932 -->
 - Atlas训练系列产品：支持
 <!-- end id2932 -->
-<!-- npu="IPV350" id2933 -->
-- IPV350：不支持
-<!-- end id2933 -->
-<!-- npu="5162A" id84283 -->
-- Hisilicon5162A：不支持
-<!-- end id84283 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id22 -->
 
 ### 功能说明
@@ -1419,12 +1281,6 @@ aclError aclmdlRIAbort(aclmdlRI modelRI)
 <!-- npu="910" id2029 -->
 - Atlas训练系列产品：支持
 <!-- end id2029 -->
-<!-- npu="IPV350" id2030 -->
-- IPV350：不支持
-<!-- end id2030 -->
-<!-- npu="5162A" id84284 -->
-- Hisilicon5162A：不支持
-<!-- end id84284 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id23 -->
 
 ### 功能说明
@@ -1481,12 +1337,6 @@ aclError aclmdlRIGetStreams(aclmdlRI modelRI, aclrtStream *streams, uint32_t *nu
 <!-- npu="910" id2603 -->
 - Atlas训练系列产品：不支持
 <!-- end id2603 -->
-<!-- npu="IPV350" id2604 -->
-- IPV350：不支持
-<!-- end id2604 -->
-<!-- npu="5162A" id84285 -->
-- Hisilicon5162A：不支持
-<!-- end id84285 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id24 -->
 
 ### 功能说明
@@ -1544,12 +1394,6 @@ aclError aclmdlRIGetTasksByStream(aclrtStream stream, aclmdlRITask *tasks, uint3
 <!-- npu="910" id1721 -->
 - Atlas训练系列产品：不支持
 <!-- end id1721 -->
-<!-- npu="IPV350" id1722 -->
-- IPV350：不支持
-<!-- end id1722 -->
-<!-- npu="5162A" id84286 -->
-- Hisilicon5162A：不支持
-<!-- end id84286 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id25 -->
 
 ### 功能说明
@@ -1609,12 +1453,6 @@ aclError aclmdlRIGetTasks(aclmdlRI modelRI, aclmdlRITask *tasks, uint32_t *numTa
 <!-- npu="910" id84259 -->
 - Atlas训练系列产品：不支持
 <!-- end id84259 -->
-<!-- npu="IPV350" id84260 -->
-- IPV350：不支持
-<!-- end id84260 -->
-<!-- npu="5162A" id84287 -->
-- Hisilicon5162A：不支持
-<!-- end id84287 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id39 -->
 
 ### 功能说明
@@ -1674,12 +1512,6 @@ aclError aclmdlRITaskGetSeqId(aclmdlRITask task, uint32_t *id)
 <!-- npu="910" id776 -->
 - Atlas训练系列产品：不支持
 <!-- end id776 -->
-<!-- npu="IPV350" id777 -->
-- IPV350：不支持
-<!-- end id777 -->
-<!-- npu="5162A" id84288 -->
-- Hisilicon5162A：不支持
-<!-- end id84288 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id26 -->
 
 ### 功能说明
@@ -1737,12 +1569,6 @@ aclError aclmdlRITaskGetParams(aclmdlRITask task, aclmdlRITaskParams* params)
 <!-- npu="910" id2365 -->
 - Atlas训练系列产品：不支持
 <!-- end id2365 -->
-<!-- npu="IPV350" id2366 -->
-- IPV350：不支持
-<!-- end id2366 -->
-<!-- npu="5162A" id84289 -->
-- Hisilicon5162A：不支持
-<!-- end id84289 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id27 -->
 
 ### 功能说明
@@ -1802,12 +1628,6 @@ aclError aclmdlRITaskSetParams(aclmdlRITask task, aclmdlRITaskParams* params)
 <!-- npu="910" id153 -->
 - Atlas训练系列产品：不支持
 <!-- end id153 -->
-<!-- npu="IPV350" id154 -->
-- IPV350：不支持
-<!-- end id154 -->
-<!-- npu="5162A" id84290 -->
-- Hisilicon5162A：不支持
-<!-- end id84290 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id28 -->
 
 ### 功能说明
@@ -1867,12 +1687,6 @@ aclError aclmdlRIKernelTaskGetAttribute(aclmdlRITask task, aclrtLaunchKernelAttr
 <!-- npu="910" id1021 -->
 - Atlas训练系列产品：不支持
 <!-- end id1021 -->
-<!-- npu="IPV350" id1022 -->
-- IPV350：不支持
-<!-- end id1022 -->
-<!-- npu="5162A" id84291 -->
-- Hisilicon5162A：不支持
-<!-- end id84291 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id29 -->
 
 ### 功能说明
@@ -1931,12 +1745,6 @@ aclError aclmdlRITaskDisable(aclmdlRITask task)
 <!-- npu="910" id510 -->
 - Atlas训练系列产品：不支持
 <!-- end id510 -->
-<!-- npu="IPV350" id511 -->
-- IPV350：不支持
-<!-- end id511 -->
-<!-- npu="5162A" id84292 -->
-- Hisilicon5162A：不支持
-<!-- end id84292 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id30 -->
 
 ### 功能说明
@@ -1994,12 +1802,6 @@ aclError aclmdlRIUpdate(aclmdlRI modelRI)
 <!-- npu="910" id1189 -->
 - Atlas训练系列产品：不支持
 <!-- end id1189 -->
-<!-- npu="IPV350" id1190 -->
-- IPV350：不支持
-<!-- end id1190 -->
-<!-- npu="5162A" id84293 -->
-- Hisilicon5162A：不支持
-<!-- end id84293 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id31 -->
 
 ### 功能说明
@@ -2055,12 +1857,6 @@ aclError aclmdlRITaskGetType(aclmdlRITask task, aclmdlRITaskType *type)
 <!-- npu="910" id1224 -->
 - Atlas训练系列产品：不支持
 <!-- end id1224 -->
-<!-- npu="IPV350" id1225 -->
-- IPV350：不支持
-<!-- end id1225 -->
-<!-- npu="5162A" id84294 -->
-- Hisilicon5162A：不支持
-<!-- end id84294 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id32 -->
 
 ### 功能说明
@@ -2114,12 +1910,6 @@ aclError aclmdlRIDestroyRegisterCallback(aclmdlRI modelRI, aclrtCallback func, v
 <!-- npu="910" id1875 -->
 - Atlas训练系列产品：支持
 <!-- end id1875 -->
-<!-- npu="IPV350" id1876 -->
-- IPV350：不支持
-<!-- end id1876 -->
-<!-- npu="5162A" id84295 -->
-- Hisilicon5162A：不支持
-<!-- end id84295 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id33 -->
 
 ### 功能说明
@@ -2172,12 +1962,6 @@ aclError aclmdlRIDestroyUnregisterCallback(aclmdlRI modelRI, aclrtCallback func)
 <!-- npu="910" id2883 -->
 - Atlas训练系列产品：支持
 <!-- end id2883 -->
-<!-- npu="IPV350" id2884 -->
-- IPV350：不支持
-<!-- end id2884 -->
-<!-- npu="5162A" id84296 -->
-- Hisilicon5162A：不支持
-<!-- end id84296 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id34 -->
 
 ### 功能说明
@@ -2229,12 +2013,6 @@ aclError aclmdlRICondHandleCreate(aclmdlRI modelRI, uint32_t defaultLaunchValue,
 <!-- npu="910" id139 -->
 - Atlas训练系列产品：不支持
 <!-- end id139 -->
-<!-- npu="IPV350" id140 -->
-- IPV350：不支持
-<!-- end id140 -->
-<!-- npu="5162A" id84297 -->
-- Hisilicon5162A：不支持
-<!-- end id84297 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id35 -->
 
 ### 功能说明
@@ -2290,12 +2068,6 @@ aclError aclmdlRICondHandleGetCondPtr(aclmdlRICondHandle handle, uint64_t **ptr)
 <!-- npu="910" id741 -->
 - Atlas训练系列产品：不支持
 <!-- end id741 -->
-<!-- npu="IPV350" id742 -->
-- IPV350：不支持
-<!-- end id742 -->
-<!-- npu="5162A" id84298 -->
-- Hisilicon5162A：不支持
-<!-- end id84298 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id36 -->
 
 ### 功能说明
@@ -2349,12 +2121,6 @@ aclError aclmdlRIAddCondTask(aclmdlRICondTaskParams params, aclrtStream stream, 
 <!-- npu="910" id2694 -->
 - Atlas训练系列产品：不支持
 <!-- end id2694 -->
-<!-- npu="IPV350" id2695 -->
-- IPV350：不支持
-<!-- end id2695 -->
-<!-- npu="5162A" id84299 -->
-- Hisilicon5162A：不支持
-<!-- end id84299 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id37 -->
 
 ### 功能说明
@@ -2423,12 +2189,6 @@ aclError aclmdlRICaptureToModelRIBegin(aclrtStream stream, aclmdlRI modelRI, acl
 <!-- npu="910" id3317 -->
 - Atlas训练系列产品：不支持
 <!-- end id3317 -->
-<!-- npu="IPV350" id3318 -->
-- IPV350：不支持
-<!-- end id3318 -->
-<!-- npu="5162A" id84300 -->
-- Hisilicon5162A：不支持
-<!-- end id84300 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id38 -->
 
 ### 功能说明
@@ -2493,12 +2253,6 @@ aclError aclmdlRITaskGetEnabled(aclmdlRITask task, uint32_t *isEnabled)
 <!-- npu="910" id84306 -->
 - Atlas训练系列产品：不支持
 <!-- end id84306 -->
-<!-- npu="IPV350" id84307 -->
-- IPV350：不支持
-<!-- end id84307 -->
-<!-- npu="5162A" id84308 -->
-- Hisilicon5162A：不支持
-<!-- end id84308 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/15_model_running_instance_management_res.md#id42 -->
 
 ### 功能说明

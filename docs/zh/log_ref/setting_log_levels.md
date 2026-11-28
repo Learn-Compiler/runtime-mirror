@@ -20,7 +20,7 @@
 
 调试日志默认为ERROR级别，且支持调整日志级别；安全日志默认为DEBUG级别，运行日志默认为INFO级别，且均不支持调整日志级别。
 
-下面介绍设置日志级别的具体方法，相关环境变量的具体说明请参考《[环境变量参考](https://gitcode.com/cann/docs/blob/master/docs/zh/env-vars/README.md)》。
+下面介绍设置日志级别的具体方法，相关环境变量的具体说明请参考《[环境变量参考](https://gitcode.com/cann/docs/blob/9.3.0/docs/zh/env-vars/README.md)》。
 
 ## 设置应用类日志级别
 

@@ -56,12 +56,6 @@ aclError aclrtSnapShotProcessLock(int pid, void* reserve)
 <!-- npu="910" id1644 -->
 - Atlas训练系列产品：不支持
 <!-- end id1644 -->
-<!-- npu="IPV350" id1645 -->
-- IPV350：不支持
-<!-- end id1645 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id1 -->
 
 ### 功能说明
@@ -116,12 +110,6 @@ aclError aclrtSnapShotProcessBackup(int pid, aclrtSnapShotBackupArgs *args)
 <!-- npu="910" id1385 -->
 - Atlas训练系列产品：不支持
 <!-- end id1385 -->
-<!-- npu="IPV350" id1386 -->
-- IPV350：不支持
-<!-- end id1386 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：不支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id2 -->
 
 ### 功能说明
@@ -135,7 +123,7 @@ aclError aclrtSnapShotProcessBackup(int pid, aclrtSnapShotBackupArgs *args)
 | 参数名 | 输入/输出 | 说明 |
 | --- | :---: | --- |
 | pid | 输入 | 目标进程ID，必须大于0。支持本进程及满足本章跨进程调用约束的其他进程。 |
-| args | 输入 | 备份配置参数，类型为[aclrtSnapShotBackupArgs](25-04_Structs.md#aclrtSnapShotBackupArgs)。传入NULL时走旧Runtime备份流程；传入非NULL时走驱动Device内存快照流程，并要求驱动支持Device内存快照能力。 |
+| args | 输入 | 备份配置参数，类型为[aclrtSnapShotBackupArgs](25-04_Structs.md#aclrtSnapShotBackupArgs)。 |
 
 ### 返回值说明
 
@@ -176,12 +164,6 @@ aclError aclrtSnapShotProcessRestore(int pid, aclrtSnapShotRestoreArgs *args)
 <!-- npu="910" id3135 -->
 - Atlas训练系列产品：不支持
 <!-- end id3135 -->
-<!-- npu="IPV350" id3136 -->
-- IPV350：不支持
-<!-- end id3136 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：不支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id3 -->
 
 ### 功能说明
@@ -195,7 +177,7 @@ aclError aclrtSnapShotProcessRestore(int pid, aclrtSnapShotRestoreArgs *args)
 | 参数名 | 输入/输出 | 说明 |
 | --- | :---: | --- |
 | pid | 输入 | 目标进程ID，必须大于0。支持本进程及满足本章跨进程调用约束的其他进程。 |
-| args | 输入 | 恢复配置参数，类型为[aclrtSnapShotRestoreArgs](25-04_Structs.md#aclrtSnapShotRestoreArgs)。传入NULL时走旧Runtime恢复流程；传入非NULL时走驱动Device内存快照流程，并要求驱动支持Device内存快照能力。 |
+| args | 输入 | 恢复配置参数，类型为[aclrtSnapShotRestoreArgs](25-04_Structs.md#aclrtSnapShotRestoreArgs)。 |
 
 ### 返回值说明
 
@@ -203,7 +185,9 @@ aclError aclrtSnapShotProcessRestore(int pid, aclrtSnapShotRestoreArgs *args)
 
 ### 约束说明
 
-恢复和备份需要在同一个Device上（指Device ID相同）。恢复时，若Device被其他进程占用，则恢复失败。`args`传入非NULL时，恢复前会先检查驱动Device内存快照能力，再检查备份版本信息：Runtime 使用的 HAL API 版本、驱动 API 版本必须分别与备份时一致。版本校验通过后，继续重新打开 Device。备份版本信息无效或版本不匹配时，返回 `ACL_ERROR_SNAPSHOT_RESTORE_FAILED`（507909）；版本查询失败时，返回对应错误。`args`传入NULL时，走旧Runtime恢复流程，不执行上述Device内存快照兼容性和版本一致性检查。
+- 恢复和备份需要在同一个Device上（指Device ID相同）。恢复时，若Device被其他进程占用，则恢复失败。
+
+- args传入非NULL时，恢复前Runtime会先检查驱动是否具备Device内存快照能力，再检查备份版本信息。备份版本信息无效、版本不匹配或查询失败时，会返回错误；args传入NULL时，不执行上述检查。
 
 <br>
 <br>
@@ -240,12 +224,6 @@ aclError aclrtSnapShotProcessUnlock(int pid, void* reserve)
 <!-- npu="910" id2827 -->
 - Atlas训练系列产品：不支持
 <!-- end id2827 -->
-<!-- npu="IPV350" id2828 -->
-- IPV350：不支持
-<!-- end id2828 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：不支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id4 -->
 
 ### 功能说明
@@ -300,12 +278,6 @@ aclError aclrtSnapShotCallbackRegister(aclrtSnapShotStage stage, aclrtSnapShotCa
 <!-- npu="910" id2771 -->
 - Atlas训练系列产品：不支持
 <!-- end id2771 -->
-<!-- npu="IPV350" id2772 -->
-- IPV350：不支持
-<!-- end id2772 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id5 -->
 
 ### 功能说明
@@ -364,12 +336,6 @@ aclError aclrtSnapShotCallbackUnregister(aclrtSnapShotStage stage, aclrtSnapShot
 <!-- npu="910" id1777 -->
 - Atlas训练系列产品：不支持
 <!-- end id1777 -->
-<!-- npu="IPV350" id1778 -->
-- IPV350：不支持
-<!-- end id1778 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：不支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id6 -->
 
 ### 功能说明
@@ -422,12 +388,6 @@ aclError aclrtSnapshotProcessGetState(int pid, aclrtProcessState* state)
 <!-- npu="910" id1784 -->
 - Atlas训练系列产品：不支持
 <!-- end id1784 -->
-<!-- npu="IPV350" id1785 -->
-- IPV350：不支持
-<!-- end id1785 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id7 -->
 
 ### 功能说明
@@ -488,12 +448,6 @@ aclError aclrtSnapshotProcessGetRestoreThreadId(int pid, int* tid)
 <!-- npu="910" id1791 -->
 - Atlas训练系列产品：不支持
 <!-- end id1791 -->
-<!-- npu="IPV350" id1792 -->
-- IPV350：不支持
-<!-- end id1792 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/21_snapshot_management_res.md#id8 -->
 
 ### 功能说明

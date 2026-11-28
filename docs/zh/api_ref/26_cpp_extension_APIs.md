@@ -65,12 +65,6 @@ aclError aclrtSynchronizeDevice(int32_t timeout)
 <!-- npu="910" id1210 -->
 - Atlas训练系列产品：支持
 <!-- end id1210 -->
-<!-- npu="IPV350" id1211 -->
-- IPV350：不支持
-<!-- end id1211 -->
-<!-- npu="5162A" id5001 -->
-- Hisilicon5162A：不支持
-<!-- end id5001 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id1 -->
 
 ### 功能说明
@@ -121,9 +115,6 @@ aclError aclrtSynchronizeStream(aclrtStream stream, int32_t timeout)
 <!-- npu="910" id2225 -->
 - Atlas训练系列产品：支持
 <!-- end id2225 -->
-<!-- npu="IPV350" id2226 -->
-- IPV350：不支持
-<!-- end id2226 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id2 -->
 
 ### 功能说明
@@ -175,12 +166,6 @@ aclError aclrtSynchronizeEvent(aclrtEvent event, int32_t timeout)
 <!-- npu="910" id3429 -->
 - Atlas训练系列产品：支持
 <!-- end id3429 -->
-<!-- npu="IPV350" id3430 -->
-- IPV350：不支持
-<!-- end id3430 -->
-<!-- npu="5162A" id5002 -->
-- Hisilicon5162A：支持
-<!-- end id5002 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id3 -->
 
 ### 功能说明
@@ -234,12 +219,6 @@ aclError aclrtStreamWaitEvent(aclrtStream stream, aclrtEvent event, int32_t time
 <!-- npu="910" id685 -->
 - Atlas训练系列产品：支持
 <!-- end id685 -->
-<!-- npu="IPV350" id686 -->
-- IPV350：不支持
-<!-- end id686 -->
-<!-- npu="5162A" id5003 -->
-- Hisilicon5162A：支持
-<!-- end id5003 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id4 -->
 
 ### 功能说明
@@ -292,12 +271,6 @@ aclError aclrtCreateStream(aclrtStream *stream, uint32_t priority, uint32_t flag
 <!-- npu="910" id629 -->
 - Atlas训练系列产品：支持
 <!-- end id629 -->
-<!-- npu="IPV350" id630 -->
-- IPV350：不支持
-<!-- end id630 -->
-<!-- npu="5162A" id5004 -->
-- Hisilicon5162A：支持
-<!-- end id5004 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id5 -->
 
 ### 功能说明
@@ -350,12 +323,6 @@ aclError aclrtSetOpExecuteTimeOut(uint64_t timeout, uint64_t *actualTimeout)
 <!-- npu="910" id2323 -->
 - Atlas训练系列产品：支持
 <!-- end id2323 -->
-<!-- npu="IPV350" id2324 -->
-- IPV350：不支持
-<!-- end id2324 -->
-<!-- npu="5162A" id5005 -->
-- Hisilicon5162A：不支持
-<!-- end id5005 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id6 -->
 
 ### 功能说明
@@ -411,12 +378,6 @@ aclError aclrtCreateEvent(aclrtEvent *event, uint32_t flag)
 <!-- npu="910" id1511 -->
 - Atlas训练系列产品：支持
 <!-- end id1511 -->
-<!-- npu="IPV350" id1512 -->
-- IPV350：不支持
-<!-- end id1512 -->
-<!-- npu="5162A" id5006 -->
-- Hisilicon5162A：支持
-<!-- end id5006 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id7 -->
 
 ### 功能说明
@@ -476,12 +437,6 @@ aclError aclrtMemcpyBatch(T **dsts, size_t *destMaxs, U **srcs, size_t *sizes, s
 <!-- npu="910" id209 -->
 - Atlas训练系列产品：不支持
 <!-- end id209 -->
-<!-- npu="IPV350" id210 -->
-- IPV350：不支持
-<!-- end id210 -->
-<!-- npu="5162A" id5007 -->
-- Hisilicon5162A：不支持
-<!-- end id5007 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id8 -->
 
 ### 功能说明
@@ -556,12 +511,6 @@ aclError aclrtMemcpyBatchAsync(T **dsts, size_t *destMaxs, U **srcs, size_t *siz
 <!-- npu="910" id1161 -->
 - Atlas训练系列产品：不支持
 <!-- end id1161 -->
-<!-- npu="IPV350" id1162 -->
-- IPV350：不支持
-<!-- end id1162 -->
-<!-- npu="5162A" id5008 -->
-- Hisilicon5162A：不支持
-<!-- end id5008 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id9 -->
 
 ### 功能说明
@@ -629,12 +578,6 @@ aclError aclrtPointerGetAttributes(const T *ptr, aclrtPtrAttributes *attributes)
 <!-- npu="910" id2946 -->
 - Atlas训练系列产品：支持
 <!-- end id2946 -->
-<!-- npu="IPV350" id2947 -->
-- IPV350：不支持
-<!-- end id2947 -->
-<!-- npu="5162A" id5009 -->
-- Hisilicon5162A：支持
-<!-- end id5009 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id10 -->
 
 ### 功能说明
@@ -690,12 +633,6 @@ aclError aclrtHostRegister(T *ptr, uint64_t size, uint32_t flag)
 <!-- npu="910" id713 -->
 - Atlas训练系列产品：不支持
 <!-- end id713 -->
-<!-- npu="IPV350" id714 -->
-- IPV350：不支持
-<!-- end id714 -->
-<!-- npu="5162A" id5010 -->
-- Hisilicon5162A：不支持
-<!-- end id5010 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id11 -->
 
 ### 功能说明
@@ -751,12 +688,6 @@ aclError aclrtHostGetDevicePointer(T *pHost, T **pDevice, uint32_t flag)
 <!-- npu="910" id174 -->
 - Atlas训练系列产品：不支持
 <!-- end id174 -->
-<!-- npu="IPV350" id175 -->
-- IPV350：不支持
-<!-- end id175 -->
-<!-- npu="5162A" id5011 -->
-- Hisilicon5162A：不支持
-<!-- end id5011 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id12 -->
 
 ### 功能说明
@@ -810,12 +741,6 @@ aclError aclrtHostUnregister(T *ptr)
 <!-- npu="910" id853 -->
 - Atlas训练系列产品：不支持
 <!-- end id853 -->
-<!-- npu="IPV350" id854 -->
-- IPV350：不支持
-<!-- end id854 -->
-<!-- npu="5162A" id5012 -->
-- Hisilicon5162A：不支持
-<!-- end id5012 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id13 -->
 
 ### 功能说明
@@ -869,12 +794,6 @@ aclError aclrtMemAllocManaged(T **devPtr, size_t size, uint32_t flags = ACL_RT_M
 <!-- npu="910" id3422 -->
 - Atlas训练系列产品：不支持
 <!-- end id3422 -->
-<!-- npu="IPV350" id3423 -->
-- IPV350：不支持
-<!-- end id3423 -->
-<!-- npu="5162A" id5013 -->
-- Hisilicon5162A：不支持
-<!-- end id5013 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id14 -->
 
 ### 功能说明
@@ -932,12 +851,6 @@ aclError aclrtMemManagedPrefetchAsync(const T *ptr, size_t size, aclrtMemManaged
 <!-- npu="910" id2477 -->
 - Atlas训练系列产品：不支持
 <!-- end id2477 -->
-<!-- npu="IPV350" id2478 -->
-- IPV350：不支持
-<!-- end id2478 -->
-<!-- npu="5162A" id5014 -->
-- Hisilicon5162A：不支持
-<!-- end id5014 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id15 -->
 
 ### 功能说明
@@ -998,12 +911,6 @@ aclError aclrtMemManagedPrefetchBatchAsync(const T **ptrs, size_t *sizes, size_t
 <!-- npu="910" id3303 -->
 - Atlas训练系列产品：不支持
 <!-- end id3303 -->
-<!-- npu="IPV350" id3304 -->
-- IPV350：不支持
-<!-- end id3304 -->
-<!-- npu="5162A" id5015 -->
-- Hisilicon5162A：不支持
-<!-- end id5015 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id16 -->
 
 ### 功能说明
@@ -1072,12 +979,6 @@ aclError aclrtMalloc(T **devPtr, size_t size, aclrtMemMallocPolicy policy, aclrt
 <!-- npu="910" id1833 -->
 - Atlas训练系列产品：支持
 <!-- end id1833 -->
-<!-- npu="IPV350" id1834 -->
-- IPV350：支持
-<!-- end id1834 -->
-<!-- npu="5162A" id5016 -->
-- Hisilicon5162A：支持
-<!-- end id5016 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id17 -->
 
 ### 功能说明
@@ -1134,12 +1035,6 @@ aclError aclrtMallocHost(T **hostPtr, size_t size, aclrtMallocConfig *cfg = null
 <!-- npu="910" id2526 -->
 - Atlas训练系列产品：支持
 <!-- end id2526 -->
-<!-- npu="IPV350" id2527 -->
-- IPV350：不支持
-<!-- end id2527 -->
-<!-- npu="5162A" id5017 -->
-- Hisilicon5162A：不支持
-<!-- end id5017 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id18 -->
 
 ### 功能说明
@@ -1195,12 +1090,6 @@ aclError aclrtMemcpy(T *dst, size_t destMax, const U *src, size_t count, aclrtMe
 <!-- npu="910" id1637 -->
 - Atlas训练系列产品：支持
 <!-- end id1637 -->
-<!-- npu="IPV350" id1638 -->
-- IPV350：支持
-<!-- end id1638 -->
-<!-- npu="5162A" id5018 -->
-- Hisilicon5162A：支持
-<!-- end id5018 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id19 -->
 
 ### 功能说明
@@ -1260,12 +1149,6 @@ aclError aclrtMemcpyAsync(T *dst, size_t destMax, const U *src, size_t count, ac
 <!-- npu="910" id3226 -->
 - Atlas训练系列产品：支持
 <!-- end id3226 -->
-<!-- npu="IPV350" id3227 -->
-- IPV350：不支持
-<!-- end id3227 -->
-<!-- npu="5162A" id5019 -->
-- Hisilicon5162A：支持
-<!-- end id5019 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id20 -->
 
 ### 功能说明
@@ -1328,12 +1211,6 @@ aclError aclrtMemcpy2d(T *dst, size_t dpitch, const U *src, size_t spitch, size_
 <!-- npu="910" id2358 -->
 - Atlas训练系列产品：支持
 <!-- end id2358 -->
-<!-- npu="IPV350" id2359 -->
-- IPV350：不支持
-<!-- end id2359 -->
-<!-- npu="5162A" id5020 -->
-- Hisilicon5162A：不支持
-<!-- end id5020 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id21 -->
 
 ### 功能说明
@@ -1351,7 +1228,7 @@ aclError aclrtMemcpy2d(T *dst, size_t dpitch, const U *src, size_t spitch, size_
 | src | 输入 | 源内存地址指针。 |
 | spitch | 输入 | 源内存中相邻两行数据的地址距离。 |
 | width | 输入 | 待复制的数据宽度。<br>取值不能超过5000000，且必须小于或等于dpitch和spitch。 |
-| height | 输入 | 待复制的数据高度。<br>取值不能超过5242880（即5 * 1024 * 1024）。 |
+| height | 输入 | 待复制的数据高度。<br>取值不能超过5242880（即5 *1024* 1024）。 |
 | kind | 输入 | 内存复制的类型。类型定义请参见[aclrtMemcpyKind](25-02_Enumerations.md#aclrtMemcpyKind)。 |
 
 ### 返回值说明
@@ -1395,12 +1272,6 @@ aclError aclrtMemcpy2dAsync(T *dst, size_t dpitch, const U *src, size_t spitch, 
 <!-- npu="910" id2722 -->
 - Atlas训练系列产品：支持
 <!-- end id2722 -->
-<!-- npu="IPV350" id2723 -->
-- IPV350：不支持
-<!-- end id2723 -->
-<!-- npu="5162A" id5021 -->
-- Hisilicon5162A：不支持
-<!-- end id5021 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id22 -->
 
 ### 功能说明
@@ -1465,12 +1336,6 @@ aclError aclrtGetSymbolAddress(const T &symbol, void **devPtr)
 <!-- npu="910" id1322 -->
 - Atlas训练系列产品：不支持
 <!-- end id1322 -->
-<!-- npu="IPV350" id1323 -->
-- IPV350：不支持
-<!-- end id1323 -->
-<!-- npu="5162A" id5022 -->
-- Hisilicon5162A：不支持
-<!-- end id5022 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id23 -->
 
 ### 功能说明
@@ -1533,12 +1398,6 @@ aclError aclrtGetSymbolSize(const T &symbol, size_t *size)
 <!-- npu="910" id2330 -->
 - Atlas训练系列产品：不支持
 <!-- end id2330 -->
-<!-- npu="IPV350" id2331 -->
-- IPV350：不支持
-<!-- end id2331 -->
-<!-- npu="5162A" id5023 -->
-- Hisilicon5162A：不支持
-<!-- end id5023 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id24 -->
 
 ### 功能说明
@@ -1596,12 +1455,6 @@ aclError aclrtMemcpyFromSymbol(void *dst, size_t dstMax, const T &symbol, size_t
 <!-- npu="910" id1917 -->
 - Atlas训练系列产品：不支持
 <!-- end id1917 -->
-<!-- npu="IPV350" id1918 -->
-- IPV350：不支持
-<!-- end id1918 -->
-<!-- npu="5162A" id5024 -->
-- Hisilicon5162A：不支持
-<!-- end id5024 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id25 -->
 
 ### 功能说明
@@ -1663,12 +1516,6 @@ aclError aclrtMemcpyFromSymbolAsync(void *dst, size_t dstMax, const T &symbol, s
 <!-- npu="910" id2743 -->
 - Atlas训练系列产品：不支持
 <!-- end id2743 -->
-<!-- npu="IPV350" id2744 -->
-- IPV350：不支持
-<!-- end id2744 -->
-<!-- npu="5162A" id5025 -->
-- Hisilicon5162A：不支持
-<!-- end id5025 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id26 -->
 
 ### 功能说明
@@ -1733,12 +1580,6 @@ aclError aclrtMemcpyToSymbol(const T &symbol, const void *src, size_t count, siz
 <!-- npu="910" id3296 -->
 - Atlas训练系列产品：不支持
 <!-- end id3296 -->
-<!-- npu="IPV350" id3297 -->
-- IPV350：不支持
-<!-- end id3297 -->
-<!-- npu="5162A" id5026 -->
-- Hisilicon5162A：不支持
-<!-- end id5026 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id27 -->
 
 ### 功能说明
@@ -1799,12 +1640,6 @@ aclError aclrtMemcpyToSymbolAsync(const T &symbol, const void *src, size_t count
 <!-- npu="910" id3471 -->
 - Atlas训练系列产品：不支持
 <!-- end id3471 -->
-<!-- npu="IPV350" id3472 -->
-- IPV350：不支持
-<!-- end id3472 -->
-<!-- npu="5162A" id5027 -->
-- Hisilicon5162A：不支持
-<!-- end id5027 -->
 <!-- @ref: runtime/res/docs/zh/api_ref/26_cpp_extension_APIs_res.md#id28 -->
 
 ### 功能说明

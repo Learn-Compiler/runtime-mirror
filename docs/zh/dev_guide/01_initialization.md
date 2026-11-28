@@ -10,7 +10,7 @@
 以下是初始化及指定计算设备的代码示例，不可以直接拷贝编译运行，仅供参考。
 
 <!-- npu="950,A3,910b,910,310p,310b" id1 -->
-完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/master/example/1_basic_features/device/0_device_normal)。
+完整样例代码请参见[Link](https://gitcode.com/cann/runtime/tree/9.3.0/example/1_basic_features/device/0_device_normal)。
 <!-- end id1 -->
 
 ```c
