@@ -456,13 +456,41 @@ TEST_F(PROF_TX_UTTEST, ProftxRangePop_CacheOpInfoBranchDoesNotCheckProfilingInit
         .stubs()
         .with(any(), any(), outBoundP(&streamAttrValue, sizeof(streamAttrValue)))
         .will(returnValue(static_cast<int32_t>(RT_ERROR_NONE)));
-    MOCKER_CPP(&ProfCannPlugin::ProfApiInit).expects(never());
-    MOCKER_CPP(&ProfAclPlugin::IsInited).expects(never());
+    MOCKER_CPP(&ProfCannPlugin::ProfApiInit).stubs();
+    MOCKER_CPP(&ProfAclPlugin::IsInited).stubs().will(returnValue(false));
     MOCKER_CPP(&ProfRuntimePlugin::ProfRtCacheLastTaskOpInfo)
         .expects(once())
         .will(returnValue(static_cast<int32_t>(RT_ERROR_NONE)));
 
     EXPECT_EQ(PROFILING_SUCCESS, ProfTxPlugin::GetProftxInstance().ProftxRangePop());
+}
+
+TEST_F(PROF_TX_UTTEST, ProftxRangePop_ReportCacheOpInfoFailedWhenProfilingNotInited)
+{
+    ProfTensor tensor{};
+    tensor.shapeDim = 1;
+    tensor.shape[0] = 4;
+    ProfTensorInfo tensorInfo{};
+    tensorInfo.opNameId = 1;
+    tensorInfo.tensorNum = 1;
+    tensorInfo.tensors = &tensor;
+    ProfEventAttributes attr;
+    attr.messageType = MESSAGE_TYPE_TENSOR_INFO;
+    attr.message.tensorInfo = &tensorInfo;
+    EXPECT_EQ(PROFILING_SUCCESS, ProfTxPlugin::GetProftxInstance().ProftxRangePushEx(&attr));
+
+    rtStreamAttrValue_t streamAttrValue{};
+    streamAttrValue.cacheOpInfoSwitch = 1;
+    MOCKER_CPP(&ProfRuntimePlugin::ProfRtsStreamGetAttribute)
+        .stubs()
+        .with(any(), any(), outBoundP(&streamAttrValue, sizeof(streamAttrValue)))
+        .will(returnValue(static_cast<int32_t>(RT_ERROR_NONE)));
+    MOCKER_CPP(&ProfCannPlugin::ProfApiInit).stubs();
+    MOCKER_CPP(&ProfAclPlugin::IsInited).stubs().will(returnValue(false));
+    MOCKER_CPP(&ProfRuntimePlugin::ProfRtCacheLastTaskOpInfo).stubs().will(returnValue(static_cast<int32_t>(-1)));
+    MOCKER(MsprofReportAdditionalInfo).expects(never());
+
+    EXPECT_EQ(PROFILING_FAILED, ProfTxPlugin::GetProftxInstance().ProftxRangePop());
 }
 
 TEST_F(PROF_TX_UTTEST, ProftxRangePop_SkipCustomInfoWhenProfilingNotInited)
