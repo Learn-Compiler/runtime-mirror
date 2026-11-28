@@ -64,6 +64,7 @@
 #include "api_impl_rt_config.hpp"
 #include "inner_thread_local.hpp"
 #include "api_impl_device_topology.hpp"
+#include "api_impl_creator.hpp"
 #include "api_impl_kernel_args.hpp"
 #include "api_impl_ipc_memory.hpp"
 #include "thread_local_container.hpp"
@@ -1171,6 +1172,75 @@ TEST_F(ApiImplTest, ApiImplDeviceTopologyInvalidParam)
     EXPECT_EQ(apiImpl.GetPairDevicesInfo(0U, 1U, DEVS_INFO_TYPE_TOPOLOGY, nullptr), RT_ERROR_INVALID_VALUE);
     EXPECT_EQ(apiImpl.GetPairPhyDevicesInfo(0U, 1U, DEVS_INFO_TYPE_TOPOLOGY, nullptr), RT_ERROR_INVALID_VALUE);
     EXPECT_EQ(pairInfo, 0);
+}
+
+TEST_F(ApiImplTest, ApiImplDeviceTopologyCreateLogsAllocationBytes)
+{
+    MOCKER(CheckLogLevel).stubs().will(returnValue(1));
+    ClearLastDlogRecordLine();
+
+    ApiDeviceTopology* topology = CreateImplDeviceTopologyAndGet();
+    EXPECT_NE(topology, nullptr);
+    EXPECT_TRUE(DlogRecordContains(
+        RtFmtMsg("ApiImplDeviceTopology:Runtime_alloc_size %zu bytes.", sizeof(ApiImplDeviceTopology))));
+
+    DestroyImplDeviceTopology(topology);
+    EXPECT_EQ(topology, nullptr);
+}
+
+class ApiImplAtomicPropertiesFailureTest : public ApiImplTest, public testing::WithParamInterface<bool> {};
+
+TEST_P(ApiImplAtomicPropertiesFailureTest, ClearsCapabilitiesAndLogsChipTypeAndError)
+{
+    ApiImplDeviceTopology apiImpl;
+    const rtChipType_t chipType = Runtime::Instance()->GetChipType();
+    const rtAtomicOperation operations[] = {RT_ATOMIC_OPERATION_INTEGER_ADD, RT_ATOMIC_OPERATION_INTEGER_MAX};
+    uint32_t capabilities[] = {UINT32_MAX, UINT32_MAX};
+    MOCKER_CPP(&DevInfoManage::GetDevProperties)
+        .expects(once())
+        .with(eq(chipType), mockcpp::any())
+        .will(returnValue(RT_ERROR_INVALID_VALUE));
+    ClearLastDlogRecordLine();
+
+    const rtError_t error = GetParam() ? apiImpl.GetP2PAtomicCapabilities(capabilities, operations, 2U, 0, 1) :
+                                         apiImpl.GetHostAtomicCapabilities(capabilities, operations, 2U, 0);
+
+    EXPECT_EQ(error, RT_ERROR_INVALID_VALUE);
+    EXPECT_EQ(capabilities[0], 0U);
+    EXPECT_EQ(capabilities[1], 0U);
+    EXPECT_TRUE(DlogRecordContains(RtFmtMsg(
+        "Failed to get device properties, chipType=%d, retCode=%#x.", static_cast<int32_t>(chipType),
+        static_cast<uint32_t>(RT_ERROR_INVALID_VALUE))));
+}
+
+INSTANTIATE_TEST_SUITE_P(HostAndPeer, ApiImplAtomicPropertiesFailureTest, testing::Bool());
+
+TEST_F(ApiImplTest, DeviceCanAccessPeerContextFailurePreservesOutputAndLogsDeviceId)
+{
+    ApiImplDeviceTopology apiImpl;
+    int32_t canAccessPeer = -1;
+    MOCKER_CPP(&DevInfoManage::IsSupportChipFeature).stubs().will(returnValue(true));
+    MOCKER(NpuDriver::RtGetRunMode).stubs().will(returnValue(static_cast<uint32_t>(RT_RUN_MODE_ONLINE)));
+    MOCKER_CPP(&Runtime::CheckCurCtxValid).expects(once()).with(eq(0)).will(returnValue(RT_ERROR_CONTEXT_NULL));
+    MOCKER(NpuDriver::DeviceCanAccessPeer).expects(never());
+    ClearLastDlogRecordLine();
+
+    EXPECT_EQ(apiImpl.DeviceCanAccessPeer(&canAccessPeer, 0U, 1U), RT_ERROR_CONTEXT_NULL);
+    EXPECT_EQ(canAccessPeer, -1);
+    EXPECT_TRUE(DlogRecordContains("Current Context is null, drv devId[0]."));
+}
+
+TEST_F(ApiImplTest, GetP2PStatusContextFailurePreservesOutputAndLogsDeviceId)
+{
+    ApiImplDeviceTopology apiImpl;
+    uint32_t status = UINT32_MAX;
+    MOCKER_CPP(&Runtime::CheckCurCtxValid).expects(once()).with(eq(0)).will(returnValue(RT_ERROR_CONTEXT_NULL));
+    MOCKER(NpuDriver::GetP2PStatus).expects(never());
+    ClearLastDlogRecordLine();
+
+    EXPECT_EQ(apiImpl.GetP2PStatus(0U, 1U, &status), RT_ERROR_CONTEXT_NULL);
+    EXPECT_EQ(status, UINT32_MAX);
+    EXPECT_TRUE(DlogRecordContains("Current Context is null, drv devId[0]."));
 }
 
 TEST_F(ApiImplTest, ApiImplDeviceTopologyDeviceIdConvertFailed)

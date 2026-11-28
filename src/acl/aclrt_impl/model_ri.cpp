@@ -9,6 +9,7 @@
  */
 
 #include <mutex>
+#include <string>
 #include "acl_rt_impl.h"
 #include "runtime/rt_model.h"
 #include "runtime/stream.h"
@@ -319,8 +320,11 @@ aclError aclmdlRISetAttributeImpl(aclmdlRI modelRI, aclrtModelAttr mdlAttrType, 
             break;
         }
         default: {
-            ACL_LOG_ERROR("invalid mdlAttrType, mdlAttrType is [%d]", static_cast<int32_t>(mdlAttrType));
-            return ACL_ERROR_INVALID_PARAM;
+            const int32_t attrValue = static_cast<int32_t>(mdlAttrType);
+            const std::string attrDesc = acl::AclErrorLogManager::FormatStr(
+                mdlAttrType == ACL_MDL_ATTR_RESERVED ? "ACL_MDL_ATTR_RESERVED(%d)" : "UNKNOWN(%d)", attrValue);
+            ACL_CHECK_INVALID_VALUE_WITH_DESC(
+                false, attrDesc.c_str(), "mdlAttrType", "ACL_MDL_ATTR_SCH_MODE_INT32(0)", ACL_ERROR_INVALID_PARAM);
         }
     }
 

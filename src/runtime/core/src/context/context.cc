@@ -530,7 +530,7 @@ rtError_t Context::Init()
         failureInfo.allocInterface);
     ERROR_RETURN_MSG_INNER(error, "Failed to init moduleAllocator_, retCode=%#x.", error);
 
-    RT_LOG(RT_LOG_INFO, "Runtime_alloc_size is %zu.", sizeof(Module*) * DEFAULT_PROGRAM_NUMBER);
+    RT_LOG(RT_LOG_INFO, "Runtime_alloc_size is %zu bytes.", sizeof(Module*) * DEFAULT_PROGRAM_NUMBER);
 
     sysParamOpt_.resize(SYS_OPT_RESERVED);
     return RT_ERROR_NONE;
@@ -549,7 +549,7 @@ void Context::TryAllocFastCq()
         return;
     }
     RT_LOG(
-        RT_LOG_INFO, "New onlineStream_ ok, Runtime_alloc_size %zu, stream_id=%d.", sizeof(Stream),
+        RT_LOG_INFO, "New onlineStream_ ok, Runtime_alloc_size %zu bytes, stream_id=%d.", sizeof(Stream),
         onlineStream_->Id_());
 
     onlineStream_->SetNeedFastcqFlag();
@@ -643,7 +643,7 @@ rtError_t Context::Setup()
         COND_RETURN_AND_MSG_OUTER(
             defaultStream_ == nullptr, RT_ERROR_STREAM_NEW, ErrorCode::EE1013, sizeof(Stream), "new");
         RT_LOG(
-            RT_LOG_INFO, "New defaultStream_ ok, Runtime_alloc_size %zu, stream_id=%d.", sizeof(Stream),
+            RT_LOG_INFO, "New defaultStream_ ok, Runtime_alloc_size %zu bytes, stream_id=%d.", sizeof(Stream),
             defaultStream_->Id_());
 
         error = defaultStream_->Setup();
@@ -2007,8 +2007,8 @@ rtError_t Context::LabelSwitchListCreate(Label** const labels, const size_t num,
         (void)device_->Driver_()->DevMemFree(devMem, device_->Id_());
         RT_LOG(
             RT_LOG_ERROR,
-            "Failed to set label device address memory, retCode=%#x, labels num=%zu, labelSize=%" PRIu64 ".", error,
-            num, labelSize);
+            "Failed to set label device address memory, retCode=%#x, labels num=%zu, labelSize=%" PRIu64 " (bytes).",
+            error, num, labelSize);
         return error;
     }
 
@@ -2053,7 +2053,10 @@ rtError_t Context::ModelTaskUpdate(
 
     ret = program->CopyTilingTabToDev(this, sinkStm->Device_(), &devCopyMem, &tilingTabLen);
     if (ret != RT_ERROR_NONE) {
-        RT_LOG(RT_LOG_ERROR, "BuildTilingTbl fail");
+        RT_LOG(
+            RT_LOG_ERROR,
+            "Failed to copy tiling table to device, deviceId=%u, stream_id=%d, desTaskId=%u, retCode=%#x.",
+            sinkStm->Device_()->Id_(), sinkStm->Id_(), desTaskId, static_cast<uint32_t>(ret));
         return ret;
     }
 
